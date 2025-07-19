@@ -30,6 +30,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
@@ -56,6 +58,7 @@
       </div>
       <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
         <form method="GET" action="{% url 'products' %}">
+          {% csrf_token %}
           <div class="input-group w-100">
             <input class="form-control border border-black rounded-0" type="text" name="q"
               placeholder="Search our site">
@@ -127,7 +130,22 @@
   </header>
 
   {% if messages %}
-  <div class="message-container"></div>
+  <div class="message-container">
+    
+      {% for message in messages %}
+          {% with message.level as level %}
+              {% if level == 40 %}
+                  {% include 'includes/toasts/toast_error.html' %}
+              {% elif level == 30 %}
+                  {% include 'includes/toasts/toast_warning.html' %}
+              {% elif level == 25 %}
+                  {% include 'includes/toasts/toast_success.html' %}
+              {% else %}
+                  {% include 'includes/toasts/toast_info.html' %}
+              {% endif %}
+          {% endwith %}
+      {% endfor %}
+  </div>
   {% endif %}
 
   {% block page_header %}
@@ -137,6 +155,11 @@
   {% endblock %}
 
   {% block postloadjs %}
+
+  <script type="text/javascript">
+    $('.toast').toast('show');
+  </script>
+
   {% endblock %}
 
 </body>
