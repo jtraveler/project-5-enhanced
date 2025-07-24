@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     # Other
     'crispy_forms',
+    'crispy_bootstrap4',
 ]
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
@@ -103,6 +104,7 @@ TEMPLATES = [
                 'django.template.context_processors.request', #required by allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
                 'bag.contexts.bag_contents',
             ],
             'builtins': [
