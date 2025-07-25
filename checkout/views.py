@@ -1,9 +1,12 @@
-from django.shortcuts import render
-
-# Create your views here.
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
+import os
+
 from .forms import OrderForm
+
+# Get Stripe keys from environment variables
+stripe_public_key = os.getenv('STRIPE_PUBLIC_KEY', '')
+stripe_secret_key = os.getenv('STRIPE_SECRET_KEY', '')
 
 def checkout(request):
     bag = request.session.get('bag', {})
@@ -15,6 +18,8 @@ def checkout(request):
     template = 'checkout/checkout.html'
     context = {
         'order_form': order_form,
+        'stripe_public_key': stripe_public_key,
+        'client_secret': 'test_client_secret',
     }
 
     return render(request, template, context)
