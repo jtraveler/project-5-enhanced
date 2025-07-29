@@ -4,3 +4,9 @@ __pycache__
 .env
 venv/env.py
 env.py
+echo "__pycache__/" >> .gitignore
+echo "*.pyc" >> .gitignore
+echo "*.pyo" >> .gitignore
+echo "*.pyd" >> .gitignore
+echo ".Python" >> .gitignore
+echo "venv/" >> .gitignore
