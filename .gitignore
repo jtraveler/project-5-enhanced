@@ -1,12 +1,6 @@
 *.sqlite3
 *.pyc
-__pycache__
+__pycache__/
 .env
-venv/env.py
+venv/
 env.py
-echo "__pycache__/" >> .gitignore
-echo "*.pyc" >> .gitignore
-echo "*.pyo" >> .gitignore
-echo "*.pyd" >> .gitignore
-echo ".Python" >> .gitignore
-echo "venv/" >> .gitignore
