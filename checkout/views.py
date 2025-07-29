@@ -54,6 +54,8 @@ def checkout(request):
             order.stripe_pid = pid
             order.original_bag = json.dumps(bag)
             order.save()
+            print(f"ORDER CREATED: {order.order_number} - PID: {pid}")  # Debug print
+            
             for item_id, item_data in bag.items():
                 try:
                     product = Product.objects.get(id=item_id)
@@ -81,6 +83,10 @@ def checkout(request):
                     order.delete()
                     return redirect(reverse('view_bag'))
 
+            # Update the order total after all line items are added
+            order.update_total()
+            print(f"ORDER TOTAL UPDATED: Grand Total = {order.grand_total}")  # Debug print
+
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
@@ -103,8 +109,6 @@ def checkout(request):
 
         order_form = OrderForm()
 
-        # in the video, the below code is not indented properly
-        # this is the correct indentation
         if not stripe_public_key:
             messages.warning(request, 'Stripe public key is missing. \
                 Did you forget to set it in your environment?')
@@ -117,7 +121,6 @@ def checkout(request):
         }
 
         return render(request, template, context)
-        # end of the corrected indentation
 
 
 def checkout_success(request, order_number):
