@@ -11,7 +11,7 @@ if os.path.isfile('env.py'):
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'mj-project5-aec364964bcd.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 # CSRF for Heroku
 CSRF_TRUSTED_ORIGINS = ['https://mj-project5-aec364964bcd.herokuapp.com']
