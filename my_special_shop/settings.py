@@ -189,3 +189,8 @@ LOGGING = {
         'level': 'DEBUG' if DEBUG else 'WARNING',
     },
 }
+
+
+# TEMP: Disable SMTP and use console backend for signup email confirmation debugging
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'nycdogpro@gmail.com'
