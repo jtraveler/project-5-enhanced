@@ -1,8 +1,8 @@
 # === settings.py ===
 import os
+import dj_database_url
 import sys
 from pathlib import Path
-import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -71,7 +71,12 @@ TEMPLATES = [
 
 # Database
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default': dj_database_url.parse(
+    os.environ.get("DATABASE_URL").decode("utf-8") 
+    if isinstance(os.environ.get("DATABASE_URL"), bytes) 
+    else os.environ.get("DATABASE_URL")
+    )
+
 }
 
 # Authentication
