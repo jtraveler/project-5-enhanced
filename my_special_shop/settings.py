@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 import dj_database_url
 
@@ -8,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-dev-secret-key')
 DEBUG = 'DEVELOPMENT' in os.environ
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']  # Update with specific domains in production
 
 # Installed Apps
 INSTALLED_APPS = [
@@ -28,6 +29,7 @@ INSTALLED_APPS = [
     'profiles',
     'bag',
     'crispy_forms',
+    'crispy_bootstrap4',
     'storages',
 ]
 
@@ -45,7 +47,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# URLS & WSGI
+# URL & WSGI
 ROOT_URLCONF = 'my_special_shop.urls'
 WSGI_APPLICATION = 'my_special_shop.wsgi.application'
 
@@ -86,35 +88,34 @@ ACCOUNT_USERNAME_REQUIRED = True
 LOGIN_REDIRECT_URL = '/'
 EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
 
-# Static & Media Files
+# Static & Media Settings (local defaults)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# AWS S3 Configuration for Static & Media
+# AWS S3 Storage
 if 'USE_AWS' in os.environ:
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
+    AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME', 'us-east-1')
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
     AWS_S3_OBJECT_PARAMETERS = {
         'CacheControl': 'max-age=86400',
     }
+
     AWS_DEFAULT_ACL = None
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
     DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 
+    STATICFILES_LOCATION = 'static'
+    MEDIAFILES_LOCATION = 'media'
 
-# Custom storage locations
-STATICFILES_LOCATION = 'static'
-MEDIAFILES_LOCATION = 'media'
-
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
 
 # Stripe
 FREE_DELIVERY_THRESHOLD = 50
@@ -125,7 +126,7 @@ STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET')
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'nycdogpro@gmail.com')
 
-# Email settings
+# Email
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     DEFAULT_FROM_EMAIL = 'nycdogpro@gmail.com'
@@ -139,7 +140,6 @@ else:
     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Logging
-import sys
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -154,6 +154,9 @@ LOGGING = {
         'level': 'DEBUG',
     },
 }
+
+# Crispy Forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Auto Field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
