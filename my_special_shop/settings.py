@@ -1,4 +1,3 @@
-# === settings.py ===
 import os
 import dj_database_url
 import sys
@@ -70,13 +69,15 @@ TEMPLATES = [
 ]
 
 # Database
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
 DATABASES = {
     'default': dj_database_url.parse(
-    os.environ.get("DATABASE_URL").decode("utf-8") 
-    if isinstance(os.environ.get("DATABASE_URL"), bytes) 
-    else os.environ.get("DATABASE_URL")
-    )
-
+        DATABASE_URL.decode("utf-8") if isinstance(DATABASE_URL, bytes) else DATABASE_URL
+    ) if DATABASE_URL else {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 # Authentication
@@ -117,8 +118,8 @@ if 'USE_AWS' in os.environ:
         STATICFILES_STORAGE = 'custom_storages.StaticStorage'
         DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 
-        STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
-        MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+        STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+        MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
     else:
         print("⚠️ AWS config missing environment variables!")
 
