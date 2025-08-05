@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     # Your apps
     'home',
     'products',
-    'cart',
+    'bag',
     'checkout',
     'profiles',
 ]
@@ -171,3 +171,31 @@ STANDARD_DELIVERY_PERCENTAGE = 10
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+import logging
+
+# Basic logging setup (optional and temporary)
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',  # You can change to WARNING once things work
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+        'django.security': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
