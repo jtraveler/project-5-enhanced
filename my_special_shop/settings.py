@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 import dj_database_url
+import logging
 
 # Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap4',
 
-    # My apps
+    # Your apps
     'home',
     'products',
     'bag',
@@ -87,11 +88,16 @@ WSGI_APPLICATION = 'my_special_shop.wsgi.application'
 # Database
 if DEVELOPMENT:
     DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3'))
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
 else:
     DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+        'default': dj_database_url.parse(
+            os.environ.get('DATABASE_URL', 'postgres://user:password@localhost/dbname')
+        )
     }
 
 # Password validation
@@ -124,7 +130,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Storage settings
+# AWS Storage settings
 if 'USE_AWS' in os.environ:
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
     AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
@@ -174,14 +180,11 @@ STANDARD_DELIVERY_PERCENTAGE = 10
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+# Crispy Forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-
-import logging
-
-# Basic logging setup (optional and temporary)
+# Logging (temporary for debugging)
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -193,7 +196,7 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['console'],
-            'level': 'DEBUG',  # You can change to WARNING once things work
+            'level': 'DEBUG',
         },
         'django.request': {
             'handlers': ['console'],
