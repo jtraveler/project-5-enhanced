@@ -86,19 +86,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'my_special_shop.wsgi.application'
 
 # Database
-if DEVELOPMENT:
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-else:
-    DATABASES = {
-        'default': dj_database_url.parse(
-            os.environ.get('DATABASE_URL', 'postgres://user:password@localhost/dbname')
-        )
-    }
+
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
