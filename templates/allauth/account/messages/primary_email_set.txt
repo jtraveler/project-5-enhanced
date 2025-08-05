@@ -1,2 +1,4 @@
 {% load i18n %}
+{% load crispy_forms_tags %}
+
 {% blocktrans %}Primary e-mail address set.{% endblocktrans %}
