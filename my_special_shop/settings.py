@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'birchlin.wsgi.application'
+WSGI_APPLICATION = 'my_special_shop.wsgi.application'
 
 # Database
 if DEVELOPMENT:
