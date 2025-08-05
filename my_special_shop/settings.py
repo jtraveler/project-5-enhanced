@@ -35,8 +35,10 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'storages',
+    'crispy_forms'
+    'crispy_bootstrap4',
 
-    # Your apps
+    # My apps
     'home',
     'products',
     'bag',
@@ -171,6 +173,10 @@ STANDARD_DELIVERY_PERCENTAGE = 10
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 
 import logging
