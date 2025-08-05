@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'birchlin.urls'
+ROOT_URLCONF = 'my_special_shop.urls'
 
 TEMPLATES = [
     {
