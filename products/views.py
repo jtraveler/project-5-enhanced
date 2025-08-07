@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
 
-from .models import Product, Category
-from .forms import ProductForm
+from .models import Product, Category, Review
+from .forms import ProductForm, ReviewForm
+from django.db.models import Avg
 
 # Create your views here.
 
@@ -63,13 +64,27 @@ def product_detail(request, product_id):
     """ A view to show individual product details """
 
     product = get_object_or_404(Product, pk=product_id)
+    reviews = product.reviews.all()
+    review_count = reviews.count()
+    avg_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
+    
+    # Check if current user has already reviewed this product
+    user_has_reviewed = False
+    if request.user.is_authenticated:
+        user_has_reviewed = reviews.filter(user=request.user).exists()
+    
+    review_form = ReviewForm()
 
     context = {
         'product': product,
+        'reviews': reviews,
+        'review_count': review_count,
+        'avg_rating': avg_rating,
+        'review_form': review_form,
+        'user_has_reviewed': user_has_reviewed,
     }
 
     return render(request, 'products/product_detail.html', context)
-
 
 @login_required
 def add_product(request):
