@@ -152,3 +152,23 @@ def delete_product(request, product_id):
     product.delete()
     messages.success(request, 'Product deleted!')
     return redirect(reverse('products'))
+
+
+@login_required
+def add_review(request, product_id):
+    """ Add a review to a product """
+    
+    product = get_object_or_404(Product, pk=product_id)
+    
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.product = product
+            review.user = request.user
+            review.save()
+            messages.success(request, 'Thank you! Your review has been added.')
+        else:
+            messages.error(request, 'Failed to add review. Please ensure the form is valid.')
+    
+    return redirect(reverse('product_detail', args=[product.id]))
