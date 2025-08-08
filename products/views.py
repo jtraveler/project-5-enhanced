@@ -65,8 +65,8 @@ def product_detail(request, product_id):
 
     product = get_object_or_404(Product, pk=product_id)
     reviews = product.reviews.all()
-    review_count = reviews.count()
-    avg_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
+    review_count = product.review_count()
+    avg_rating = product.average_rating()
     
     # Check if current user has already reviewed this product
     user_has_reviewed = False
@@ -160,14 +160,22 @@ def add_review(request, product_id):
     
     product = get_object_or_404(Product, pk=product_id)
     
+    # Check if user has already reviewed this product
+    if Review.objects.filter(product=product, user=request.user).exists():
+        messages.error(request, 'You have already reviewed this product.')
+        return redirect(reverse('product_detail', args=[product.id]))
+    
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
             review.product = product
             review.user = request.user
-            review.save()
-            messages.success(request, 'Thank you! Your review has been added.')
+            try:
+                review.save()
+                messages.success(request, 'Thank you! Your review has been added.')
+            except:
+                messages.error(request, 'You have already reviewed this product.')
         else:
             messages.error(request, 'Failed to add review. Please ensure the form is valid.')
     
