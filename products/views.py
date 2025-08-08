@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
+from django.db import models
 
 from .models import Product, Category, Review
 from .forms import ProductForm, ReviewForm
@@ -31,12 +32,26 @@ def all_products(request):
             if sortkey == 'rating':
                 # Annotate products with average rating from reviews
                 products = products.annotate(avg_rating=Avg('reviews__rating'))
+                # For ascending order, we want nulls (no reviews) last
+                if request.GET.get('direction') != 'desc':
+                    products = products.annotate(
+                        has_reviews=models.Case(
+                            models.When(avg_rating__isnull=True, then=0),
+                            default=1,
+                            output_field=models.IntegerField()
+                        )
+                    )
                 sortkey = 'avg_rating'
             if 'direction' in request.GET:
                 direction = request.GET['direction']
                 if direction == 'desc':
                     sortkey = f'-{sortkey}'
-            products = products.order_by(sortkey)
+            
+            # Special handling for rating sorting
+            if sort == 'rating' and direction != 'desc':
+                products = products.order_by('-has_reviews', 'avg_rating')
+            else:
+                products = products.order_by(sortkey)
             
         if 'category' in request.GET:
             categories = request.GET['category'].split(',')

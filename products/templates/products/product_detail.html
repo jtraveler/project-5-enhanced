@@ -139,7 +139,11 @@
                         <div class="card-body">
                             <h5 class="card-title">
                                 {% for i in "12345" %}
-                                    {% if i|add:0 <= review.rating %}★{% else %}☆{% endif %}
+                                    {% if i|add:0 <= review.rating %}
+                                        <i class="fas fa-star text-warning"></i>
+                                    {% else %}
+                                        <i class="far fa-star text-warning"></i>
+                                    {% endif %}
                                 {% endfor %}
                             </h5>
                             <h6 class="card-subtitle mb-2 text-muted">
