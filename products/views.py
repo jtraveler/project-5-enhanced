@@ -172,3 +172,54 @@ def add_review(request, product_id):
             messages.error(request, 'Failed to add review. Please ensure the form is valid.')
     
     return redirect(reverse('product_detail', args=[product.id]))
+
+
+@login_required
+def edit_review(request, product_id, review_id):
+    """ Edit a review """
+    
+    product = get_object_or_404(Product, pk=product_id)
+    review = get_object_or_404(Review, pk=review_id)
+    
+    # Check if the user owns this review
+    if review.user != request.user:
+        messages.error(request, 'Sorry, you can only edit your own reviews.')
+        return redirect(reverse('product_detail', args=[product.id]))
+    
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your review has been updated!')
+            return redirect(reverse('product_detail', args=[product.id]))
+        else:
+            messages.error(request, 'Failed to update review. Please ensure the form is valid.')
+    else:
+        form = ReviewForm(instance=review)
+    
+    template = 'products/edit_review.html'
+    context = {
+        'form': form,
+        'product': product,
+        'review': review,
+    }
+    
+    return render(request, template, context)
+
+
+@login_required
+def delete_review(request, product_id, review_id):
+    """ Delete a review """
+    
+    product = get_object_or_404(Product, pk=product_id)
+    review = get_object_or_404(Review, pk=review_id)
+    
+    # Check if the user owns this review
+    if review.user != request.user:
+        messages.error(request, 'Sorry, you can only delete your own reviews.')
+        return redirect(reverse('product_detail', args=[product.id]))
+    
+    review.delete()
+    messages.success(request, 'Your review has been deleted!')
+    
+    return redirect(reverse('product_detail', args=[product.id]))
