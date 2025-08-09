@@ -20,6 +20,11 @@ def all_products(request):
     categories = None
     sort = None
     direction = None
+    
+    # Get user's favorited products
+    favorited_products = []
+    if request.user.is_authenticated:
+        favorited_products = Favorite.objects.filter(user=request.user).values_list('product_id', flat=True)
 
     if request.GET:
         if 'sort' in request.GET:
@@ -75,10 +80,10 @@ def all_products(request):
         'search_term': query,
         'current_categories': categories,
         'current_sorting': current_sorting,
+        'favorited_products': favorited_products,
     }
 
     return render(request, 'products/products.html', context)
-
 
 def product_detail(request, product_id):
     """ A view to show individual product details """
