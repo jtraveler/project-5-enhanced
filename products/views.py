@@ -284,3 +284,15 @@ def toggle_favorite(request, product_id):
         return JsonResponse({'favorited': favorited})
     
     return redirect(request.META.get('HTTP_REFERER', 'products'))
+
+@login_required
+def wishlist(request):
+    """ Display user's favorite products """
+    
+    favorites = Favorite.objects.filter(user=request.user).select_related('product')
+    
+    context = {
+        'favorites': favorites,
+    }
+    
+    return render(request, 'products/wishlist.html', context)

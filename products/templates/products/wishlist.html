@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h2 class="logo-font mb-4">My Wishlist</h2>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                {% if favorites %}
+                    <p>You have {{ favorites|length }} item{{ favorites|length|pluralize }} in your wishlist.</p>
+                    {% for favorite in favorites %}
+                        <p>
+                            <a href="{% url 'product_detail' favorite.product.id %}">
+                                {{ favorite.product.name }}
+                            </a> 
+                            - ${{ favorite.product.price }}
+                        </p>
+                    {% endfor %}
+                {% else %}
+                    <p>Your wishlist is empty.</p>
+                    <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0">
+                        Keep Shopping
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
