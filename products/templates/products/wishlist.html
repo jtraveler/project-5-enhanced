@@ -50,8 +50,8 @@
                                         {% endif %}
                                         <form method="POST" action="{% url 'toggle_favorite' favorite.product.id %}" class="mt-2">
                                             {% csrf_token %}
-                                            <button type="submit" class="btn btn-outline-danger btn-sm">
-                                                <i class="fas fa-heart-broken"></i> Remove from Wishlist
+                                            <button type="submit" class="btn btn-outline-danger btn-sm btn-wishlist-remove">
+                                              <i class="fas fa-heart-broken"></i> Remove from Wishlist
                                             </button>
                                         </form>
                                     </div>

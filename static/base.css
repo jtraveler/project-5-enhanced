@@ -300,6 +300,53 @@ color: #17a2b8; /* text-info */
   margin-left: 10px;
 }
 
+/* Favorite Heart Buttons */
+.btn-favorite {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid #dc3545;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.btn-favorite:hover {
+  background-color: #dc3545;
+  transform: scale(1.1);
+}
+
+.btn-favorite .fa-heart {
+  font-size: 18px;
+  color: #dc3545;
+  transition: all 0.3s ease;
+}
+
+.btn-favorite:hover .fa-heart {
+  color: white;
+}
+
+.btn-favorite.favorited {
+  background-color: #dc3545;
+}
+
+.btn-favorite.favorited .fa-heart {
+  color: white;
+}
+
+/* Wishlist remove button */
+.btn-wishlist-remove {
+  transition: all 0.3s ease;
+}
+
+.btn-wishlist-remove:hover {
+  background-color: #dc3545;
+  color: white;
+  transform: translateY(-2px);
+}
+
 
 
 /* fixed top navbar only on medium and up */
