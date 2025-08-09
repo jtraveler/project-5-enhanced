@@ -265,6 +265,42 @@ color: #17a2b8; /* text-info */
   border-radius: 0;
 }
 
+/* Forms in general, make it so each item is on their own separate row */
+.form-group {
+
+  background-color: yellow !important;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Star Rating Widget */
+.star-rating {
+  font-size: 1.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.star-rating .star-select {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.star-rating .star-select:hover {
+  transform: scale(1.2);
+}
+
+.star-rating .star-select.far {
+  color: #ffc107 !important;
+  opacity: 0.3;
+}
+
+#rating-text {
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+
 
 /* fixed top navbar only on medium and up */
 @media (min-width: 992px) {

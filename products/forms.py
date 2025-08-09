@@ -26,21 +26,18 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['rating', 'comment']
+        widgets = {
+            'rating': forms.HiddenInput(),
+        }
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
         # Add placeholders and classes
-        self.fields['rating'].widget = forms.Select(choices=[
-            (5, '⭐⭐⭐⭐⭐ - Excellent'),
-            (4, '⭐⭐⭐⭐ - Very Good'),
-            (3, '⭐⭐⭐ - Good'),
-            (2, '⭐⭐ - Fair'),
-            (1, '⭐ - Poor'),
-        ])
         self.fields['comment'].widget.attrs['placeholder'] = 'Write your review here...'
         self.fields['comment'].widget.attrs['rows'] = 4
-        
-        # Add CSS classes for styling
-        self.fields['rating'].widget.attrs['class'] = 'border-black rounded-0'
         self.fields['comment'].widget.attrs['class'] = 'border-black rounded-0'
+        
+        # Set default rating value
+        if not self.instance.pk:  # Only for new reviews
+            self.fields['rating'].initial = 5

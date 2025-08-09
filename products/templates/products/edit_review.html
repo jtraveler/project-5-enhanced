@@ -26,7 +26,27 @@
             <div class="col-12 col-md-6">
                 <form method="POST" action="{% url 'edit_review' product.id review.id %}" class="form mb-2">
                     {% csrf_token %}
-                    {{ form | crispy }}
+                    
+                    <!-- Star Rating Widget -->
+                    <div class="form-group">
+                        <label>Rating:</label>
+                        <div class="star-rating mb-3">
+                            <i class="fas fa-star text-warning star-select" data-rating="1"></i>
+                            <i class="fas fa-star text-warning star-select" data-rating="2"></i>
+                            <i class="fas fa-star text-warning star-select" data-rating="3"></i>
+                            <i class="fas fa-star text-warning star-select" data-rating="4"></i>
+                            <i class="fas fa-star text-warning star-select" data-rating="5"></i>
+                            <span class="ms-2" id="rating-text">Excellent</span>
+                        </div>
+                        {{ form.rating }}
+                    </div>
+                    
+                    <!-- Comment Field -->
+                    <div class="form-group">
+                        <label for="{{ form.comment.id_for_label }}">Your Review:</label>
+                        {{ form.comment }}
+                    </div>
+                    
                     <div class="text-right">
                         <a class="btn btn-outline-black rounded-0" href="{% url 'product_detail' product.id %}">Cancel</a>
                         <button class="btn btn-black rounded-0" type="submit">Update Review</button>
@@ -35,4 +55,60 @@
             </div>            
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script>
+    // Star Rating Widget
+    $(document).ready(function() {
+        const stars = $('.star-select');
+        const ratingInput = $('#id_rating');
+        const ratingText = $('#rating-text');
+        
+        const ratingTexts = {
+            1: 'Poor',
+            2: 'Fair', 
+            3: 'Good',
+            4: 'Very Good',
+            5: 'Excellent'
+        };
+        
+        // Set initial rating from existing review
+        let currentRating = parseInt(ratingInput.val()) || parseInt('{{ review.rating }}') || 5;
+        ratingInput.val(currentRating);
+        updateStars(currentRating);
+        ratingText.text(ratingTexts[currentRating]);
+        
+        // Click handler
+        stars.on('click', function() {
+            currentRating = $(this).data('rating');
+            ratingInput.val(currentRating);
+            updateStars(currentRating);
+        });
+        
+        // Hover handler
+        stars.on('mouseenter', function() {
+            const hoverRating = $(this).data('rating');
+            updateStars(hoverRating);
+            ratingText.text(ratingTexts[hoverRating]);
+        });
+        
+        // Mouse leave handler
+        $('.star-rating').on('mouseleave', function() {
+            updateStars(currentRating);
+            ratingText.text(ratingTexts[currentRating]);
+        });
+        
+        function updateStars(rating) {
+            stars.each(function(index) {
+                if (index < rating) {
+                    $(this).removeClass('far').addClass('fas');
+                } else {
+                    $(this).removeClass('fas').addClass('far');
+                }
+            });
+        }
+    });
+</script>
 {% endblock %}
