@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
 from django.db import models
+from django.http import JsonResponse
 
-from .models import Product, Category, Review
+from .models import Product, Category, Review, Favorite
 from .forms import ProductForm, ReviewForm
 from django.db.models import Avg
 
@@ -92,6 +93,11 @@ def product_detail(request, product_id):
     if request.user.is_authenticated:
         user_has_reviewed = reviews.filter(user=request.user).exists()
     
+    # Check if current user has favorited this product
+    is_favorited = False
+    if request.user.is_authenticated:
+        is_favorited = Favorite.objects.filter(user=request.user, product=product).exists()
+    
     review_form = ReviewForm()
 
     context = {
@@ -101,6 +107,7 @@ def product_detail(request, product_id):
         'avg_rating': avg_rating,
         'review_form': review_form,
         'user_has_reviewed': user_has_reviewed,
+        'is_favorited': is_favorited,  # Add this to context
     }
 
     return render(request, 'products/product_detail.html', context)
@@ -250,3 +257,25 @@ def delete_review(request, product_id, review_id):
     messages.success(request, 'Your review has been deleted!')
     
     return redirect(reverse('product_detail', args=[product.id]))
+
+@login_required
+def toggle_favorite(request, product_id):
+    """ Add or remove a product from favorites """
+    
+    product = get_object_or_404(Product, pk=product_id)
+    
+    try:
+        favorite = Favorite.objects.get(user=request.user, product=product)
+        favorite.delete()
+        messages.success(request, f'{product.name} removed from favorites!')
+        favorited = False
+    except Favorite.DoesNotExist:
+        Favorite.objects.create(user=request.user, product=product)
+        messages.success(request, f'{product.name} added to favorites!')
+        favorited = True
+    
+    # Return JSON response for AJAX requests
+    if request.is_ajax():
+        return JsonResponse({'favorited': favorited})
+    
+    return redirect(request.META.get('HTTP_REFERER', 'products'))

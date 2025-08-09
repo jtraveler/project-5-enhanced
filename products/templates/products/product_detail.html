@@ -53,6 +53,15 @@
                     </small>
                 {% endif %}
                 <p class="mt-3">{{ product.description }}</p>
+                {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'toggle_favorite' product.id %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm {% if is_favorited %}btn-danger{% else %}btn-outline-danger{% endif %} rounded-0">
+                            <i class="fas fa-heart{% if not is_favorited %}-o{% endif %}"></i>
+                            {% if is_favorited %}Remove from{% else %}Add to{% endif %} Favorites
+                        </button>
+                    </form>
+                {% endif %}
                 <form class="form" action="{% url 'add_to_bag' product.id %}" method="POST">
                     {% csrf_token %}
                     <div class="form-row">
