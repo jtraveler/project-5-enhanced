@@ -1,5 +1,9 @@
 import os
 from pathlib import Path
+
+if os.path.exists('env.py'):
+    import env
+
 import dj_database_url
 import logging
 
@@ -174,6 +178,7 @@ else:
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET')
+STRIPE_CURRENCY  = os.environ.get("STRIPE_CURRENCY", "usd")
 FREE_DELIVERY_THRESHOLD = 50
 STANDARD_DELIVERY_PERCENTAGE = 10
 

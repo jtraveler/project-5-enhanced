@@ -40,7 +40,8 @@ a:hover {text-decoration: none;}
   grid-template-columns: 220px 1fr auto;
   gap: 16px;
   align-items: center;
-  padding: 14px 0;
+  padding-top: 14px;
+  padding-bottom: 14px;
 }
 
 /* Brand text – heavy, uppercase, subtle tracking */
@@ -111,14 +112,17 @@ a:hover {text-decoration: none;}
 /* Divider between row 1 and row 2 */
 .header-divider {
   border-bottom: 1px solid #e0e0e0;
+
 }
 
 /* Nav row: left align your include's nav items */
-.nav-row { padding: 8px 0; }
+.nav-row { 
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 #main-nav .navbar-nav { justify-content: flex-start !important; }
 #main-nav .nav-link {
   color: #111 !important;
-  font-weight: 600;
   letter-spacing: .2px;
 }
 #main-nav .nav-link:hover,
@@ -147,8 +151,11 @@ a:hover {text-decoration: none;}
   width: 1.5rem;
 }
 
-.logo-font {
-  text-transform: uppercase;
+
+
+.navbar-nav .nav-item:first-child a {
+  background-color: yellow;
+  padding-left: 0;
 }
 
 .main-logo-link {
