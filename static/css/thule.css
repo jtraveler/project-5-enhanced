@@ -1,0 +1,78 @@
+/* Thule-like global theme that coexists with Bootstrap */
+
+/* Wider desktop container */
+:root { --maxw: 1440px; }
+@media (min-width:1200px){
+  .container, .container-lg, .container-xl { max-width: var(--maxw); }
+}
+
+/* Header / navbar refresh */
+.navbar { border:0; box-shadow:0 1px 0 rgba(0,0,0,.08); background:#fff !important; }
+#main-nav .nav-link { color:#111 !important; font-weight:600; letter-spacing:.2px; }
+#main-nav .dropdown-menu { border:0; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.08); padding:10px; }
+#main-nav .nav-link:hover, #main-nav .dropdown-item:hover { text-decoration:underline; text-underline-offset:3px; }
+
+/* Utility icons */
+.utility .nav-link { color:#111 !important; }
+.utility .nav-link .fa { font-size:18px; }
+.utility .nav-link p { margin:0; font-size:12px; color:#333; }
+
+/* HERO (homepage only) */
+.hero { position:relative; overflow:hidden; margin:12px 0 28px; border-radius:0; }
+.hero--video { min-height:52vh; background:#000; }
+.hero__media { width:100%; height:52vh; object-fit:cover; display:block; }
+.hero__overlay {
+  position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end;
+  padding:clamp(16px,6vw,56px); color:#fff;
+  background:linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.55) 100%);
+}
+.btn-cta{
+  display:inline-flex; gap:10px; align-items:center; background:#fff; color:#000 !important;
+  border:1px solid #fff; padding:12px 18px; border-radius:12px; font-weight:700; text-decoration:none;
+}
+
+/* Bring your life rail */
+.rail{ margin:28px 0; }
+.rail__header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+.rail__controls{ display:flex; gap:8px; }
+.rail__btn{ border:1px solid rgba(0,0,0,.12); background:#fff; padding:8px 12px; border-radius:10px; }
+.rail__scroller{
+  display:grid; grid-auto-flow:column; grid-auto-columns:minmax(220px,1fr);
+  gap:12px; overflow-x:auto; padding-bottom:6px; scroll-snap-type:x mandatory;
+}
+.railcard{ position:relative; height:220px; border-radius:14px; overflow:hidden; background:#e5e7eb; color:#111; text-decoration:none; scroll-snap-align:start; }
+.railcard__media{ position:absolute; inset:0; background-size:cover; background-position:center; transform:scale(1.02); transition:transform .4s; }
+.railcard:hover .railcard__media{ transform:scale(1.06); }
+.railcard__label{ position:absolute; left:14px; bottom:14px; background:rgba(255,255,255,.92); padding:10px 14px; border-radius:12px; font-weight:700; }
+
+/* Categories grid (homepage) */
+.categories{ margin:34px 0; }
+.categories__grid{ display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr)); }
+@media (min-width:992px){ .categories__grid{ grid-template-columns:repeat(4,minmax(0,1fr)); } }
+.catcard{ background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:14px; overflow:hidden; text-decoration:none; color:inherit; }
+.catcard__thumb{ background:#f3f4f6; aspect-ratio:4/3; }
+.catcard__title{ padding:12px; font-weight:700; }
+
+/* Popular products rail */
+.popular__scroller{ display:grid; grid-auto-flow:column; grid-auto-columns:minmax(220px,1fr); gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:6px; }
+.productcard{ border:1px solid rgba(0,0,0,.08); border-radius:14px; overflow:hidden; background:#fff; text-decoration:none; color:inherit; scroll-snap-align:start; }
+.productcard__thumb{ background:#f8fafc; display:grid; place-items:center; aspect-ratio:4/3; }
+.productcard__thumb img{ max-width:100%; max-height:100%; object-fit:contain; }
+.productcard__title{ padding:10px 12px 0; font-weight:700; }
+.productcard__price{ padding:0 12px 12px; }
+
+/* Footer */
+.site-footer{ margin-top:40px; background:#111; color:#eaeaea; }
+.site-footer .container{ padding:36px 16px; }
+.newsletter{ text-align:center; padding:34px 0; border-bottom:1px solid rgba(255,255,255,.12); margin-bottom:22px; }
+.newsletter__form{ display:flex; gap:8px; justify-content:center; margin-top:12px; }
+.newsletter__form input{ border:1px solid rgba(255,255,255,.25); background:#1b1b1b; color:#fff; padding:10px 14px; border-radius:999px; min-width:280px; }
+.newsletter__form button{ border:1px solid #fff; background:#fff; color:#000; padding:10px 16px; border-radius:999px; }
+.footergrid{ display:grid; gap:22px; grid-template-columns:repeat(2,minmax(0,1fr)); margin:20px 0 6px; }
+@media (min-width:992px){ .footergrid{ grid-template-columns:repeat(4,minmax(0,1fr)); } }
+.footergrid h4{ margin:0 0 8px; }
+.footergrid ul{ list-style:none; padding:0; margin:0; }
+.footergrid a{ color:#eaeaea; text-decoration:none; }
+.footergrid a:hover{ text-decoration:underline; }
+.footnote{ display:flex; flex-direction:column; gap:10px; border-top:1px solid rgba(255,255,255,.12); padding-top:16px; font-size:13px; }
+@media (min-width:768px){ .footnote{ flex-direction:row; justify-content:space-between; align-items:center; } }
