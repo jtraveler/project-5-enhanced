@@ -1,28 +1,26 @@
 {% extends "base.html" %}
-
 {% load static %}
 
-{% block page_header %}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col"></div>
-        </div>
-    </div>
-{% endblock %}
+{% block page_header %}{% endblock %}
 
 {% block content %}
-    <div class="container h-100">
-        <div class="row h-100">
-            <div class="col-7 col-md-6 my-auto">
-                <h1 class="display-4 logo-font text-black">
-                    The new collections are here
-                </h1>
-                <div class="my-5">
-                    <h4>
-                        <a href="{% url 'products' %}" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3">Shop Now</a>
-                    </h4>
-                </div>
-            </div>
-        </div>
+
+  <!-- Full-width video hero -->
+  <section class="hero hero--video">
+    <video class="hero__media" autoplay muted loop playsinline
+           poster="{% static 'placeholders/hero-poster.jpg' %}">
+      <source src="{% static 'placeholders/hero.mp4' %}" type="video/mp4">
+    </video>
+
+    <div class="hero__overlay">
+      <p class="hero__eyebrow">What you bring is just the beginning</p>
+      <h1 class="hero__title">Unpacked Adventures</h1>
+      <a href="{% url 'products' %}" class="btn-hero">
+        Explore more <span aria-hidden="true">→</span>
+      </a>
     </div>
+  </section>
+
+  {# You can add the rest of your homepage sections below this #}
+
 {% endblock %}
