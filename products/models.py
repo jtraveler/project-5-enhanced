@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Avg
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill, ResizeToFit
+import os
 
 
 class Category(models.Model):
@@ -41,6 +44,98 @@ class Product(models.Model):
         """Count total reviews"""
         return self.reviews.count()
     
+    def get_primary_image(self):
+        """Get the primary image or first image if no primary is set"""
+        primary = self.images.filter(is_primary=True).first()
+        if primary:
+            return primary
+        # Fallback to first image
+        first_image = self.images.first()
+        if first_image:
+            return first_image
+        # Fallback to legacy image field if it exists
+        if self.image:
+            return self
+        return None
+    
+    def get_all_images(self):
+        """Get all images including the legacy image field"""
+        images = list(self.images.all())
+        # Include legacy image if it exists and no new images
+        if self.image and not images:
+            return [self]  # Return self as it has the image property
+        return images
+
+
+class ProductImage(models.Model):
+    """
+    Model to store multiple images per product
+    """
+    product = models.ForeignKey(
+        Product, 
+        related_name='images', 
+        on_delete=models.CASCADE
+    )
+    image = models.ImageField(
+        upload_to='product_images/',
+        help_text='Upload product image'
+    )
+    # Thumbnail for gallery - automatically generated
+    thumbnail = ImageSpecField(
+        source='image',
+        processors=[ResizeToFill(100, 100)],
+        format='JPEG',
+        options={'quality': 85}
+    )
+    # Medium size for gallery view
+    image_medium = ImageSpecField(
+        source='image',
+        processors=[ResizeToFit(800, 800)],
+        format='JPEG',
+        options={'quality': 90}
+    )
+    alt_text = models.CharField(
+        max_length=255, 
+        blank=True,
+        help_text='Alternative text for image (for SEO and accessibility)'
+    )
+    is_primary = models.BooleanField(
+        default=False,
+        help_text='Set as primary image for product listings'
+    )
+    order = models.PositiveIntegerField(
+        default=0,
+        blank=False,
+        null=False,
+        db_index=True
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['order', 'created_at']
+        
+    def __str__(self):
+        return f"{self.product.name} - Image {self.order + 1}"
+    
+    def save(self, *args, **kwargs):
+        # Auto-generate alt text if not provided
+        if not self.alt_text and self.product:
+            self.alt_text = f"{self.product.name} - Image {self.order + 1}"
+        
+        # Ensure only one primary image per product
+        if self.is_primary:
+            ProductImage.objects.filter(
+                product=self.product, 
+                is_primary=True
+            ).exclude(pk=self.pk).update(is_primary=False)
+        
+        super().save(*args, **kwargs)
+    
+    def get_image_filename(self):
+        """Get just the filename without path"""
+        return os.path.basename(self.image.name)
+
 
 class Review(models.Model):
     """
@@ -60,7 +155,8 @@ class Review(models.Model):
     
     def __str__(self):
         return f'{self.product.name} - {self.user.username} - {self.rating} stars'
-    
+
+
 class Favorite(models.Model):
     """
     Favorite model for wishlist functionality
