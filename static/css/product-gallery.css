@@ -1,0 +1,105 @@
+/* Product Gallery Styles */
+.product-gallery-container {
+  position: relative;
+  max-width: 100%;
+}
+
+/* Main Swiper */
+.gallery-main {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.gallery-main .swiper-slide {
+  text-align: center;
+  background: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.gallery-main .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+}
+
+/* Thumbnails Swiper */
+.gallery-thumbs {
+  height: 100px;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.gallery-thumbs .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.gallery-thumbs .swiper-slide-thumb-active {
+  opacity: 1;
+  border-color: #000;
+}
+
+.gallery-thumbs .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Navigation arrows */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #000;
+  background: rgba(255, 255, 255, 0.8);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 20px;
+}
+
+/* Pagination */
+.swiper-pagination-bullet {
+  background: #000;
+}
+
+.swiper-pagination-bullet-active {
+  background: #000;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .gallery-main .swiper-slide img {
+      max-height: 300px;
+  }
+  
+  .gallery-thumbs {
+      height: 60px;
+  }
+  
+  .gallery-thumbs .swiper-slide {
+      width: 20%;
+  }
+}
+
+/* Single image fallback */
+.single-product-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
