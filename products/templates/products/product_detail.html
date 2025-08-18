@@ -2,6 +2,14 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
+{% block extra_css %}
+{{ block.super }}
+<!-- Swiper CSS -->
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/product-gallery.css' %}" />
+{% endblock %}
+
 {% block page_header %}
 <div class="container header-container">
     <div class="row">
@@ -16,15 +24,51 @@
     <div class="row">
         <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
             <div class="image-container my-5">
-                {% if product.image %}
-                <a href="{{ product.image.url }}" target="_blank">
-                    <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% with images=product.get_all_images %}
+                {% if images|length > 1 %}
+                <!-- Multiple Images Gallery -->
+                <div class="product-gallery-container">
+                    <!-- Main Swiper -->
+                    <div class="swiper gallery-main">
+                        <div class="swiper-wrapper">
+                            {% for image in images %}
+                            <div class="swiper-slide">
+                                <img src="{% if image.image_medium %}{{ image.image_medium.url }}{% else %}{{ image.image.url }}{% endif %}" 
+                                     alt="{{ image.alt_text|default:product.name }}">
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <!-- Navigation -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <!-- Pagination -->
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    
+                    <!-- Thumbnails Swiper -->
+                    <div class="swiper gallery-thumbs">
+                        <div class="swiper-wrapper">
+                            {% for image in images %}
+                            <div class="swiper-slide">
+                                <img src="{% if image.thumbnail %}{{ image.thumbnail.url }}{% else %}{{ image.image.url }}{% endif %}" 
+                                     alt="{{ image.alt_text|default:product.name }}">
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% elif images|length == 1 %}
+                <!-- Single Image -->
+                {% with image=images.0 %}
+                <a href="{{ image.image.url }}" target="_blank">
+                    <img class="single-product-image" src="{{ image.image.url }}" alt="{{ product.name }}">
                 </a>
+                {% endwith %}
                 {% else %}
-                <a href="">
-                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-                </a>
+                <!-- No Image -->
+                <img class="single-product-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
                 {% endif %}
+                {% endwith %}
             </div>
         </div>
         <div class="col-12 col-md-6 col-lg-4">
@@ -246,10 +290,58 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+{% include 'products/includes/quantity_input_script.html' %}
+
+<!-- Swiper JS -->
+<script src="{% static 'js/swiper-bundle.min.js' %}"></script>
 
 <script>
-    // Star Rating Widget
+    // Initialize Swiper Gallery
     $(document).ready(function() {
+        // Only initialize if gallery exists
+        if ($('.gallery-thumbs').length && $('.gallery-main').length) {
+            // Thumbnails swiper
+            var galleryThumbs = new Swiper('.gallery-thumbs', {
+                spaceBetween: 10,
+                slidesPerView: 4,
+                freeMode: true,
+                watchSlidesProgress: true,
+                breakpoints: {
+                    // when window width is >= 320px
+                    320: {
+                        slidesPerView: 4,
+                        spaceBetween: 5
+                    },
+                    // when window width is >= 768px
+                    768: {
+                        slidesPerView: 5,
+                        spaceBetween: 10
+                    }
+                }
+            });
+
+            // Main gallery swiper
+            var galleryMain = new Swiper('.gallery-main', {
+                spaceBetween: 10,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    type: 'progressbar',
+                },
+                thumbs: {
+                    swiper: galleryThumbs
+                }
+            });
+        }
+
+        // Star Rating Widget (existing code)
         const stars = $('.star-select');
         const ratingInput = $('#id_rating');
         const ratingText = $('#rating-text');
@@ -297,9 +389,4 @@
         }
     });
 </script>
-{% endblock %}
-
-{% block postloadjs %}
-{{ block.super }}
-{% include 'products/includes/quantity_input_script.html' %}
 {% endblock %}
