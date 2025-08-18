@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'storages',
     'crispy_forms',
     'crispy_bootstrap4',
+    'imagekit',
+    'adminsortable2',
 
     # Your apps
     'home',
@@ -50,6 +52,9 @@ INSTALLED_APPS = [
     'checkout',
     'profiles',
     'contact',
+
+    # Cleanup app (must be at the end)
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 SITE_ID = 1
