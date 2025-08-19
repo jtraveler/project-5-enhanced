@@ -12,6 +12,7 @@ from django.db.models import Avg
 
 # Create your views here.
 
+
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
 
@@ -38,24 +39,30 @@ def all_products(request):
             if sortkey == 'rating':
                 # Annotate products with average rating from reviews
                 products = products.annotate(avg_rating=Avg('reviews__rating'))
-                # For ascending order, we want nulls (no reviews) last
-                if request.GET.get('direction') != 'desc':
-                    products = products.annotate(
-                        has_reviews=models.Case(
-                            models.When(avg_rating__isnull=True, then=0),
-                            default=1,
-                            output_field=models.IntegerField()
-                        )
+                
+                # For both ascending and descending, we want nulls (no reviews) last
+                products = products.annotate(
+                    has_reviews=models.Case(
+                        models.When(avg_rating__isnull=True, then=0),
+                        default=1,
+                        output_field=models.IntegerField()
                     )
+                )
                 sortkey = 'avg_rating'
+            
             if 'direction' in request.GET:
                 direction = request.GET['direction']
-                if direction == 'desc':
+                if direction == 'desc' and sort != 'rating':  # Don't add minus for rating
                     sortkey = f'-{sortkey}'
             
             # Special handling for rating sorting
-            if sort == 'rating' and direction != 'desc':
-                products = products.order_by('-has_reviews', 'avg_rating')
+            if sort == 'rating':
+                if direction == 'desc':
+                    # For high to low: products with reviews first (descending), then by rating (descending)
+                    products = products.order_by('-has_reviews', '-avg_rating')
+                else:
+                    # For low to high: products with reviews first, then by rating (ascending)
+                    products = products.order_by('-has_reviews', 'avg_rating')
             else:
                 products = products.order_by(sortkey)
             
