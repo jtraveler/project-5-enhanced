@@ -148,8 +148,7 @@
                             <div class="d-flex gap-2 mt-5">
                                 <input type="submit" class="btn btn-black rounded-0 text-uppercase flex-grow-1" value="Add to Bag">
                                 {% if user.is_authenticated %}
-                                    <button type="button" class="btn btn-favorite-outline {% if is_favorited %}favorited{% endif %}" 
-                                            onclick="document.getElementById('favorite-form-{{ product.id }}').submit();">
+                                    <button type="button" class="btn btn-favorite-outline {% if is_favorited %}favorited{% endif %}" onclick="document.getElementById('favorite-form-{{ product.id }}').submit();">
                                         <i class="{% if is_favorited %}fas{% else %}far{% endif %} fa-heart"></i>
                                     </button>
                                 {% endif %}
@@ -157,14 +156,15 @@
                         </div>
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
                         {% endwith %}
-                    </div>
-                </form>
-                
-                {% if user.is_authenticated %}
-                    <form method="POST" action="{% url 'toggle_favorite' product.id }}" id="favorite-form-{{ product.id }}" class="d-none">
-                        {% csrf_token %}
-                    </form>
-                {% endif %}
+                        </div>
+                        </form>
+                        
+                        <!-- Hidden favorite form -->
+                        {% if user.is_authenticated %}
+                            <form method="POST" action="{% url 'toggle_favorite' product.id %}" id="favorite-form-{{ product.id }}" class="d-none">
+                                {% csrf_token %}
+                            </form>
+                        {% endif %}
             </div>
         </div>
     </div>
@@ -393,6 +393,23 @@
                 }
             });
         }
+        
+        // Update favorite button visual state on click
+        $('.btn-favorite-outline').on('click', function(e) {
+            var $button = $(this);
+            var $icon = $button.find('i');
+            
+            // Toggle the icon classes immediately for visual feedback
+            if ($icon.hasClass('far')) {
+                $icon.removeClass('far').addClass('fas');
+                $button.addClass('favorited');
+            } else {
+                $icon.removeClass('fas').addClass('far');
+                $button.removeClass('favorited');
+            }
+            
+            
+        });
     });
 </script>
 {% endblock %}
