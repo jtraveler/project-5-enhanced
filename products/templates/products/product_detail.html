@@ -19,6 +19,13 @@
 {% endblock %}
 
 {% block content %}
+<!-- Pointy Star SVG Definition -->
+<svg style="display: none;">
+    <symbol id="star-pointy" viewBox="0 0 24 24">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+    </symbol>
+  </svg>
+
 <div class="overlay"></div>
 <div class="container">
 
@@ -88,7 +95,9 @@
                 {% endif %}
                 {% if avg_rating > 0 %}
                 <small class="text-muted">
-                    <i class="fas fa-star mr-1"></i>{{ avg_rating|floatformat:1 }} / 5 
+                    <span class="star-icon-pointy">
+                        <svg><use href="#star-pointy"></use></svg>
+                    </span>{{ avg_rating|floatformat:1 }} / 5 
                     ({{ review_count }} review{{ review_count|pluralize }})
                 </small>
                 {% else %}
@@ -199,9 +208,13 @@
                             <h5 class="card-title">
                                 {% for i in "12345" %}
                                     {% if i|add:0 <= review.rating %}
-                                        <i class="fas fa-star star-icon"></i>
+                                        <span class="star-icon-pointy">
+                                            <svg><use href="#star-pointy"></use></svg>
+                                        </span>
                                     {% else %}
-                                        <i class="far fa-star star-icon-empty"></i>
+                                        <span class="star-icon-pointy empty">
+                                            <svg><use href="#star-pointy"></use></svg>
+                                        </span>
                                     {% endif %}
                                 {% endfor %}
                             </h5>
@@ -249,7 +262,7 @@
 
         <!-- Add Review Form -->
     
-        <div class="col-12 col-md-6 col-lg-6">
+        <div class="col-12 col-md-6 col-lg-6 writing-review">
             {% if user.is_authenticated %}
                 {% if not user_has_reviewed %}
                     <hr>
@@ -260,12 +273,22 @@
                         <!-- Star Rating Widget -->
                         <div class="form-group">
                             <label>Rating:</label>
-                            <div class="star-rating mb-3">
-                                <i class="fas fa-star star-icon star-select" data-rating="1"></i>
-                                <i class="fas fa-star star-icon star-select" data-rating="2"></i>
-                                <i class="fas fa-star star-icon star-select" data-rating="3"></i>
-                                <i class="fas fa-star star-icon star-select" data-rating="4"></i>
-                                <i class="fas fa-star star-icon star-select" data-rating="5"></i>
+                            <div class="star-rating mb-3 d-flex">
+                                <span class="star-icon-pointy star-select" data-rating="1">
+                                    <svg><use href="#star-pointy"></use></svg>
+                                </span>
+                                <span class="star-icon-pointy star-select" data-rating="2">
+                                    <svg><use href="#star-pointy"></use></svg>
+                                </span>
+                                <span class="star-icon-pointy star-select" data-rating="3">
+                                    <svg><use href="#star-pointy"></use></svg>
+                                </span>
+                                <span class="star-icon-pointy star-select" data-rating="4">
+                                    <svg><use href="#star-pointy"></use></svg>
+                                </span>
+                                <span class="star-icon-pointy star-select" data-rating="5">
+                                    <svg><use href="#star-pointy"></use></svg>
+                                </span>
                                 <span class="ms-2" id="rating-text">Excellent</span>
                             </div>
                             {{ review_form.rating }}
@@ -390,9 +413,9 @@
         function updateStars(rating) {
             stars.each(function(index) {
                 if (index < rating) {
-                    $(this).removeClass('far').addClass('fas');
+                    $(this).removeClass('empty');
                 } else {
-                    $(this).removeClass('fas').addClass('far');
+                    $(this).addClass('empty');
                 }
             });
         }
