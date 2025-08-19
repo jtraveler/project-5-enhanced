@@ -265,25 +265,38 @@ def delete_review(request, product_id, review_id):
 
 @login_required
 def toggle_favorite(request, product_id):
-    """ Add or remove a product from favorites """
-    
+    """Toggle a product as favorite for the current user"""
     product = get_object_or_404(Product, pk=product_id)
     
-    try:
-        favorite = Favorite.objects.get(user=request.user, product=product)
+    favorite, created = Favorite.objects.get_or_create(
+        user=request.user,
+        product=product
+    )
+    
+    if not created:
+        # If it already existed, delete it (toggle off)
         favorite.delete()
-        messages.success(request, f'{product.name} removed from favorites!')
-        favorited = False
-    except Favorite.DoesNotExist:
-        Favorite.objects.create(user=request.user, product=product)
-        messages.success(request, f'{product.name} added to favorites!')
-        favorited = True
+        is_favorited = False
+    else:
+        # If it was created, it's now favorited
+        is_favorited = True
     
-    # Return JSON response for AJAX requests
-    if request.is_ajax():
-        return JsonResponse({'favorited': favorited})
+    # Check if it's an AJAX request
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        # Return JSON response for AJAX requests
+        return JsonResponse({
+            'is_favorited': is_favorited,
+            'message': f'{"Added to" if is_favorited else "Removed from"} favorites'
+        })
     
-    return redirect(request.META.get('HTTP_REFERER', 'products'))
+    # For regular requests, redirect back
+    messages.success(
+        request,
+        f'{"Added to" if is_favorited else "Removed from"} favorites'
+    )
+    # Fixed redirect - use HTTP_REFERER or fall back to product detail
+    redirect_url = request.META.get('HTTP_REFERER', reverse('product_detail', args=[product_id]))
+    return redirect(redirect_url)
 
 @login_required
 def wishlist(request):
