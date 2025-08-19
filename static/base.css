@@ -1,3 +1,11 @@
+/* Global varibles - Product Detail - Swipe colors */
+:root {
+  --swiper-pagination-color: black;
+  --swiper-theme-color: black;
+}
+
+
+
 html {
   height: 100%;
 }

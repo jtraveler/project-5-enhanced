@@ -8,39 +8,75 @@
 .gallery-main {
   width: 100%;
   margin-bottom: 10px;
+  position: relative;
+}
+
+.gallery-main .swiper-wrapper {
+  position: relative;
+  height: 550px;
 }
 
 .gallery-main .swiper-slide {
   text-align: center;
-  background: #f8f9fa;
+  background: white;
   display: flex;
   justify-content: center;
-  align-items: center;
   overflow: hidden;
+  position: relative;
 }
 
 .gallery-main .swiper-slide img {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 500px;
   object-fit: contain;
 }
 
-/* Thumbnails Swiper */
+/* Force pagination to bottom */
+.product-gallery-container .swiper-pagination {
+  position: absolute !important;
+  bottom: 10px !important;
+  top: auto !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 10 !important;
+  width: 100% !important;
+  text-align: center;
+}
+
+/* Bullet pagination styling */
+.product-gallery-container .swiper-pagination-bullet {
+  width: 8px !important;
+  height: 8px !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  opacity: 1 !important;
+  margin: 0 4px !important;
+}
+
+.product-gallery-container .swiper-pagination-bullet-active {
+  background: #000 !important;
+  width: 10px !important;
+  height: 10px !important;
+}
+
+/* Thumbnails container */
 .gallery-thumbs {
-  height: 100px;
   box-sizing: border-box;
   padding: 10px 0;
 }
 
+/* Square thumbnails with aspect ratio */
 .gallery-thumbs .swiper-slide {
   width: 25%;
-  height: 100%;
   opacity: 0.4;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 3px solid transparent;
   transition: all 0.3s ease;
+  border-radius: 15px;
+  overflow: hidden;
+  /* Force square aspect ratio */
+  aspect-ratio: 1 / 1;
+  position: relative;
 }
 
 .gallery-thumbs .swiper-slide-thumb-active {
@@ -49,10 +85,13 @@
 }
 
 .gallery-thumbs .swiper-slide img {
-  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 12px; /* Slightly smaller to account for border */
 }
 
 /* Navigation arrows */
@@ -73,27 +112,10 @@
   font-size: 20px;
 }
 
-/* Pagination */
-.swiper-pagination-bullet {
-  background: #000;
-}
-
-.swiper-pagination-bullet-active {
-  background: #000;
-}
-
 /* Mobile adjustments */
 @media (max-width: 768px) {
-  .gallery-main .swiper-slide img {
-      max-height: 300px;
-  }
-  
-  .gallery-thumbs {
-      height: 60px;
-  }
-  
   .gallery-thumbs .swiper-slide {
-      width: 20%;
+    width: 20%;
   }
 }
 
@@ -102,4 +124,12 @@
   width: 100%;
   height: auto;
   display: block;
+}
+
+/* Main image height control */
+@media (min-width: 200px) {
+  .gallery-main .swiper-slide img {
+    height: 500px;
+    width: auto;
+  }
 }
