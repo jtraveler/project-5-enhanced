@@ -1,15 +1,16 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminBase
+from adminsortable2.admin import SortableInlineAdminMixin
 from .models import Product, Category, ProductImage, Review, Favorite
 
 
-# Category admin remains the same
+# Category admin
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'friendly_name',
         'name',
     )
+    search_fields = ('name', 'friendly_name')
 
 
 # ProductImage inline admin
@@ -26,7 +27,9 @@ class ProductImageInline(SortableInlineAdminMixin, admin.TabularInline):
     thumbnail_preview.short_description = 'Preview'
 
 
-# Update Product admin
+# Product admin with enhanced search and filtering
+from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminBase
+
 class ProductAdmin(SortableAdminBase, admin.ModelAdmin):
     list_display = (
         'sku',
@@ -35,11 +38,31 @@ class ProductAdmin(SortableAdminBase, admin.ModelAdmin):
         'price',
         'rating',
         'image_count',
+        'created_at',
         'primary_image_preview',
     )
     
-    ordering = ('sku',)
+    list_filter = (
+        'category',
+        'created_at',
+        'price',
+        'has_sizes',
+    )
+    
+    search_fields = (
+        'name',
+        'sku',
+        'description',
+        'category__name',
+        'category__friendly_name',
+    )
+    
+    date_hierarchy = 'created_at'
+    ordering = ('-created_at',)
     inlines = [ProductImageInline]
+    
+    # Optionally, add list_per_page to control pagination
+    list_per_page = 60
     
     def image_count(self, obj):
         return obj.images.count()
@@ -56,7 +79,7 @@ class ProductAdmin(SortableAdminBase, admin.ModelAdmin):
     primary_image_preview.short_description = 'Primary'
 
 
-# Review admin remains the same
+# Review admin
 class ReviewAdmin(admin.ModelAdmin):
     list_display = (
         'product',
@@ -74,6 +97,7 @@ class ReviewAdmin(admin.ModelAdmin):
         'comment',
     )
     ordering = ('-created_at',)
+    date_hierarchy = 'created_at'
 
 
 # Favorite admin
@@ -82,6 +106,7 @@ class FavoriteAdmin(admin.ModelAdmin):
     list_filter = ('created_at',)
     search_fields = ('user__username', 'product__name')
     ordering = ('-created_at',)
+    date_hierarchy = 'created_at'
 
 
 # Register models
