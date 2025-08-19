@@ -23,10 +23,16 @@ h1,h2,h3,h4 { font-weight: 600; letter-spacing: -0.2px; }
 h5,h6 { font-weight: 700; }
 body, p, li { font-size: 16px; line-height: 1.45; }
 
-/* Slightly wider desktop like thule.com */
-:root { --desktop-max: 1440px; }
-@media (min-width: 1200px) {
-  .container, .container-lg, .container-xl { max-width: var(--desktop-max); }
+
+/* This is the main area of the content */
+.guts {
+
+  background: white;
+  /* box-shadow: 0 1px 16px 0 rgba(0, 0, 0, .1); */
+  /* border-color: var(--color-grey-medium); */
+  /* border-radius: 4px; */
+  /* padding: 40px; */
+  margin-top: 10px;
 }
 
 a:hover {text-decoration: none; color: #000;}
@@ -55,7 +61,7 @@ a:hover {text-decoration: none; color: #000;}
   color: #111;
 }
 
-/* Search (Thule-like pill) */
+/* Search */
 .header-search {
   position: relative;
   display: flex;
@@ -571,12 +577,7 @@ input[name='q']::placeholder {
 
 /* -------------------------------- Media Queries */
 
-/* Slightly larger container on xl screens */
-@media (min-width: 1200px) {
-.container {
-  max-width: 80%;
-}
-}
+
 
 /* Allauth form formatting */
 
@@ -814,6 +815,40 @@ color: #17a2b8; /* text-info */
 .btn-favorite.favorited i,
 .btn-favorite.favorited:hover i {
   color: #000 !important;
+}
+
+
+/* Product Detail Page - Breadcrumb Styling */
+.breadcrumb {
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.breadcrumb li {
+  font-size: 14px;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "/";
+  color: #6c757d;
+  padding: 0 0.5rem;
+}
+
+.breadcrumb-item a {
+  color: #6c757d;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb-item a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+  color: #000;
+  font-weight: 500;
 }
 
 /* Product Detail Favorite Button */
