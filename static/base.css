@@ -19,7 +19,7 @@ html, body {
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   color: #111;
 }
-h1,h2,h3,h4 { font-weight: 800; letter-spacing: -0.2px; }
+h1,h2,h3,h4 { font-weight: 600; letter-spacing: -0.2px; }
 h5,h6 { font-weight: 700; }
 body, p, li { font-size: 16px; line-height: 1.45; }
 
@@ -634,7 +634,7 @@ color: #17a2b8; /* text-info */
 
 .product-details-container h1 {
 
-  font-size: 2.0rem;
+  font-size: 1.8rem;
   line-height: 1.3;
   margin-bottom: 20px;
   font-weight: 400;
@@ -704,40 +704,49 @@ color: #17a2b8; /* text-info */
   margin-left: 10px;
 }
 
+
 /* Favorite Heart Buttons */
 .btn-favorite {
-  background-color: rgba(255, 255, 255, 0.9);
-  border: 2px solid #dc3545;
-  width: 40px;
-  height: 40px;
+  background: white;
+  border: none;
+  width: 35px;
+  height: 35px;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  border-radius: 50%;
 }
 
-.btn-favorite:hover {
-  background-color: #dc3545;
-  transform: scale(1.1);
+
+.btn-favorite:focus {
+  outline: none;
+  box-shadow: none;
 }
 
-.btn-favorite .fa-heart {
-  font-size: 18px;
-  color: #dc3545;
+/* Heart icon styling */
+.btn-favorite i {
+  font-size: 22px;
+  color: #000;
   transition: all 0.3s ease;
 }
 
-.btn-favorite:hover .fa-heart {
-  color: white;
+/* Remove any background color changes */
+.btn-favorite,
+.btn-favorite:hover,
+.btn-favorite.favorited,
+.btn-favorite.favorited:hover {
+  background-color: transparent !important;
+  border: none !important;
 }
 
-.btn-favorite.favorited {
-  background-color: #dc3545;
-}
-
-.btn-favorite.favorited .fa-heart {
-  color: white;
+/* Ensure the heart is always black */
+.btn-favorite i,
+.btn-favorite:hover i,
+.btn-favorite.favorited i,
+.btn-favorite.favorited:hover i {
+  color: #000 !important;
 }
 
 /* Wishlist remove button */
