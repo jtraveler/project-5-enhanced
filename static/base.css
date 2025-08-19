@@ -687,6 +687,23 @@ color: #17a2b8; /* text-info */
 }
 
 
+/* Star Rating Styling - Global */
+.star-icon {
+  color: #000 !important;
+}
+
+.star-icon-empty {
+  color: #000 !important;
+  opacity: 0.3;
+}
+
+/* Override the yellow/warning color for stars */
+.fa-star.text-warning {
+  color: #000 !important;
+}
+
+
+
 /* Star Rating Widget */
 .star-rating {
   font-size: 1.5rem;
@@ -697,6 +714,7 @@ color: #17a2b8; /* text-info */
 .star-rating .star-select {
   cursor: pointer;
   transition: transform 0.2s;
+  color: #000 !important;
 }
 
 .star-rating .star-select:hover {
@@ -704,7 +722,7 @@ color: #17a2b8; /* text-info */
 }
 
 .star-rating .star-select.far {
-  color: #ffc107 !important;
+  color: #000 !important;
   opacity: 0.3;
 }
 

@@ -43,7 +43,7 @@
                                         <p class="lead mb-0 text-left font-weight-bold">${{ favorite.product.price }}</p>
                                         {% if favorite.product.average_rating > 0 %}
                                             <small class="text-muted">
-                                                <i class="fas fa-star text-warning mr-1"></i>{{ favorite.product.average_rating|floatformat:1 }} / 5
+                                                <i class="fas fa-star star-icon mr-1"></i>{{ favorite.product.average_rating|floatformat:1 }} / 5
                                             </small>
                                         {% else %}
                                             <small class="text-muted">No Rating</small>

@@ -199,9 +199,9 @@
                             <h5 class="card-title">
                                 {% for i in "12345" %}
                                     {% if i|add:0 <= review.rating %}
-                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star star-icon"></i>
                                     {% else %}
-                                        <i class="far fa-star text-warning"></i>
+                                        <i class="far fa-star star-icon-empty"></i>
                                     {% endif %}
                                 {% endfor %}
                             </h5>
@@ -261,11 +261,11 @@
                         <div class="form-group">
                             <label>Rating:</label>
                             <div class="star-rating mb-3">
-                                <i class="fas fa-star text-warning star-select" data-rating="1"></i>
-                                <i class="fas fa-star text-warning star-select" data-rating="2"></i>
-                                <i class="fas fa-star text-warning star-select" data-rating="3"></i>
-                                <i class="fas fa-star text-warning star-select" data-rating="4"></i>
-                                <i class="fas fa-star text-warning star-select" data-rating="5"></i>
+                                <i class="fas fa-star star-icon star-select" data-rating="1"></i>
+                                <i class="fas fa-star star-icon star-select" data-rating="2"></i>
+                                <i class="fas fa-star star-icon star-select" data-rating="3"></i>
+                                <i class="fas fa-star star-icon star-select" data-rating="4"></i>
+                                <i class="fas fa-star star-icon star-select" data-rating="5"></i>
                                 <span class="ms-2" id="rating-text">Excellent</span>
                             </div>
                             {{ review_form.rating }}

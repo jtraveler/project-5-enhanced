@@ -94,8 +94,7 @@
                                             {% endif %}
                                             {% if product.average_rating > 0 %}
                                                 <small class="text-muted">
-                                                    <i class="fas fa-star text-warning mr-1"></i>{{ product.average_rating|floatformat:1 }} / 5 
-                                                    ({{ product.review_count }} review{{ product.review_count|pluralize }})
+                                                    <i class="fas fa-star star-icon mr-1"></i>{{ product.average_rating|floatformat:1 }} / 5
                                                 </small>
                                             {% else %}
                                                 <small class="text-muted">No Rating</small>
