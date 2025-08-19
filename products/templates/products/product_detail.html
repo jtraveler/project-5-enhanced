@@ -101,15 +101,7 @@
                     </small>
                 {% endif %}
                 <p class="mt-3">{{ product.description }}</p>
-                {% if user.is_authenticated %}
-                    <form method="POST" action="{% url 'toggle_favorite' product.id %}" class="d-inline">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-favorite rounded-circle {% if is_favorited %}favorited{% endif %}">
-                            <i class="fas fa-heart"></i>
-                            <span class="sr-only">{% if is_favorited %}Remove from{% else %}Add to{% endif %} Favorites</span>
-                        </button>
-                    </form>
-                {% endif %}
+                
                 <form class="form" action="{% url 'add_to_bag' product.id %}" method="POST">
                     {% csrf_token %}
                     <div class="form-row">
@@ -151,19 +143,28 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="col{% if s %}-12 mt-2{% endif %}">
-                            <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 mt-5">
-                                <span class="icon">
-                                    <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="text-uppercase">Keep Shopping</span>
-                            </a>
-                            <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="Add to Bag">
+                            <div class="d-flex gap-2 mt-5">
+                                <input type="submit" class="btn btn-black rounded-0 text-uppercase flex-grow-1" value="Add to Bag">
+                                {% if user.is_authenticated %}
+                                    <button type="button" class="btn btn-favorite-outline {% if is_favorited %}favorited{% endif %}" 
+                                            onclick="document.getElementById('favorite-form-{{ product.id }}').submit();">
+                                        <i class="{% if is_favorited %}fas{% else %}far{% endif %} fa-heart"></i>
+                                    </button>
+                                {% endif %}
+                            </div>
                         </div>
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
                         {% endwith %}
                     </div>
                 </form>
+                
+                {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'toggle_favorite' product.id }}" id="favorite-form-{{ product.id }}" class="d-none">
+                        {% csrf_token %}
+                    </form>
+                {% endif %}
             </div>
         </div>
     </div>
