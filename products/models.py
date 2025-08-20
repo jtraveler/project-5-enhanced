@@ -40,6 +40,20 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
+    def get_image_url(self):
+        """
+        Safely get the image URL, with fallback for missing files
+        """
+        if self.image:
+            try:
+                # Check if the file actually exists
+                if self.image.storage.exists(self.image.name):
+                    return self.image.url
+            except:
+                pass
+        # Return default image if no image or file missing
+        return '/media/noimage.png'
+    
     def average_rating(self):
         """Calculate average rating from reviews"""
         avg = self.reviews.aggregate(Avg('rating'))['rating__avg']
@@ -140,19 +154,24 @@ class ProductImage(models.Model):
     def get_image_filename(self):
         """Get just the filename without path"""
         return os.path.basename(self.image.name)
+    
     def get_image_url(self):
         """Return image URL with fallback for missing files"""
         try:
-            return self.image.url
+            if self.image and self.image.storage.exists(self.image.name):
+                return self.image.url
         except:
-            return '/static/images/no-image.png'
+            pass
+        return '/media/noimage.png'
     
     def get_thumbnail_url(self):
         """Return thumbnail URL with fallback for missing files"""
         try:
-            return self.thumbnail.url
+            if self.thumbnail and self.thumbnail.storage.exists(self.thumbnail.name):
+                return self.thumbnail.url
         except:
-            return '/static/images/no-image-thumb.png'
+            pass
+        return '/media/noimage.png'
 
 
 class Review(models.Model):

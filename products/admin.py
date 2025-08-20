@@ -22,7 +22,10 @@ class ProductImageInline(SortableInlineAdminMixin, admin.TabularInline):
     
     def thumbnail_preview(self, obj):
         if obj.image:
-            return format_html('<img src="{}" width="100" height="100" />', obj.thumbnail.url)
+            try:
+                return format_html('<img src="{}" width="100" height="100" />', obj.get_thumbnail_url())
+            except:
+                return "No image"
         return "No image"
     thumbnail_preview.short_description = 'Preview'
 
@@ -72,10 +75,14 @@ class ProductAdmin(SortableAdminBase, admin.ModelAdmin):
         primary_image = obj.get_primary_image()
         if primary_image:
             try:
-                if hasattr(primary_image, 'thumbnail'):
-                    image_url = primary_image.thumbnail.url
+                # Use the safe get_image_url method
+                if hasattr(primary_image, 'get_thumbnail_url'):
+                    image_url = primary_image.get_thumbnail_url()
+                elif hasattr(primary_image, 'get_image_url'):
+                    image_url = primary_image.get_image_url()
                 elif hasattr(primary_image, 'image'):
-                    image_url = primary_image.image.url
+                    # For legacy Product image field
+                    image_url = primary_image.get_image_url()
                 else:
                     return "No image"
                 
@@ -85,9 +92,9 @@ class ProductAdmin(SortableAdminBase, admin.ModelAdmin):
                     f'/admin/products/product/{obj.id}/change/',
                     image_url
                 )
-            except (ValueError, AttributeError):
-                # Handle cases where the image file doesn't exist
-                return "Image missing"
+            except Exception as e:
+                # Handle any unexpected errors
+                return "Image error"
         return "No image"
     primary_image_preview.short_description = 'Image'
 
