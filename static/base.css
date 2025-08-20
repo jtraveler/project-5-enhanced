@@ -417,9 +417,8 @@ a:hover {text-decoration: none; color: #000;}
 }
 
 
-
-.navbar-nav .nav-item:first-child a {
-  background-color: yellow;
+/* The first navigation - the All Produtcs link */
+.navbar-nav .nav-first-link {
   padding-left: 0;
 }
 
@@ -1003,6 +1002,10 @@ color: #17a2b8; /* text-info */
     display: flex;
     gap: 8px;
   }
+
+  .sort-select-wrapper {width: 100%;
+  }
+
   .display-4.logo-font.text-black {
       font-size: 2rem;
   }

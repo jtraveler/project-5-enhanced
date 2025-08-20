@@ -1,7 +1,7 @@
 <div class="collapse navbar-collapse" id="main-nav-list">
     <ul class="navbar-nav w-auto">
         <li class="nav-item dropdown">
-            <a class="logo-font nav-link text-black" href="#" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="logo-font nav-link text-black nav-first-link" href="#" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 All Products
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
@@ -36,13 +36,15 @@
 
 
         <li class="nav-item dropdown">
-            <a class="logo-font nav-link text-black" href="#" id="clothing-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Power & Lighting
+            <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=power_banks" aria-haspopup="true" aria-expanded="false">
+                Power
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="clothing-link">
-                <a href="{% url 'products' %}?category=power_banks" class="dropdown-item">Power Banks</a>
-                <a href="{% url 'products' %}?category=lighting" class="dropdown-item">Lighting</a>
-            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=lighting" aria-haspopup="true" aria-expanded="false">
+                Lighting
+            </a>
         </li>
 
         <li class="nav-item dropdown">
@@ -51,16 +53,18 @@
             </a>
         </li>
 
+        <li class="nav-item dropdown">
+            <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=navigation" aria-haspopup="true" aria-expanded="false">
+                Navigation
+            </a>
+        </li>
 
         <li class="nav-item dropdown">
-            <a class="logo-font nav-link text-black" href="#" id="clothing-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Navigation & Safety
+            <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=backpacks_and_bags" aria-haspopup="true" aria-expanded="false">
+                Safety
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="clothing-link">
-                <a href="{% url 'products' %}?category=navigation" class="dropdown-item">Navigation</a>
-                <a href="{% url 'products' %}?category=safety" class="dropdown-item">Safety</a>
-            </div>
         </li>
+
 
         <li class="nav-item dropdown">
             <a class="logo-font nav-link text-black" href="#" id="clothing-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -74,7 +78,7 @@
 
         <li class="nav-item">
         
-        <a href="{% url 'contact' %}" class="logo-font nav-link text-black">Contact Us</a>
+        <a href="{% url 'contact' %}" class="logo-font nav-link text-black">Contact</a>
         </li>
     </ul>
 </div>
