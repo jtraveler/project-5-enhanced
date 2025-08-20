@@ -71,12 +71,25 @@ class ProductAdmin(SortableAdminBase, admin.ModelAdmin):
     def primary_image_preview(self, obj):
         primary_image = obj.get_primary_image()
         if primary_image:
-            if hasattr(primary_image, 'thumbnail'):
-                return format_html('<img src="{}" width="50" height="50" />', primary_image.thumbnail.url)
-            elif hasattr(primary_image, 'image'):
-                return format_html('<img src="{}" width="50" height="50" />', primary_image.image.url)
+            try:
+                if hasattr(primary_image, 'thumbnail'):
+                    image_url = primary_image.thumbnail.url
+                elif hasattr(primary_image, 'image'):
+                    image_url = primary_image.image.url
+                else:
+                    return "No image"
+                
+                # Make the image clickable with a link to the edit page
+                return format_html(
+                    '<a href="{}"><img src="{}" width="80" height="80" style="object-fit: cover; border-radius: 4px;" /></a>',
+                    f'/admin/products/product/{obj.id}/change/',
+                    image_url
+                )
+            except (ValueError, AttributeError):
+                # Handle cases where the image file doesn't exist
+                return "Image missing"
         return "No image"
-    primary_image_preview.short_description = 'Primary'
+    primary_image_preview.short_description = 'Image'
 
 
 # Review admin

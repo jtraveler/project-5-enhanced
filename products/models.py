@@ -140,6 +140,19 @@ class ProductImage(models.Model):
     def get_image_filename(self):
         """Get just the filename without path"""
         return os.path.basename(self.image.name)
+    def get_image_url(self):
+        """Return image URL with fallback for missing files"""
+        try:
+            return self.image.url
+        except:
+            return '/static/images/no-image.png'
+    
+    def get_thumbnail_url(self):
+        """Return thumbnail URL with fallback for missing files"""
+        try:
+            return self.thumbnail.url
+        except:
+            return '/static/images/no-image-thumb.png'
 
 
 class Review(models.Model):
