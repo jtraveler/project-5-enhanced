@@ -337,7 +337,7 @@ a:hover {text-decoration: none; color: #000;}
 /* This is the dropdown of the Info on the main nav, so last item */
 .drop-down-info-only {
 
-  left: -150px;
+  left: -170px;
 }
 
 /* Add a subtle hover effect to the profile icon itself */

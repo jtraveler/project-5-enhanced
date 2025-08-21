@@ -54,7 +54,7 @@
                             {% if search_term or current_categories or current_sorting != 'None_None' %}
                                 <span class="small"><a href="{% url 'products' %}">Products Home</a> | </span>
                             {% endif %}
-                            {{ products|length }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+                            {{ page_obj.paginator.count }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
                         </p>
                     </div>
                 </div>
@@ -63,18 +63,32 @@
                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                             <div class="card h-100 border-0 position-relative">
                                 {% with primary_image=product.get_primary_image %}
-                                    {% if primary_image %}
-                                    <a href="{% url 'product_detail' product.id %}">
-                                        <img class="card-img-top img-fluid" src="{% if primary_image.image %}{{ primary_image.image.url }}{% else %}{{ product.image.url }}{% endif %}" alt="{{ product.name }}">
-                                    </a>
+                                    {% if primary_image and primary_image.image %}
+                                        <a href="{% url 'product_detail' product.id %}">
+                                            <img class="card-img-top img-fluid" 
+                                                src="{{ primary_image.image.url }}" 
+                                                alt="{{ product.name }}" 
+                                                loading="lazy" 
+                                                decoding="async"
+                                                onerror="this.src='{{ MEDIA_URL }}noimage.png'">
+                                        </a>
                                     {% elif product.image %}
-                                    <a href="{% url 'product_detail' product.id %}">
-                                        <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
-                                    </a>
+                                        <a href="{% url 'product_detail' product.id %}">
+                                            <img class="card-img-top img-fluid" 
+                                                src="{{ product.image.url }}" 
+                                                alt="{{ product.name }}" 
+                                                loading="lazy" 
+                                                decoding="async"
+                                                onerror="this.src='{{ MEDIA_URL }}noimage.png'">
+                                        </a>
                                     {% else %}
-                                    <a href="{% url 'product_detail' product.id %}">
-                                        <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-                                    </a>
+                                        <a href="{% url 'product_detail' product.id %}">
+                                            <img class="card-img-top img-fluid" 
+                                                src="{{ MEDIA_URL }}noimage.png" 
+                                                alt="{{ product.name }}" 
+                                                loading="lazy" 
+                                                decoding="async">
+                                        </a>
                                     {% endif %}
                                 {% endwith %}
                                 {% if user.is_authenticated %}
@@ -141,6 +155,39 @@
                         {% endif %}
                     {% endfor %}
                 </div>
+                
+                <!-- Pagination Controls -->
+                {% if page_obj.has_other_pages %}
+                    <div class="row">
+                        <div class="col-12">
+                            <nav aria-label="Products pagination">
+                                <ul class="pagination justify-content-center">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page=1{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}{% if request.GET.direction %}&direction={{ request.GET.direction }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo; First</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}{% if request.GET.direction %}&direction={{ request.GET.direction }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Previous</a>
+                                        </li>
+                                    {% endif %}
+                                    
+                                    <li class="page-item active">
+                                        <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                                    </li>
+                                    
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}{% if request.GET.direction %}&direction={{ request.GET.direction }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}{% if request.GET.direction %}&direction={{ request.GET.direction }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Last &raquo;</a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.db.models.functions import Lower
 from django.db import models
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 
 from .models import Product, Category, Review, Favorite
 from .forms import ProductForm, ReviewForm
@@ -16,7 +17,8 @@ from django.db.models import Avg
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
 
-    products = Product.objects.all()
+    # Optimize database queries with select_related and prefetch_related
+    products = Product.objects.select_related('category').prefetch_related('reviews').all()
     query = None
     categories = None
     sort = None
@@ -80,10 +82,16 @@ def all_products(request):
             queries = Q(name__icontains=query) | Q(description__icontains=query)
             products = products.filter(queries)
 
+    # Add pagination - 20 products per page
+    paginator = Paginator(products, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     current_sorting = f'{sort}_{direction}'
 
     context = {
-        'products': products,
+        'products': page_obj,  # Use paginated products
+        'page_obj': page_obj,  # Add page object for pagination controls
         'search_term': query,
         'current_categories': categories,
         'current_sorting': current_sorting,
@@ -95,8 +103,9 @@ def all_products(request):
 def product_detail(request, product_id):
     """ A view to show individual product details """
 
-    product = get_object_or_404(Product, pk=product_id)
-    reviews = product.reviews.all()
+    # Optimize database queries
+    product = get_object_or_404(Product.objects.select_related('category'), pk=product_id)
+    reviews = product.reviews.select_related('user').all()
     review_count = product.review_count()
     avg_rating = product.average_rating()
     

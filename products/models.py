@@ -31,6 +31,15 @@ class Product(models.Model):
     rating = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True, editable=False)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
+    
+    # ADDING COMPRESSED IMAGE FIELD
+    image_thumbnail = ImageSpecField(
+        source='image',
+        processors=[ResizeToFill(300, 300)],
+        format='JPEG',
+        options={'quality': 80}
+    )
+    
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
 
@@ -98,6 +107,12 @@ class ProductImage(models.Model):
     image = models.ImageField(
         upload_to='product_images/',
         help_text='Upload product image'
+    )
+    image_thumbnail = ImageSpecField(
+        source='image',
+        processors=[ResizeToFill(300, 300)],
+        format='JPEG',
+        options={'quality': 80}
     )
     # Thumbnail for gallery - automatically generated
     thumbnail = ImageSpecField(
