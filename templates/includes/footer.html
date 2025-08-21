@@ -1,56 +1,106 @@
-<footer class="site-footer">
-  <div class="container">
-    <section class="newsletter">
-      <h3>Get free shipping on your first order</h3>
-      <p>Plus early access to new products, exclusive offers, and events.</p>
-      <form action="#" class="newsletter__form">
-        <input type="email" placeholder="Email address">
-        <button type="submit">Sign up</button>
-      </form>
+<!-- Remove the container if you want to extend the Footer to full width. -->
+<div class="container-fluid">
+
+  <!-- Footer -->
+  <footer
+          class="text-lg-start text-white pt-5 px-3"
+          style="background-color: #212121"
+          >
+   
+    <!-- Section: Social media -->
+
+    <!-- Section: Links  -->
+    <section>
+      <div class="container text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-12 col-lg-4 col-xl-3 mb-4 mr-5">
+            <!-- Content -->
+            <a href="{% url 'home' %}" class="brand-text">BIRCHLIN</a>
+            
+            <p>
+              Gear up at our wilderness outpost where quality meets adventure. From tents to trails, we equip your escape. Find your wild side and we'll pack the rest!          </div>
+          <!-- Grid column -->
+
+         
+          <div class="col-md-12 col-lg-6 col-xl-7 mx-auto mb-4">
+            <!-- Links -->
+            <div class="footer-header mb-4">Browse by Category</div>
+            
+            <div class="grid-container">
+            <p>
+              <a href="{% url 'products' %}?category=tents_and_shelter" aria-haspopup="true" aria-expanded="false" aria-label="Category - Shelter">Shelter</a>
+            </p>
+            <p>
+              <a href="{% url 'products' %}?category=sleeping_bags" aria-label="Category - Sleeping Bags">Sleeping Bags</a>
+            </p>
+            <p>
+              <a href="{% url 'products' %}?category=sleeping_pads" aria-label="Category - Sleeping Pads">Sleeping Pads</a>
+            </p>
+            <p>
+              <a href="{% url 'products' %}?category=cooking_and_food" aria-haspopup="true" aria-expanded="false" aria-label="Category - Cook">Cook</a>
+            </p>
+            <p>
+              <a href="{% url 'products' %}?category=power_banks" aria-haspopup="true" aria-expanded="false" aria-label="Category - Power">Power</a>
+            </p>
+            <p>
+              <a href="{% url 'products' %}?category=lighting" aria-haspopup="true" aria-expanded="false" aria-label="Category - Lighting">Lighting</a>
+            </p>
+            <p>
+              <a href="{% url 'products' %}?category=backpacks_and_bags" aria-haspopup="true" aria-expanded="false" aria-label="Category - Carry">Carry</a>
+            </p>
+            <p>
+              <a href="{% url 'products' %}?category=navigation" aria-haspopup="true" aria-expanded="false" aria-label="Category - Navigation">Navigation</a>
+            </p>
+            <p>
+              <a href="{% url 'products' %}?category=safety" aria-haspopup="true" aria-expanded="false" aria-label="Category - Safety">Safety</a>
+            </p>
+           
+            <p>
+              <a href="{% url 'contact' %}" aria-label="Category - Connect">Contact</a>
+            </p>
+
+          </div>
+            
+          </div>
+
+          <div class="col-md-12 col-lg-12 col-xl-1 mx-auto">
+            <!-- Links -->
+            <div class="footer-header mb-4">Connect</div>
+            
+            <div class="social-media-links">
+              <a href="https://www.facebook.com" class="text-white mr-2" aria-label="Visit Birchlin on Facebook">
+                  <i class="fab fa-facebook-f" aria-hidden="true"></i>
+              </a>
+              <a href="https://www.x.com" class="text-white mr-2" aria-label="Follow Birchlin on X">
+                  <i class="fab fa-twitter" aria-hidden="true"></i>
+              </a>
+              <a href="https://www.instagram.com" class="text-white" aria-label="Follow Birchlin on Instagram">
+                  <i class="fab fa-instagram" aria-hidden="true"></i>
+              </a>
+              
+          </div>
+          </div>
+
+          
+          
+        </div>
+       
+      </div>
     </section>
+    <!-- Section: Links  -->
 
-    <div class="footergrid">
-      <div>
-        <h4>Order Support</h4>
-        <ul>
-          <li><a href="#">Shipping &amp; Delivery</a></li>
-          <li><a href="#">Returns</a></li>
-          <li><a href="#">Order Status</a></li>
-          <li><a href="#">Payment Methods</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Product Support</h4>
-        <ul>
-          <li><a href="#">Assembly Guides</a></li>
-          <li><a href="#">Product Registration</a></li>
-          <li><a href="#">Safety Information</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>About</h4>
-        <ul>
-          <li><a href="#">Sustainability</a></li>
-          <li><a href="#">Stories</a></li>
-          <li><a href="#">Press</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Sales</h4>
-        <ul>
-          <li><a href="#">Find a Dealer</a></li>
-          <li><a href="#">B2B</a></li>
-        </ul>
-      </div>
+    <!-- Copyright -->
+    <div
+         class="text-center p-3 mt-5 copyright"
+         style="background-color: rgba(0, 0, 0, 0.2)"
+         >
+      © 2025 Copyright: <a href="{% url 'home' %}" class="not-special" aria-label="Go to the homepage">Birchlin</a>
     </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
 
-    <div class="footnote">
-      <div>© {% now "Y" %} Your Company. All rights reserved.</div>
-      <nav class="footnote__links">
-        <a href="#">Privacy</a>
-        <a href="#">Cookies</a>
-        <a href="#">Imprint</a>
-      </nav>
-    </div>
-  </div>
-</footer>
+</div>
+<!-- End of .container -->

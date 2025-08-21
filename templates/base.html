@@ -59,7 +59,7 @@
 
 <body>
   <header class="site-header">
-    <!-- Row 1: Logo • Search • Utility -->
+    <!-- Row 1: Logo, Search Utility -->
     <div class="container header-top">
       <a href="{% url 'home' %}" class="brand-text">BIRCHLIN</a>
   
@@ -154,6 +154,9 @@
 
   {% block content %}
   {% endblock %}
+
+  <!-- Include footer -->
+  {% include 'includes/footer.html' %}
 
   {% block postloadjs %}
 

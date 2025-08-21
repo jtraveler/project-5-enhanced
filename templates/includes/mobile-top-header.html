@@ -21,83 +21,83 @@
     </div>
 </li>
 <li class="nav-item dropdown">
-    <a class="logo-font nav-link text-black nav-first-link" href="#" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="logo-font nav-link text-black nav-first-link" href="#" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="All Products">
         All Products
     </a>
     <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-        <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price</a>
-        <a href="{% url 'products' %}?sort=rating&direction=desc" class="dropdown-item ">By Rating</a>
-        <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item ">By Category</a>
+        <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item" aria-label="By Price">By Price</a>
+        <a href="{% url 'products' %}?sort=rating&direction=desc" class="dropdown-item" aria-label="By Rating">By Rating</a>
+        <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item" aria-label="By Category">By Category</a>
         <a href="{% url 'products' %}" class="dropdown-item">All Products</a>
     </div>
 </li>
 
 <li class="nav-item dropdown">
-    <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=tents_and_shelter" aria-haspopup="true" aria-expanded="false">
+    <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=tents_and_shelter" aria-haspopup="true" aria-expanded="false" aria-label="Category - Shelter">
         Shelter
     </a>
 </li>
 
 <li class="nav-item dropdown">
-    <a class="logo-font nav-link text-black" href="#" id="clothing-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="logo-font nav-link text-black" href="#" id="clothing-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Category - Sleep">
         Sleep
     </a>
     <div class="dropdown-menu border-0" aria-labelledby="clothing-link">
-        <a href="{% url 'products' %}?category=sleeping_bags" class="dropdown-item">Sleeping Bags</a>
-        <a href="{% url 'products' %}?category=sleeping_pads" class="dropdown-item">Sleeping Pads</a>
+        <a href="{% url 'products' %}?category=sleeping_bags" class="dropdown-item" aria-label="Category - Sleeping Bags">Sleeping Bags</a>
+        <a href="{% url 'products' %}?category=sleeping_pads" class="dropdown-item" aria-label="Category - Sleeping Pads">Sleeping Pads</a>
     </div>
 </li>
 
 <li class="nav-item dropdown">
-    <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=cooking_and_food" aria-haspopup="true" aria-expanded="false">
+    <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=cooking_and_food" aria-haspopup="true" aria-expanded="false" aria-label="Category - Cook">
         Cook
     </a>
 </li>
 
 
 <li class="nav-item dropdown">
-    <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=power_banks" aria-haspopup="true" aria-expanded="false">
+    <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=power_banks" aria-haspopup="true" aria-expanded="false" aria-label="Category - Power">
         Power
     </a>
 </li>
 
 <li class="nav-item dropdown">
-    <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=lighting" aria-haspopup="true" aria-expanded="false">
+    <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=lighting" aria-haspopup="true" aria-expanded="false" aria-label="Category - Lighting">
         Lighting
     </a>
 </li>
 
 <li class="nav-item dropdown">
-    <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=backpacks_and_bags" aria-haspopup="true" aria-expanded="false">
+    <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=backpacks_and_bags" aria-haspopup="true" aria-expanded="false" aria-label="Category - Carry">
         Carry
     </a>
 </li>
 
 <li class="nav-item dropdown">
-    <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=navigation" aria-haspopup="true" aria-expanded="false">
+    <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=navigation" aria-haspopup="true" aria-expanded="false" aria-label="Category - Navigation">
         Navigation
     </a>
 </li>
 
 <li class="nav-item dropdown">
-    <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=safety" aria-haspopup="true" aria-expanded="false">
+    <a class="logo-font nav-link text-black" href="{% url 'products' %}?category=safety" aria-haspopup="true" aria-expanded="false" aria-label="Category - Safety">
         Safety
     </a>
 </li>
 
 
 <li class="nav-item dropdown">
-    <a class="logo-font nav-link text-black" href="#" id="clothing-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="logo-font nav-link text-black" href="#" id="clothing-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Category - Comfort">
         Comfort
     </a>
     <div class="dropdown-menu border-0" aria-labelledby="clothing-link">
-        <a href="{% url 'products' %}?category=hommocks" class="dropdown-item">Hommocks</a>
-        <a href="{% url 'products' %}?category=chairs" class="dropdown-item">Chairs</a>
+        <a href="{% url 'products' %}?category=hommocks" class="dropdown-item" aria-label="Category - Hommocks">Hommocks</a>
+        <a href="{% url 'products' %}?category=chairs" class="dropdown-item" aria-label="Category - Chairs">Chairs</a>
     </div>
 </li>
 
 <li class="nav-item">
 
-<a href="{% url 'contact' %}" class="logo-font nav-link text-black">Contact</a>
+<a href="{% url 'contact' %}" class="logo-font nav-link text-black" aria-label="Category - Connect">Contact</a>
 </li>
 
