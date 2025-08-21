@@ -16,9 +16,13 @@ from django.db.models import Avg
 
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
+    
+    # Enhanced database queries with images prefetch
+    products = Product.objects.select_related('category').prefetch_related(
+        'reviews', 'images'  # Add images prefetch here
+    ).all()
 
     # Optimize database queries with select_related and prefetch_related
-    products = Product.objects.select_related('category').prefetch_related('reviews').all()
     query = None
     categories = None
     sort = None
