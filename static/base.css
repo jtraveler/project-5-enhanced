@@ -962,10 +962,13 @@ color: #17a2b8; /* text-info */
   text-decoration: none;
   background: transparent;
   font-weight: 700;
+  max-width: 300px;
 }
 .btn-hero:hover { background: rgba(255,255,255,.12); }
 
-
+footer {
+margin-top: 110px;
+}
 
 footer .footer-header {
 
@@ -1028,6 +1031,13 @@ footer .social-media-links a {
   }
 }
 
+@media (min-width: 1200px) {
+  .hero__overlay {
+
+    padding-left: 15%;
+  }
+}
+
 /* pad the top a bit when navbar is collapsed on mobile */
 @media (max-width: 991px) {
   .header-container {
@@ -1087,6 +1097,8 @@ footer .social-media-links a {
 
 /* === Nav hover: simple fade-in underline + color fade === */
 @media (min-width: 992px) {
+
+  
   #main-nav .navbar-nav > .nav-item > .nav-link {
     position: relative;
     color: rgba(17,17,17,.85) !important;
