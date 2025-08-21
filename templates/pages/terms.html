@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+               
+                <h2 class="logo-font mb-4">Terms and Conditions</h2>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm p-xs-0 p-md-4 p-l-4 p-xl-4>
+                    <div class="card-body">
+                        <p class="text-muted">Last updated: 21/08/25</p>
+                        
+                        <h4 class="mt-4">Acceptance of Terms</h4>
+                        <p>By accessing and using the Birchlin website, you accept and agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our services.</p>
+                        
+                        <h4 class="mt-4">Product Information</h4>
+                        <p>We strive to provide accurate product descriptions, specifications, and pricing. However, we do not warrant that product descriptions are error-free. All products are subject to availability, and we reserve the right to discontinue products at any time.</p>
+                        
+                        <h4 class="mt-4">Orders and Payment</h4>
+                        <p>All orders are subject to acceptance and product availability. We reserve the right to refuse or cancel orders at our discretion. Payment must be received before orders are processed and shipped.</p>
+                        
+                        <h4 class="mt-4">Shipping and Delivery</h4>
+                        <p>We aim to process and ship orders within 2-3 business days. Shipping times vary by location and selected method. Risk of loss transfers to you upon delivery to the carrier.</p>
+                        
+                        <h4 class="mt-4">Returns and Exchanges</h4>
+                        <p>We want you to be completely satisfied with your purchase. Items may be returned within 30 days in original condition with original packaging. Custom or personalized items are not eligible for return unless defective.</p>
+                        
+                        <h4 class="mt-4">Warranty Disclaimer</h4>
+                        <p>Products are sold with manufacturer warranties where applicable. Birchlin makes no additional warranties beyond those provided by manufacturers. We are not liable for incidental or consequential damages.</p>
+                        
+                        <h4 class="mt-4">Limitation of Liability</h4>
+                        <p>Our liability for any claims arising from your use of our products or services is limited to the purchase price of the specific product or service in question.</p>
+                        
+                        <h4 class="mt-4">Contact Information</h4>
+                        <p>For questions about these Terms and Conditions, contact us at <a href="mailto:legal@birchlin.com">legal@birchlin.com</a>.</p>
+                        
+                        <div class="mt-5">
+                            <a href="{% url 'products' %}" class="btn btn-black">Back to Shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                
+                <h2 class="logo-font mb-4">About Birchlin</h2>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm p-xs-0 p-md-4 p-l-4 p-xl-4">
+                    <div class="card-body">
+                        <h3 class="mb-4">Where Adventure Begins</h3>
+                        
+                        <p class="lead">At Birchlin, we believe that the best moments in life happen outside your comfort zone – literally. Founded by outdoor enthusiasts who understand that gear isn't just equipment, it's the bridge between dreaming about adventure and living it.</p>
+                        
+                        <p>Our story began around a campfire in the remote wilderness of the Pacific Northwest. Three friends, united by their passion for exploration and frustrated by gear that promised the world but delivered disappointment when it mattered most. We knew there had to be a better way.</p>
+                        
+                        <p>That's why we've dedicated ourselves to curating only the most reliable, innovative, and field-tested outdoor equipment. Every product in our collection has been personally used by our team in real-world conditions – from alpine ascents to backcountry camping, from dawn surf sessions to midnight stargazing.</p>
+                        
+                        <p>We're not just selling gear; we're sharing the tools that have enabled our own greatest adventures. Whether you're planning your first overnight hike or your next expedition to a remote corner of the world, Birchlin is here to ensure you're prepared for whatever the wilderness throws your way.</p>
+                        
+                        <p><strong>Because at Birchlin, we don't just sell outdoor gear – we fuel the spirit of adventure.</strong></p>
+                        
+                        <div class="mt-4">
+                            <a href="{% url 'products' %}" class="btn btn-black">Explore Our Gear</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

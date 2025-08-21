@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+               
+                <h2 class="logo-font mb-4">Privacy Policy</h2>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm p-xs-0 p-md-4 p-l-4 p-xl-4">
+                    <div class="card-body">
+                       <p class="text-muted">Last updated: {% now "F d, Y" %}</p>
+                        
+                        <h4 class="mt-4">Information We Collect</h4>
+                        <p>Birchlin collects information you provide directly, such as when you create an account, make a purchase, or contact our customer service team. This includes your name, email address, shipping address, and payment information.</p>
+                        
+                        <h4 class="mt-4">How We Use Your Information</h4>
+                        <p>We use the information we collect to process your orders, provide customer support, send you updates about your purchases, and improve our services. We may also use your information to send you promotional materials about products we think you'll love, but you can opt out at any time.</p>
+                        
+                        <h4 class="mt-4">Information Sharing</h4>
+                        <p>We don't sell, trade, or rent your personal information to third parties. We may share your information with trusted partners who help us operate our website and conduct our business, but only when necessary and under strict confidentiality agreements.</p>
+                        
+                        <h4 class="mt-4">Data Security</h4>
+                        <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. Your payment information is encrypted and processed securely through trusted payment processors.</p>
+                        
+                        <h4 class="mt-4">Cookies</h4>
+                        <p>Our website uses cookies to enhance your browsing experience, remember your preferences, and analyze website traffic. You can control cookie settings through your browser preferences.</p>
+                        
+                        <h4 class="mt-4">Your Rights</h4>
+                        <p>You have the right to access, update, or delete your personal information. You can also request that we stop processing your data for marketing purposes. Contact us to exercise these rights.</p>
+                        
+                        <h4 class="mt-4">Contact Us</h4>
+                        <p>If you have questions about this Privacy Policy, please contact us at <a href="mailto:privacy@birchlin.com">privacy@birchlin.com</a>.</p>
+                        
+                        <div class="mt-5">
+                            <a href="{% url 'products' %}" class="btn btn-black">Back to Shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
