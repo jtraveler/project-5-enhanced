@@ -15,13 +15,13 @@
     <symbol id="star-pointy" viewBox="0 0 24 24">
       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
     </symbol>
-  </svg>
+</svg>
 
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col">
-                <hr>
+                
                 <h2 class="logo-font mb-4">My Wishlist</h2>
                 <hr>
             </div>
@@ -34,7 +34,10 @@
                         <div class="card h-100 border-0">
                             {% if favorite.product.image %}
                             <a href="{% url 'product_detail' favorite.product.id %}">
-                                <img class="card-img-top img-fluid" src="{{ favorite.product.image.url }}" alt="{{ favorite.product.name }}">
+                                <img class="card-img-top img-fluid" 
+                                     src="{{ favorite.product.image.url }}" 
+                                     alt="{{ favorite.product.name }}"
+                                     onerror="this.src='{{ MEDIA_URL }}noimage.png'">
                             </a>
                             {% else %}
                             <a href="{% url 'product_detail' favorite.product.id %}">

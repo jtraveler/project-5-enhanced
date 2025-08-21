@@ -76,9 +76,16 @@
             </div>
         </li>
 
-        <li class="nav-item">
-        
-        <a href="{% url 'contact' %}" class="logo-font nav-link text-black" aria-label="Category - Connect">Contact</a>
+        <li class="nav-item dropdown">
+            <a class="logo-font nav-link text-black" href="#" id="clothing-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Category - Sleep">
+                Info
+            </a>
+            <div class="dropdown-menu border-0 drop-down-info-only" aria-labelledby="clothing-link">
+                <a href="{% url 'about' %}" class="dropdown-item" aria-label="About Us">About Us</a>
+                <a href="{% url 'contact' %}" class="dropdown-item" aria-label="Category - Connect">Contact</a>
+                <a href="{% url 'privacy_policy' %}" class="dropdown-item" aria-label="Privacy Policy">Privacy Policy</a>
+                <a href="{% url 'terms' %}" class="dropdown-item" aria-label="Terms & Conditions">Terms & Conditions</a>
+            </div>
         </li>
     </ul>
 </div>

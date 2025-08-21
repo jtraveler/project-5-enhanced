@@ -141,21 +141,26 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   
   <!-- Load fonts and icons after page load -->
-  <script>
-    window.addEventListener('load', function() {
-      // Load fonts
-      const fontLink = document.createElement('link');
-      fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap';
-      fontLink.rel = 'stylesheet';
-      document.head.appendChild(fontLink);
-      
-      // Load FontAwesome
-      const faLink = document.createElement('link');
-      faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
-      faLink.rel = 'stylesheet';
-      document.head.appendChild(faLink);
-    });
-  </script>
+<!-- Load Stripe immediately for checkout pages -->
+{% if 'checkout' in request.resolver_match.url_name %}
+    <script src="https://js.stripe.com/basil/stripe.js"></script>
+{% endif %}
+
+<script>
+window.addEventListener('load', function() {
+    // Load fonts after everything else
+    const fontLink = document.createElement('link');
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap';
+    fontLink.rel = 'stylesheet';
+    document.head.appendChild(fontLink);
+    
+    // Load FontAwesome
+    const faLink = document.createElement('link');
+    faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
+    faLink.rel = 'stylesheet';
+    document.head.appendChild(faLink);
+});
+</script>
 
   {% block corejs %}
   {% endblock %}
