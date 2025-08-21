@@ -3,14 +3,14 @@
 
   <!-- Footer -->
   <footer
-          class="text-lg-start text-white pt-5 px-3"
+          class="text-lg-start text-white pt-5"
           style="background-color: #212121"
           >
    
     <!-- Section: Social media -->
 
     <!-- Section: Links  -->
-    <section>
+    <section class="px-3">
       <div class="container text-md-start mt-5">
         <!-- Grid row -->
         <div class="row mt-3">
@@ -24,11 +24,11 @@
           <!-- Grid column -->
 
          
-          <div class="col-md-12 col-lg-6 col-xl-7 mx-auto mb-4">
+          <div class="col-md-12 col-lg-6 col-xl-5 mx-auto mb-4 pr-4 pr-lg-0 pr-xl-4">
             <!-- Links -->
             <div class="footer-header mb-4">Browse by Category</div>
             
-            <div class="grid-container">
+            <div class="grid-container-category">
             <p>
               <a href="{% url 'products' %}?category=tents_and_shelter" aria-haspopup="true" aria-expanded="false" aria-label="Category - Shelter">Shelter</a>
             </p>
@@ -65,22 +65,24 @@
             
           </div>
 
-          <div class="col-md-12 col-lg-12 col-xl-1 mx-auto">
+          <div class="col-md-12 col-lg-5 col-xl-3 mx-auto ml-lg-0 pr-xl-0 mr-xl-0">
             <!-- Links -->
-            <div class="footer-header mb-4">Connect</div>
+            <div class="footer-header mb-4">Info</div>
+              <div class="grid-container-info">
+                <p>
+                  <a href="{% url 'about' %}" aria-label="About Us">About Us</a>
+                </p>
+                <p>
+                  <a href="{% url 'contact' %}" aria-label="Category - Connect">Contact</a>
+                </p>
+                <p>
+                  <a href="{% url 'privacy_policy' %}" aria-label="Privacy Policy">Privacy Policy</a>
+                </p>
+                <p>
+                  <a href="{% url 'terms' %}" aria-label="Terms & Conditions">Terms & Conditions</a>
+                </p>
+            </div>
             
-            <div class="social-media-links">
-              <a href="https://www.facebook.com" class="text-white mr-2" aria-label="Visit Birchlin on Facebook">
-                  <i class="fab fa-facebook-f" aria-hidden="true"></i>
-              </a>
-              <a href="https://www.x.com" class="text-white mr-2" aria-label="Follow Birchlin on X">
-                  <i class="fab fa-twitter" aria-hidden="true"></i>
-              </a>
-              <a href="https://www.instagram.com" class="text-white" aria-label="Follow Birchlin on Instagram">
-                  <i class="fab fa-instagram" aria-hidden="true"></i>
-              </a>
-              
-          </div>
           </div>
 
           
@@ -93,10 +95,21 @@
 
     <!-- Copyright -->
     <div
-         class="text-center p-3 mt-5 copyright"
+         class="text-center p-4 mt-5 copyright"
          style="background-color: rgba(0, 0, 0, 0.2)"
          >
-      © 2025 Copyright: <a href="{% url 'home' %}" class="not-special" aria-label="Go to the homepage">Birchlin</a>
+         <div class="social-media-links">
+          <a href="https://www.facebook.com" class="text-white mr-2" aria-label="Visit Birchlin on Facebook">
+              <i class="fab fa-facebook-f" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.x.com" class="text-white mr-2" aria-label="Follow Birchlin on X">
+              <i class="fab fa-twitter" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.instagram.com" class="text-white" aria-label="Follow Birchlin on Instagram">
+              <i class="fab fa-instagram" aria-hidden="true"></i>
+          </a>
+          
+      </div>
     </div>
     <!-- Copyright -->
   </footer>

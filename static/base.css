@@ -997,11 +997,18 @@ footer a:hover {
   color: white;
 }
 
-footer .grid-container {
+footer .grid-container-category {
 
   display: grid;
   grid-template-columns: auto auto auto auto;
 }
+
+footer .grid-container-info {
+
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
 
 footer .brand-text {
 
@@ -1010,9 +1017,16 @@ footer .brand-text {
   margin: 0 0 20px;
 }
 
+footer .social-media-links {
+
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+
 footer .social-media-links a {
 
-  font-size: 14px;
+  font-size: 17px;
 }
 
 
@@ -1020,22 +1034,11 @@ footer .social-media-links a {
 @media (max-width: 767px) {
   .hero--video { min-height: 46vh; }
   .hero__media  { height: 46vh; }
+
+  
 }
 
-/* fixed top navbar only on medium and up */
-@media (min-width: 992px) {
-  .fixed-top-desktop-only {
-      position: fixed;
-      top: 0;
-      right: 0;
-      left: 0;
-      z-index: 1030;
-  }
 
-  .header-container {
-      padding-top: 70px;
-  }
-}
 
 @media (min-width: 1200px) {
   .hero__overlay {
@@ -1099,11 +1102,38 @@ footer .social-media-links a {
   .increment-qty, .decrement-qty {
       padding: .25rem .5rem !important;
   }
+
+  footer .grid-container-info {
+
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+
+  footer .grid-container-info {
+
+    display: grid;
+    grid-template-columns: auto auto;
+  }
 }
 
 /* === Nav hover: simple fade-in underline + color fade === */
 @media (min-width: 992px) {
 
+  /* fixed top navbar only on medium and up */
+  .fixed-top-desktop-only {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+  }
+
+  .header-container {
+      padding-top: 70px;
+  }
   
   #main-nav .navbar-nav > .nav-item > .nav-link {
     position: relative;
@@ -1172,10 +1202,16 @@ footer .social-media-links a {
 
 
 @media (max-width: 580px) {
-  footer .grid-container {
+  footer .grid-container-category {
 
     display: grid;
     grid-template-columns: auto auto !important;
+  }
+
+  footer .grid-container-info {
+
+    display: grid;
+    grid-template-columns: auto auto;
   }
 
 }
