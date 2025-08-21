@@ -1,5 +1,5 @@
 <div class="collapse navbar-collapse" id="main-nav-list">
-    <ul class="navbar-nav w-auto">
+    <ul class="navbar-nav">
         <li class="nav-item dropdown">
             <a class="logo-font nav-link text-black nav-first-link" href="#" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="All Products">
                 All Products
@@ -70,7 +70,7 @@
             <a class="logo-font nav-link text-black" href="#" id="clothing-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Category - Comfort">
                 Comfort
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="clothing-link">
+            <div class="dropdown-menu border-0 drop-down-comfort-only" aria-labelledby="clothing-link">
                 <a href="{% url 'products' %}?category=hommocks" class="dropdown-item" aria-label="Category - Hommocks">Hommocks</a>
                 <a href="{% url 'products' %}?category=chairs" class="dropdown-item" aria-label="Category - Chairs">Chairs</a>
             </div>
