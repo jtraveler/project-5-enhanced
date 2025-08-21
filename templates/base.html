@@ -54,6 +54,13 @@
   {% endblock %}
 
   <title>Birchlin {% block extra_title %}{% endblock %}</title>
+
+  {% block meta %}
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="{% block meta_description %}Birchlin - Premium outdoor gear and camping equipment. Shop tents, shelters, hiking gear and outdoor accessories with fast delivery.{% endblock %}">
+  {% endblock %}
   
 </head>
 
