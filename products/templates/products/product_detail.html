@@ -178,11 +178,9 @@
                         <div class="col{% if s %}-12 mt-2{% endif %}">
                             <div class="d-flex gap-2 mt-5">
                                 <input type="submit" class="btn btn-black rounded-0 text-uppercase flex-grow-1" value="Add to Bag">
-                                {% if user.is_authenticated %}
-                                    <button type="button" class="btn btn-favorite-outline {% if is_favorited %}favorited{% endif %}" onclick="document.getElementById('favorite-form-{{ product.id }}').submit();">
-                                        <i class="{% if is_favorited %}fas{% else %}far{% endif %} fa-heart"></i>
-                                    </button>
-                                {% endif %}
+                                <button type="button" class="btn btn-favorite-outline {% if is_favorited %}favorited{% endif %}" onclick="handleFavoriteClick();">
+                                    <i class="{% if user.is_authenticated and is_favorited %}fas{% else %}far{% endif %} fa-heart"></i>
+                                </button>
                             </div>
                         </div>
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
@@ -459,5 +457,12 @@
             
         });
     });
+    function handleFavoriteClick() {
+    {% if user.is_authenticated %}
+        document.getElementById('favorite-form-{{ product.id }}').submit();
+    {% else %}
+        window.location.href = "{% url 'account_signup' %}?next={{ request.path }}";
+    {% endif %}
+}
 </script>
 {% endblock %}
