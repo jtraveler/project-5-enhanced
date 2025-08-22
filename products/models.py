@@ -49,19 +49,21 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
-    def get_image_url(self):
-        """
-        Safely get the image URL, with fallback for missing files
-        """
+    def get_safe_image_url(self):
+        """Return image URL only if file exists, otherwise return placeholder"""
         if self.image:
             try:
-                # Check if the file actually exists
                 if self.image.storage.exists(self.image.name):
                     return self.image.url
             except:
                 pass
-        # Return default image if no image or file missing
         return '/media/noimage.png'
+    
+    def get_image_url(self):
+        """
+        Safely get the image URL, with fallback for missing files
+        """
+        return self.get_safe_image_url()
     
     def average_rating(self):
         """Calculate average rating from reviews"""
@@ -73,26 +75,55 @@ class Product(models.Model):
         return self.reviews.count()
     
     def get_primary_image(self):
-        """Get the primary image or first image if no primary is set"""
+        """Get the primary image or first image if no primary is set - with file checking"""
+        # Check ProductImage instances first
         primary = self.images.filter(is_primary=True).first()
         if primary:
-            return primary
-        # Fallback to first image
-        first_image = self.images.first()
-        if first_image:
-            return first_image
-        # Fallback to legacy image field if it exists
+            try:
+                if primary.image and primary.image.storage.exists(primary.image.name):
+                    return primary
+            except:
+                pass
+        
+        # Fallback to any existing image
+        for image in self.images.all():
+            try:
+                if image.image and image.image.storage.exists(image.image.name):
+                    return image
+            except:
+                continue
+        
+        # Fallback to legacy image field if it exists and file is present
         if self.image:
-            return self
-        return None
+            try:
+                if self.image.storage.exists(self.image.name):
+                    return self  # Return self so template can access self.image.url
+            except:
+                pass
+        
+        return None  # No valid images found
     
     def get_all_images(self):
-        """Get all images including the legacy image field"""
-        images = list(self.images.all())
+        """Get all images including the legacy image field - only existing files"""
+        valid_images = []
+        
+        # Check ProductImage instances
+        for image in self.images.all():
+            try:
+                if image.image and image.image.storage.exists(image.image.name):
+                    valid_images.append(image)
+            except:
+                continue
+        
         # Include legacy image if it exists and no new images
-        if self.image and not images:
-            return [self]  # Return self as it has the image property
-        return images
+        if not valid_images and self.image:
+            try:
+                if self.image.storage.exists(self.image.name):
+                    valid_images.append(self)  # Return self as it has the image property
+            except:
+                pass
+        
+        return valid_images
 
 
 class ProductImage(models.Model):
@@ -170,14 +201,18 @@ class ProductImage(models.Model):
         """Get just the filename without path"""
         return os.path.basename(self.image.name)
     
-    def get_image_url(self):
-        """Return image URL with fallback for missing files"""
+    def get_safe_image_url(self):
+        """Return image URL only if file exists, otherwise return placeholder"""
         try:
             if self.image and self.image.storage.exists(self.image.name):
                 return self.image.url
         except:
             pass
         return '/media/noimage.png'
+    
+    def get_image_url(self):
+        """Return image URL with fallback for missing files"""
+        return self.get_safe_image_url()
     
     def get_thumbnail_url(self):
         """Return thumbnail URL with fallback for missing files"""
@@ -186,7 +221,7 @@ class ProductImage(models.Model):
                 return self.thumbnail.url
         except:
             pass
-        return '/media/noimage.png'
+        return self.get_safe_image_url()  # Fallback to original image
 
 
 class Review(models.Model):
