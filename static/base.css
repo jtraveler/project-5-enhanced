@@ -146,8 +146,19 @@ a:hover {text-decoration: none; color: #000;}
 }
 
 
+/* Bag icon in the upper right utility nav */
+.bag_icon svg path {
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 3;
+  
+}
+/* Size of the bag icon in the upper right utility nav */
+.bag_icon svg {
 
-
+  width: 30px;
+  height: 30px;
+}
 
 
 .header-util__item {
@@ -160,6 +171,7 @@ a:hover {text-decoration: none; color: #000;}
   border: none;
   padding: 0;
   cursor: pointer;
+  height: 100%;
 }
 
 .header-util__item i {
