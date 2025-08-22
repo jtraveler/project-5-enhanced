@@ -66,7 +66,7 @@
                                     {% if primary_image and primary_image.image %}
                                         <a href="{% url 'product_detail' product.id %}">
                                             <img class="card-img-top img-fluid" 
-                                                src="{% if primary_image.image_thumbnail %}{{ primary_image.image_thumbnail.url }}{% else %}{{ primary_image.image.url }}{% endif %}" 
+                                                src="{{ primary_image.image.url }}"
                                                 alt="{{ product.name }}"
                                                 {% if forloop.counter > 6 %}loading="lazy"{% endif %}
                                                 decoding="async"
@@ -75,7 +75,7 @@
                                     {% elif product.image %}
                                         <a href="{% url 'product_detail' product.id %}">
                                             <img class="card-img-top img-fluid" 
-                                                src="{% if product.image_thumbnail %}{{ product.image_thumbnail.url }}{% else %}{{ product.image.url }}{% endif %}" 
+                                                src="{{ product.image.url }}"
                                                 alt="{{ product.name }}" 
                                                 {% if forloop.counter > 6 %}loading="lazy"{% endif %}
                                                 decoding="async"
