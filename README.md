@@ -2,7 +2,7 @@
 
 [Live Project Link](https://mj-project5-aec364964bcd.herokuapp.com/)
 
-![Techsini.com Mockup](static/images/readme-images/techsini-dot-com-slash-multi-mockup.jpg)
+![Techsini.com Mockup](static/images/readme/techsini-dot-com-slash-multi-mockup.jpg)
 
 Birchlin is a comprehensive e-commerce platform designed for outdoor enthusiasts who demand reliable, field-tested gear for their adventures. Whether you're planning your first overnight hike or preparing for an extended wilderness expedition, Birchlin connects you with the equipment that has been personally vetted by experienced outdoor professionals.
 
@@ -214,51 +214,39 @@ The product catalog prioritizes information clarity and discovery:
 **Product Detail Integration:**
 - Seamless transition from catalog to detailed product pages
 - Breadcrumb navigation maintaining context
-- Related product suggestions based on category and usage
 
 ## Color Palette
 
-The color scheme draws inspiration from natural outdoor environments:
+The color scheme is super simplistic with just three tones:
 
-![Color Palette](static/images/readme/color-palette.png)
+![Color Palette](static/images/readme/color-palette.jpg)
 
 **Primary Colors:**
-- **Forest Green:** `#2d5016` - Primary brand color representing nature and reliability
-- **Earth Brown:** `#8B4513` - Secondary color evoking natural materials
-- **Stone Grey:** `#696969` - Neutral color for text and backgrounds
+- **Dark Grey:** `#1a1a1a`
+- **Medium Grey:** `#212121`
+- **White:** `#ffffff`
 
-**Accent Colors:**
-- **Alert Orange:** `#FF6B35` - Used for calls-to-action and important notifications
-- **Sky Blue:** `#4A90E2` - Links and interactive elements
-- **Success Green:** `#28A745` - Confirmation messages and positive actions
 
 ## Typography
 
 Typography selection emphasizes readability across various contexts:
 
-**Primary Font:** [Roboto](https://fonts.google.com/specimen/Roboto)
+**Primary Font:** [Inter](https://fonts.google.com/specimen/Inter)
 - Clean, modern typeface ensuring legibility at all sizes
 - Wide character set supporting international customers
 - Multiple weights available for hierarchical content
 
-**Secondary Font:** [Open Sans](https://fonts.google.com/specimen/Open+Sans)
-- Used for body text and detailed product descriptions
-- Optimized for extended reading sessions
-- Excellent cross-browser compatibility
 
 ## Icons & Visual Elements
 
 Visual elements maintain consistency while conveying outdoor themes:
 
-**Icon Library:** [Bootstrap Icons](https://icons.getbootstrap.com/)
+**Icon Library:** [Font Awesome Icons](https://fontawesome.com/)
 - Comprehensive set covering all e-commerce functions
 - Consistent style matching the overall design system
 - Scalable vector format ensuring crisp display
 
-**Custom Elements:**
-- Category-specific icons for navigation
-- Weather resistance indicators for applicable products
-- Difficulty level indicators for technical gear
+![Icons](static/images/readme/icons.jpg)
 
 ## Technologies Used
 
@@ -266,14 +254,119 @@ Visual elements maintain consistency while conveying outdoor themes:
 
 Wireframes established the foundational layout and user flow:
 
-**Homepage Wireframe:**
-![Homepage Wireframe](static/images/readme/wireframe-homepage.png)
 
-**Product Catalog Wireframe:**
-![Catalog Wireframe](static/images/readme/wireframe-catalog.png)
 
-**Product Detail Wireframe:**
-![Detail Wireframe](static/images/readme/wireframe-detail.png)
+<br>
+<details>
+   <br>
+   <summary>Homepage Wireframe - Desktop</summary>
+   <img src="static/images/readme/wireframes/homepage.png" style="display: block; margin: auto;" alt="PostgreSQL creation step1">
+   <br>
+</details>
+<br>
+
+<br>
+<details>
+   <br>
+   <summary>Homepage Wireframe - Mobile</summary>
+   <img src="static/images/readme/wireframes/homepage-mobile.png" style="display: block; margin: auto;" alt="PostgreSQL creation step1">
+   <br>
+</details>
+<br>
+
+<br>
+<details>
+   <br>
+   <summary>Product Catalog - Desktop</summary>
+   <img src="static/images/readme/wireframes/products.png" style="display: block; margin: auto;" alt="Product Catalog - Desktop">
+   <br>
+</details>
+<br>
+
+<br>
+<details>
+   <br>
+   <summary>Product Catalog - Mobile</summary>
+   <img src="static/images/readme/wireframes/products-mobile.png" style="display: block; margin: auto;" alt="Product Catalog - Mobile">
+   <br>
+</details>
+<br>
+
+<br>
+<details>
+   <br>
+   <summary>Product Detail - Desktop</summary>
+   <img src="static/images/readme/wireframes/product-detail.png" style="display: block; margin: auto;" alt="Product Detail - Desktop">
+   <br>
+</details>
+<br>
+
+<br>
+<details>
+   <br>
+   <summary>Product Detail - Mobile</summary>
+   <img src="static/images/readme/wireframes/product-detail-mobile.png" style="display: block; margin: auto;" alt="Product Detail - Mobile">
+   <br>
+</details>
+<br>
+
+<br>
+<details>
+   <br>
+   <summary>Checkout - Desktop</summary>
+   <img src="static/images/readme/wireframes/checkout.png" style="display: block; margin: auto;" alt="Checkout - Desktop">
+   <br>
+</details>
+<br>
+
+<br>
+<details>
+   <br>
+   <summary>Checkout - Mobile</summary>
+   <img src="static/images/readme/wireframes/checkout-mobile.png" style="display: block; margin: auto;" alt="Checkout - Mobile">
+   <br>
+</details>
+<br>
+   
+
+<br>
+<details>
+   <br>
+   <summary>General Info Page - Desktop</summary>
+   <img src="static/images/readme/wireframes/general-text.png" style="display: block; margin: auto;" alt="General Info Page - Desktop">
+   <br>
+</details>
+<br>
+
+<br>
+<details>
+   <br>
+   <summary>General Info Page - Mobile</summary>
+   <img src="static/images/readme/wireframes/general-text-mobile.png" style="display: block; margin: auto;" alt="General Info Page - Mobile">
+   <br>
+</details>
+<br>
+
+
+<br>
+<details>
+   <br>
+   <summary>Contact Wireframe - Desktop</summary>
+   <img src="static/images/readme/wireframes/contact.png" style="display: block; margin: auto;" alt="Contact Wireframe - Desktop">
+   <br>
+</details>
+<br>
+
+<br>
+<details>
+   <br>
+   <summary>Contact Wireframe - Mobile</summary>
+   <img src="static/images/readme/wireframes/contact-mobile.png" style="display: block; margin: auto;" alt="Contact Wireframe - Mobile">
+   <br>
+</details>
+<br>
+
+
 
 ### Favicon
 
@@ -306,6 +399,8 @@ The favicon incorporates outdoor themes while maintaining brand recognition:
 **Design Tools:**
 - [Balsamiq](https://balsamiq.com/) - Wireframe creation
 - [Figma](https://www.figma.com/) - UI design and prototyping
+- [Adobe Photoshop](https://https://www.adobe.com/products/photoshop.html/) - Custom graphic creation
+- [Adobe Illustrator](https://www.adobe.com/products/illustrator.html) - Adjusting icons
 
 ### Libraries and Modules
 
@@ -313,28 +408,50 @@ The favicon incorporates outdoor themes while maintaining brand recognition:
 <summary>Python Dependencies</summary>
 
 ```
-asgiref==3.7.2
-boto3==1.34.131
-botocore==1.34.131
+asgiref==3.8.1
+boto3==1.37.38
+botocore==1.37.38
+certifi==2025.7.14
+cffi==1.17.1
+charset-normalizer==3.4.2
+crispy-bootstrap4==2022.1
+cryptography==45.0.5
+defusedxml==0.7.1
 dj-database-url==0.5.0
 Django==3.2.25
-django-allauth==0.44.0
+django-admin-sortable2==1.0.4
+django-allauth==0.50.0
+django-cleanup==8.0.0
 django-countries==7.2.1
 django-crispy-forms==1.14.0
-django-storages==1.14.3
-gunicorn==21.2.0
+django-imagekit==5.0.0
+django-storages==1.14.6
+flake8==7.1.2
+gunicorn==23.0.0
+idna==3.10
 jmespath==1.0.1
-oauthlib==3.2.2
-pillow==10.3.0
-psycopg2==2.9.9
-PyJWT==2.8.0
+mccabe==0.7.0
+oauthlib==3.3.1
+packaging==25.0
+pilkit==3.0
+pillow==10.4.0
+psycopg2==2.9.10
+pycodestyle==2.12.1
+pycparser==2.22
+pyflakes==3.2.0
+PyJWT==2.9.0
+python-dateutil==2.9.0.post0
 python3-openid==3.2.0
-pytz==2024.1
-requests-oauthlib==1.3.1
-s3transfer==0.10.1
-sqlparse==0.5.0
-stripe==9.11.0
-urllib3==1.26.18
+pytz==2025.2
+requests==2.32.4
+requests-oauthlib==2.0.0
+s3transfer==0.11.5
+six==1.17.0
+sqlparse==0.5.3
+stripe==12.3.0
+typing-extensions==4.13.2
+urllib3==1.26.20
+whitenoise==6.7.0
 ```
 
 </details>
@@ -348,10 +465,6 @@ Amazon Web Services provides scalable infrastructure for media and static file m
 - Media file storage for product images and user uploads
 - CDN integration for improved global performance
 
-**IAM Setup:**
-- Dedicated user accounts with minimal required permissions
-- Secure access key management
-- Bucket policy configuration for public read access
 
 ### Email Services
 
@@ -361,11 +474,6 @@ Email functionality supports customer communication and marketing:
 - Order confirmation emails
 - Password reset functionality
 - Customer service communications
-
-**Newsletter Service:**
-- Mailchimp integration for marketing campaigns
-- Subscription management and segmentation
-- Automated welcome sequences for new customers
 
 ### The Structure Plane - Database
 
@@ -434,29 +542,6 @@ Birchlin implements a comprehensive digital marketing strategy supporting sustai
 - CDN implementation for global content delivery
 - Database query optimization for improved response times
 
-### Social Media Marketing
-
-**Platform Strategy:**
-- Instagram: Visual content showcasing gear in outdoor settings
-- YouTube: Product reviews and outdoor adventure documentation
-- Facebook: Community building and customer service
-
-**Content Types:**
-- User-generated content featuring Birchlin gear in use
-- Educational content about gear selection and maintenance
-- Behind-the-scenes content about product testing and selection
-
-### Newsletter Marketing
-
-**Email Campaigns:**
-- Welcome series for new subscribers introducing gear categories
-- Seasonal gear recommendations based on outdoor activities
-- Exclusive access to new product launches and sales events
-
-**Segmentation Strategy:**
-- Activity-based segments (hiking, camping, backpacking)
-- Experience level targeting (beginner, intermediate, expert)
-- Geographic segmentation for region-specific gear recommendations
 
 ### Future Marketing Strategies
 
@@ -482,7 +567,7 @@ Birchlin implements a comprehensive digital marketing strategy supporting sustai
 - Persistent shopping cart icon with live item count
 - User account dropdown with quick access to profile features
 
-**Search Integration:**
+**Future Search Integration:**
 - Autocomplete search suggestions based on product names
 - Advanced search filters accessible from results page
 - Recent search history for registered users
@@ -495,119 +580,64 @@ Birchlin implements a comprehensive digital marketing strategy supporting sustai
 - Call-to-action buttons directing to featured categories
 - Automatic video optimization for different connection speeds
 
-#### Product Catalog
-
-**Advanced Product Display:**
-- Grid and list view options for different browsing preferences
-- Product image galleries with zoom functionality
-- Quick view modal for rapid product comparison
-- Infinite scroll with lazy loading for performance
-
-**Filtering System:**
-- Multi-select category filtering
-- Price range sliders with real-time updates
-- Brand and rating filters
-- Sort options including price, popularity, and customer ratings
-
-#### Advanced Filtering System
-
-**Category Filters:**
-- Shelter type (tents, tarps, bivouacs)
-- Sleeping bag temperature ratings
-- Backpack capacity ranges
-- Power output specifications for electronics
-
-**Technical Specifications:**
-- Weight ranges for ultralight gear selection
-- Waterproof ratings for weather protection
-- Material composition filters
-- Compatibility filters for system integration
 
 #### Product Detail Pages
 
 **Comprehensive Product Information:**
-- High-resolution image galleries with 360-degree views
-- Detailed technical specifications and dimensions
-- Customer review system with verified purchase indicators
-- Size and color selection with real-time availability
+- High-resolution image galleries
+- Customer review system
 
 **Enhanced Media Display:**
 - Swiper.js image carousel for smooth navigation
-- Video integration for product demonstrations
-- Zoom functionality for detail inspection
-- Image comparison tools for similar products
 
 #### Shopping Cart & Checkout
 
 **Smart Cart Features:**
 - Persistent cart across sessions for registered users
-- Quantity adjustment with stock validation
-- Estimated shipping calculations
-- Promo code application with validation
+- Quantity adjustment
 
 **Streamlined Checkout:**
 - Guest checkout option for quick purchases
 - Address autocomplete for shipping information
-- Multiple payment methods through Stripe integration
-- Order confirmation with tracking information
 
 #### User Authentication & Profiles
 
 **Account Management:**
 - Django Allauth integration for secure authentication
-- Social login options (Google, Facebook)
-- Email verification for account security
 - Password reset functionality
 
 **User Profiles:**
-- Order history with reorder functionality
+- Order history
 - Shipping address management
 - Wishlist access and management
-- Review history and management
 
 #### Wishlist Functionality
 
 **Personal Wishlist:**
 - Add products from catalog or detail pages
-- Wishlist sharing functionality for gift recommendations
-- Move to cart functionality for easy purchasing
-- Price drop notifications for wishlisted items
 
 #### Search Capabilities
 
 **Intelligent Search:**
 - Full-text search across product names and descriptions
 - Search result highlighting for query terms
-- Did-you-mean suggestions for misspelled queries
-- No results handling with suggested alternatives
 
-#### Contact & Support
+#### Contact
 
 **Customer Support:**
 - Contact form with category-specific routing
-- FAQ section organized by product categories
-- Live chat integration for real-time assistance
-- Return and warranty information
 
 **Form Validation:**
 - Real-time validation for all form inputs
 - Clear error messaging for failed validations
 - Success confirmations for form submissions
-- Spam protection through reCAPTCHA integration
 
 #### Admin Management
 
 **Backend Enhancement:**
 - Custom admin interface for product management
-- Bulk product import and export functionality
-- Order management dashboard with status tracking
-- Customer service tools for support ticket management
+- Order management dashboard
 
-**Inventory Management:**
-- Stock level tracking with low inventory alerts
-- Automated reorder point notifications
-- Supplier management and purchase order creation
-- Product performance analytics and reporting
 
 #### Responsive Design
 
@@ -615,7 +645,6 @@ Birchlin implements a comprehensive digital marketing strategy supporting sustai
 - Touch-friendly interface elements
 - Optimized image sizes for mobile bandwidth
 - Simplified navigation for small screens
-- Mobile-specific checkout flow
 
 **Cross-Device Consistency:**
 - Consistent functionality across all device types
@@ -631,6 +660,13 @@ Birchlin implements a comprehensive digital marketing strategy supporting sustai
 - Integration with fitness and outdoor activity tracking apps
 - Virtual outdoor gear consultation services
 - Community forum for gear discussions and trip planning
+- FAQ section
+- Inventory Management
+- Chatbot in the lower right corner for quick answers for customers
+- More dynamic products related to the outdoors such as clothing, books etc.
+- More social media channels to reach a larger audience
+- More visual hooks on the homepage such as specific products based on season or a person's location
+- Option to join mailing list
 
 ## Testing
 
