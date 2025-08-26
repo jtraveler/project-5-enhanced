@@ -17,7 +17,7 @@ from django.db.models import Avg
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
     
-    products = Product.objects.select_related('category').prefetch_related('reviews').all()
+    products = Product.objects.select_related('category').prefetch_related('reviews', 'images').all()
 
     # Optimize database queries with select_related and prefetch_related
     query = None
@@ -319,7 +319,7 @@ def toggle_favorite(request, product_id):
 def wishlist(request):
     """ Display user's favorite products """
     
-    favorites = Favorite.objects.filter(user=request.user).select_related('product')
+    favorites = Favorite.objects.filter(user=request.user).select_related('product').prefetch_related('product__images')
     
     context = {
         'favorites': favorites,

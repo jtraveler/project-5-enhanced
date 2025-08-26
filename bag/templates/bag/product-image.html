@@ -1,5 +1,15 @@
-{% if item.product.image %}
-<img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-{% else %}
-<img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
-{% endif %}
+{% load static %}
+
+{% with primary_image=item.product.get_primary_image %}
+    {% if primary_image %}
+        {% if primary_image.image_thumbnail %}
+            <img class="img-fluid rounded" src="{{ primary_image.image_thumbnail.url }}" alt="{{ item.product.name }}">
+        {% elif primary_image.image %}
+            <img class="img-fluid rounded" src="{{ primary_image.image.url }}" alt="{{ item.product.name }}">
+        {% else %}
+            <img class="img-fluid rounded" src="{% static 'images/noimage.png' %}" alt="{{ item.product.name }}">
+        {% endif %}
+    {% else %}
+        <img class="img-fluid rounded" src="{% static 'images/noimage.png' %}" alt="{{ item.product.name }}">
+    {% endif %}
+{% endwith %}
