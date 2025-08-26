@@ -1116,6 +1116,27 @@ footer .social-media-links a {
       padding-top: 40px;
   }
 
+  .bag_icon {
+
+    position: relative;
+  }
+
+  .bag-order-count {
+    display: block;
+    position: absolute;
+    background: black;
+    color: white !important;
+    padding: 5px;
+    border-radius: 100px;
+    width: 15px;
+    height: 15px;
+    top: 9px;
+    right: 0;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+
   body {
       height: calc(100vh - 116px);
   }
