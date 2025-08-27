@@ -1126,6 +1126,9 @@ EMAIL_HOST_PASSWORD=your-app-password
 - [Creating Product Gallery with Django and Swiper](https://testdriven.io/blog/django-product-gallery/) - TestDriven.io
 - [Modern Image Galleries in Django](https://www.codingforentrepreneurs.com/blog/django-image-galleries/) - Coding For Entrepreneurs
 
+**Footer**
+- [mdbootstrap.com](https://mdbootstrap.com/docs/standard/navigation/footer/examples-and-customization/)
+
 **Performance & Optimization:**
 - [Image Processing in Django with ImageKit](https://simpleisbetterthancomplex.com/tutorial/2019/03/20/django-image-kit.html) - SimpleIsBetterThanComplex
 - [Optimize Images in Django](https://djangostars.com/blog/optimize-images-in-django/) - Django Stars
@@ -1157,13 +1160,13 @@ EMAIL_HOST_PASSWORD=your-app-password
 - [Pixabay](https://pixabay.com/) - Icons and graphic elements
 
 **Video Content:**
-- [Coverr](https://coverr.co/) - Background video content
-- Custom footage shot specifically for hero sections
+- [From USer Taryn Elliott on Pexels.com](https://www.pexels.com/video/a-woman-sitting-on-a-rock-with-a-coffee-pot-4909395/) - Background video content
 
 ### Acknowledgments
 
 **Development Support:**
-- **Mentor Name** - Technical guidance and code review
+- **Mentor Spencer Barriball** - Technical guidance, coaching and code review
+- **Cohort Kay Welfare** - Technical guidance, coaching and project driven support
 - **Code Institute** - Educational resources and project guidance
 - **Django Community** - Documentation and community support
 
@@ -1181,10 +1184,10 @@ EMAIL_HOST_PASSWORD=your-app-password
 
 **This project is for educational purposes only and demonstrates a comprehensive e-commerce implementation using modern web technologies.**
 
-For questions or collaboration opportunities, please contact: [contact@birchlin.com](mailto:contact@birchlin.com)
+For questions or collaboration opportunities, please contact: [info@birchlin.com](mailto:info@birchlin.com)
 
-**Live Site:** [https://birchlin-outdoor-gear.herokuapp.com/](https://birchlin-outdoor-gear.herokuapp.com/)  
-**Repository:** [https://github.com/username/birchlin-project](https://github.com/username/birchlin-project)
+**Live Site:** [https://mj-project5-aec364964bcd.herokuapp.com/](https://mj-project5-aec364964bcd.herokuapp.com/)  
+**Repository:** [https://github.com/jtraveler/project-5](https://github.com/jtraveler/project-5)
 
 ## License
 
@@ -1194,10 +1197,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Current Version:** 1.0.0  
 **Status:** Production Ready  
-**Last Updated:** [Current Date]
-
-**Upcoming Features:**
-- Mobile app development
-- Advanced personalization engine
-- Subscription box service
-- Community forum integration
+**Last Updated:** 27, August 2025

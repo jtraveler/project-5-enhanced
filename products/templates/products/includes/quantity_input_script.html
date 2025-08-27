@@ -26,6 +26,12 @@
      e.preventDefault();
      var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
      var currentValue = parseInt($(closestInput).val());
+     
+     // Add validation - don't increment if at max
+     if (currentValue >= 99) {
+         return false;
+     }
+     
      $(closestInput).val(currentValue + 1);
      var itemId = $(this).data('item_id');
      handleEnableDisable(itemId);
@@ -36,8 +42,28 @@
      e.preventDefault();
      var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
      var currentValue = parseInt($(closestInput).val());
+     
+     // Add validation - don't decrement if at min
+     if (currentValue <= 1) {
+         return false;
+     }
+     
      $(closestInput).val(currentValue - 1);
      var itemId = $(this).data('item_id');
      handleEnableDisable(itemId);
+  });
+  
+  // Prevent manual input of invalid values
+  $('.qty_input').on('input', function() {
+      var value = parseInt($(this).val());
+      var itemId = $(this).data('item_id');
+      
+      if (value < 1) {
+          $(this).val(1);
+      } else if (value > 99) {
+          $(this).val(99);
+      }
+      
+      handleEnableDisable(itemId);
   });
 </script>
