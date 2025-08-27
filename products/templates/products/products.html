@@ -15,198 +15,199 @@
     <symbol id="star-pointy" viewBox="0 0 24 24">
       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
     </symbol>
-  </svg>
+</svg>
   
-    <div class="overlay"></div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="container">
-                <h2 class="logo-font">Products</h2>
-            
-                {% for c in current_categories %}
-                <a class="category-badge text-decoration-none" href="{% url 'products' %}?category={{ c.name|urlencode }}">
-                        <span class="p-2 mt-2 badge badge-white text-black rounded-0 border border-dark">{{ c.friendly_name }}</span>
-                    </a>
-                {% endfor %}
-                <hr class="mb-1">
-            </div>
+<div class="overlay"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="container">
+            <h2 class="logo-font">Products</h2>
+        
+            {% for c in current_categories %}
+            <a class="category-badge text-decoration-none" href="{% url 'products' %}?category={{ c.name|urlencode }}">
+                    <span class="p-2 mt-2 badge badge-white text-black rounded-0 border border-dark">{{ c.friendly_name }}</span>
+                </a>
+            {% endfor %}
+            <hr class="mb-1">
         </div>
-        <div class="row">
-            <div class="container">
-                <div class="row mt-1 mb-2">
-                    <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
-                        <div class="sort-select-wrapper">
-                            <select id="sort-selector" class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
-                                <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
-                                <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
-                                <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
-                                <option value="rating_asc" {% if current_sorting == 'rating_asc' %}selected{% endif %}>Rating (low to high)</option>
-                                <option value="rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Rating (high to low)</option>
-                                <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
-                                <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
-                                <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category (A-Z)</option>
-                                <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category (Z-A)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 order-md-first">
-                        <p class="text-muted mt-3 text-center text-md-left">
-                            {% if search_term or current_categories or current_sorting != 'None_None' %}
-                                <span><a href="{% url 'products' %}">Products Home</a> | </span>
-                            {% endif %}
-                            {{ page_obj.paginator.count }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
-                        </p>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="row mt-1 mb-2">
+                <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
+                    <div class="sort-select-wrapper">
+                        <label for="sort-selector" class="sr-only">Sort products by</label>
+                        <select id="sort-selector" class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}" aria-label="Sort products by price, rating, name, or category">
+                            <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+                            <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+                            <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
+                            <option value="rating_asc" {% if current_sorting == 'rating_asc' %}selected{% endif %}>Rating (low to high)</option>
+                            <option value="rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Rating (high to low)</option>
+                            <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
+                            <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+                            <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category (A-Z)</option>
+                            <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category (Z-A)</option>
+                        </select>
                     </div>
                 </div>
-                <div class="row">
-                    {% for product in products %}
-                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                            <div class="card h-100 border-0 position-relative">
-                                {% with primary_image=product.get_primary_image %}
-                                    {% if primary_image and primary_image.image %}
-                                        <a href="{% url 'product_detail' product.id %}">
-                                            <picture>
-                                                <source 
-                                                    srcset="{% if primary_image.image_thumbnail_webp %}{{ primary_image.image_thumbnail_webp.url }}{% elif product.image_thumbnail_webp %}{{ product.image_thumbnail_webp.url }}{% endif %}" 
-                                                    type="image/webp">
-                                                <img class="card-img-top img-fluid" 
-                                                    src="{% if primary_image.image_thumbnail %}{{ primary_image.image_thumbnail.url }}{% elif product.image_thumbnail %}{{ product.image_thumbnail.url }}{% else %}{{ primary_image.image.url }}{% endif %}"
-                                                    alt="{{ product.name }}"
-                                                    {% if forloop.counter > 6 %}loading="lazy"{% endif %}
-                                                    decoding="async"
-                                                    onerror="this.src='{{ MEDIA_URL }}noimage.png'">
-                                            </picture>
-                                        </a>
-                                    {% elif product.image %}
-                                        <a href="{% url 'product_detail' product.id %}">
-                                            <picture>
-                                                <source 
-                                                    srcset="{% if product.image_thumbnail_webp %}{{ product.image_thumbnail_webp.url }}{% endif %}" 
-                                                    type="image/webp">
-                                                <img class="card-img-top img-fluid" 
-                                                    src="{% if product.image_thumbnail %}{{ product.image_thumbnail.url }}{% else %}{{ product.image.url }}{% endif %}"
-                                                    alt="{{ product.name }}" 
-                                                    {% if forloop.counter > 6 %}loading="lazy"{% endif %}
-                                                    decoding="async"
-                                                    onerror="this.src='{{ MEDIA_URL }}noimage.png'">
-                                            </picture>
-                                        </a>
-                                    {% else %}
-                                        <a href="{% url 'product_detail' product.id %}">
+                <div class="col-12 col-md-6 order-md-first">
+                    <p class="text-muted mt-3 text-center text-md-left">
+                        {% if search_term or current_categories or current_sorting != 'None_None' %}
+                            <span><a href="{% url 'products' %}">Products Home</a> | </span>
+                        {% endif %}
+                        {{ page_obj.paginator.count }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                        <div class="card h-100 border-0 position-relative">
+                            {% with primary_image=product.get_primary_image %}
+                                {% if primary_image and primary_image.image %}
+                                    <a href="{% url 'product_detail' product.id %}" aria-label="View details for {{ product.name }}">
+                                        <picture>
+                                            <source 
+                                                srcset="{% if primary_image.image_thumbnail_webp %}{{ primary_image.image_thumbnail_webp.url }}{% elif product.image_thumbnail_webp %}{{ product.image_thumbnail_webp.url }}{% endif %}" 
+                                                type="image/webp">
                                             <img class="card-img-top img-fluid" 
-                                                src="{{ MEDIA_URL }}noimage.png" 
+                                                src="{% if primary_image.image_thumbnail %}{{ primary_image.image_thumbnail.url }}{% elif product.image_thumbnail %}{{ product.image_thumbnail.url }}{% else %}{{ primary_image.image.url }}{% endif %}"
+                                                alt="{{ product.name }}"
+                                                {% if forloop.counter > 6 %}loading="lazy"{% endif %}
+                                                decoding="async"
+                                                onerror="this.src='{{ MEDIA_URL }}noimage.png'">
+                                        </picture>
+                                    </a>
+                                {% elif product.image %}
+                                    <a href="{% url 'product_detail' product.id %}" aria-label="View details for {{ product.name }}">
+                                        <picture>
+                                            <source 
+                                                srcset="{% if product.image_thumbnail_webp %}{{ product.image_thumbnail_webp.url }}{% endif %}" 
+                                                type="image/webp">
+                                            <img class="card-img-top img-fluid" 
+                                                src="{% if product.image_thumbnail %}{{ product.image_thumbnail.url }}{% else %}{{ product.image.url }}{% endif %}"
                                                 alt="{{ product.name }}" 
                                                 {% if forloop.counter > 6 %}loading="lazy"{% endif %}
-                                                decoding="async">
-                                        </a>
-                                    {% endif %}
-                                {% endwith %}
-                                {% if user.is_authenticated %}
-                                    <form method="POST" action="{% url 'toggle_favorite' product.id %}" class="position-absolute" style="top: 10px; right: 10px;">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-favorite rounded-circle {% if product.id in favorited_products %}favorited{% endif %}">
-                                            <i class="{% if product.id in favorited_products %}fas{% else %}far{% endif %} fa-heart"></i>
-                                        </button>
-                                    </form>
+                                                decoding="async"
+                                                onerror="this.src='{{ MEDIA_URL }}noimage.png'">
+                                        </picture>
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'product_detail' product.id %}" aria-label="View details for {{ product.name }}">
+                                        <img class="card-img-top img-fluid" 
+                                            src="{{ MEDIA_URL }}noimage.png" 
+                                            alt="{{ product.name }}" 
+                                            {% if forloop.counter > 6 %}loading="lazy"{% endif %}
+                                            decoding="async">
+                                    </a>
                                 {% endif %}
-                                <div class="card-body pb-0">
-                                    <p class="mb-0">{{ product.name }}</p>
-                                </div>
-                                <div class="card-footer bg-white pt-0 border-0 text-left">
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
-                                            {% if product.category %}
-                                            <p class="small mt-1 mb-0">
-                                                <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name|urlencode }}">
-                                                    <i class="fas fa-tag mr-1"></i>{{ product.category.friendly_name }}
-                                                </a>
-                                            </p>
-                                            {% endif %}
-                                            {% if product.average_rating > 0 %}
-                                                <small class="text-muted">
-                                                    <span class="star-icon-pointy">
-                                                        <svg><use href="#star-pointy"></use></svg>
-                                                    </span>{{ product.average_rating|floatformat:1 }} / 5
-                                                </small>
-                                            {% else %}
-                                                <small class="text-muted">No Rating</small>
-                                            {% endif %}
-                                            {% if request.user.is_superuser %}
-                                                <small class="ml-3">
-                                                    <a href="{% url 'edit_product' product.id %}">Edit</a> | 
-                                                    <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
-                                                </small>
-                                            {% endif %}
-                                        </div>
+                            {% endwith %}
+                            {% if user.is_authenticated %}
+                                <form method="POST" action="{% url 'toggle_favorite' product.id %}" class="position-absolute" style="top: 10px; right: 10px;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-favorite rounded-circle {% if product.id in favorited_products %}favorited{% endif %}" aria-label="{% if product.id in favorited_products %}Remove {{ product.name }} from favorites{% else %}Add {{ product.name }} to favorites{% endif %}">
+                                        <i class="{% if product.id in favorited_products %}fas{% else %}far{% endif %} fa-heart" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            {% endif %}
+                            <div class="card-body pb-0">
+                                <p class="mb-0">{{ product.name }}</p>
+                            </div>
+                            <div class="card-footer bg-white pt-0 border-0 text-left">
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
+                                        {% if product.category %}
+                                        <p class="small mt-1 mb-0">
+                                            <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name|urlencode }}" aria-label="View all {{ product.category.friendly_name }} products">
+                                                <i class="fas fa-tag mr-1" aria-hidden="true"></i>{{ product.category.friendly_name }}
+                                            </a>
+                                        </p>
+                                        {% endif %}
+                                        {% if product.average_rating > 0 %}
+                                            <small class="text-muted">
+                                                <span class="star-icon-pointy" aria-hidden="true">
+                                                    <svg><use href="#star-pointy"></use></svg>
+                                                </span>{{ product.average_rating|floatformat:1 }} / 5
+                                                <span class="sr-only">Rating: {{ product.average_rating|floatformat:1 }} out of 5 stars</span>
+                                            </small>
+                                        {% else %}
+                                            <small class="text-muted">No Rating</small>
+                                        {% endif %}
+                                        {% if request.user.is_superuser %}
+                                            <small class="ml-3">
+                                                <a href="{% url 'edit_product' product.id %}" aria-label="Edit {{ product.name }}">Edit</a> | 
+                                                <a class="text-danger" href="{% url 'delete_product' product.id %}" aria-label="Delete {{ product.name }}">Delete</a>
+                                            </small>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {% if forloop.counter|divisibleby:1 %}
-                            <div class="col-12 d-sm-none mb-5">
-                                <hr>
-                            </div>
-                        {% endif %}                        
-                        {% if forloop.counter|divisibleby:2 %}
-                            <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-5">
-                                <hr>
-                            </div>
-                        {% endif %}
-                        {% if forloop.counter|divisibleby:3 %}
-                            <div class="col-12 d-none d-lg-block d-xl-none mb-5">
-                                <hr>
-                            </div>
-                        {% endif %}
-                        {% if forloop.counter|divisibleby:4 %}
-                            <div class="col-12 d-none d-xl-block mb-5">
-                                <hr>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                
-                <!-- Pagination Controls -->
-                <!-- Pagination Controls -->
-                {% if page_obj.has_other_pages %}
-                <div class="row">
-                    <div class="col-12">
-                        <nav aria-label="Products pagination">
-                            <ul class="pagination justify-content-center">
-                                {% if page_obj.has_previous %}
-                                    <li class="page-item">
-                                        <a class="page-link btn-outline-black" href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&laquo; First</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link btn-outline-black" href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Previous</a>
-                                    </li>
-                                {% endif %}
-                                
-                                <li class="page-item active">
-                                    <span class="page-link btn-black">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-                                </li>
-                                
-                                {% if page_obj.has_next %}
-                                    <li class="page-item">
-                                        <a class="page-link btn-outline-black" href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Next</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link btn-outline-black" href="?page={{ page_obj.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Last &raquo;</a>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        </nav>
                     </div>
-                </div>
-                {% endif %}
+                    {% if forloop.counter|divisibleby:1 %}
+                        <div class="col-12 d-sm-none mb-5">
+                            <hr>
+                        </div>
+                    {% endif %}                        
+                    {% if forloop.counter|divisibleby:2 %}
+                        <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-5">
+                            <hr>
+                        </div>
+                    {% endif %}
+                    {% if forloop.counter|divisibleby:3 %}
+                        <div class="col-12 d-none d-lg-block d-xl-none mb-5">
+                            <hr>
+                        </div>
+                    {% endif %}
+                    {% if forloop.counter|divisibleby:4 %}
+                        <div class="col-12 d-none d-xl-block mb-5">
+                            <hr>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
+            
+            <!-- Pagination Controls -->
+            {% if page_obj.has_other_pages %}
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="Products pagination">
+                        <ul class="pagination justify-content-center">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link btn-outline-black" href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Go to first page">&laquo; First</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link btn-outline-black" href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Go to previous page">Previous</a>
+                                </li>
+                            {% endif %}
+                            
+                            <li class="page-item active">
+                                <span class="page-link btn-black" aria-current="page">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                            </li>
+                            
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link btn-outline-black" href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Go to next page">Next</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link btn-outline-black" href="?page={{ page_obj.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Go to last page">Last &raquo;</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
-    <div class="btt-button shadow-sm rounded-0 border border-black">
-        <a class="btt-link d-flex h-100">
-            <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
-        </a>	
-    </div>
+</div>
+<button class="btt-button shadow-sm rounded-0 border border-black" aria-label="Back to top">
+    <span class="btt-link d-flex h-100">
+        <i class="fas fa-arrow-up text-black mx-auto my-auto" aria-hidden="true"></i>
+    </span>	
+</button>
 {% endblock %}
 
 {% block postloadjs %}
