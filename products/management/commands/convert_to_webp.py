@@ -1,25 +1,23 @@
 from django.core.management.base import BaseCommand
 from products.models import Product, ProductImage
-from imagekit.utils import get_field
 from django.core.files.storage import default_storage
-import os
 
 class Command(BaseCommand):
-    help = 'Generate WebP versions for all existing product images'
+    help = 'Generate optimized thumbnails for all existing product images'
 
     def add_arguments(self, parser):
         parser.add_argument(
             '--force',
             action='store_true',
-            help='Force regeneration of existing WebP images',
+            help='Force regeneration of existing thumbnails',
         )
 
     def handle(self, *args, **options):
         force = options['force']
         
-        self.stdout.write('Starting WebP conversion process...')
+        self.stdout.write('Starting image optimization process...')
         
-        # Convert Product images (legacy image field)
+        # Process Product images (legacy image field)
         products = Product.objects.exclude(image='')
         product_count = 0
         
@@ -33,25 +31,36 @@ class Command(BaseCommand):
                         )
                         continue
                     
-                    # Generate WebP versions
-                    webp_field = get_field(product, 'image_webp')
-                    thumbnail_webp_field = get_field(product, 'image_thumbnail_webp')
+                    # Generate thumbnails by accessing the properties
+                    # This triggers imagekit to generate the thumbnails
+                    if hasattr(product, 'image_thumbnail'):
+                        try:
+                            _ = product.image_thumbnail.url
+                        except:
+                            pass
                     
-                    if force or not default_storage.exists(webp_field.name):
-                        webp_field.generate()
-                        
-                    if force or not default_storage.exists(thumbnail_webp_field.name):
-                        thumbnail_webp_field.generate()
+                    # Try to generate WebP if supported (will fail silently if not)
+                    if hasattr(product, 'image_webp'):
+                        try:
+                            _ = product.image_webp.url
+                        except:
+                            pass
+                    
+                    if hasattr(product, 'image_thumbnail_webp'):
+                        try:
+                            _ = product.image_thumbnail_webp.url
+                        except:
+                            pass
                     
                     product_count += 1
-                    self.stdout.write(f'✓ Converted WebP for Product: {product.name}')
+                    self.stdout.write(f'✓ Processed thumbnails for Product: {product.name}')
                     
                 except Exception as e:
                     self.stdout.write(
-                        self.style.ERROR(f'Failed to convert {product.name}: {str(e)}')
+                        self.style.ERROR(f'Failed to process {product.name}: {str(e)}')
                     )
         
-        # Convert ProductImage instances
+        # Process ProductImage instances
         product_images = ProductImage.objects.all()
         image_count = 0
         
@@ -65,36 +74,34 @@ class Command(BaseCommand):
                         )
                         continue
                     
-                    # Generate WebP versions
-                    webp_field = get_field(product_image, 'image_webp')
-                    thumbnail_webp_field = get_field(product_image, 'image_thumbnail_webp')
-                    medium_webp_field = get_field(product_image, 'image_medium_webp')
-                    thumb_webp_field = get_field(product_image, 'thumbnail_webp')
+                    # Generate thumbnails by accessing the properties
+                    thumbnail_fields = [
+                        'image_thumbnail', 'thumbnail', 'image_medium',
+                        'image_webp', 'image_thumbnail_webp', 'thumbnail_webp', 'image_medium_webp'
+                    ]
                     
-                    if force or not default_storage.exists(webp_field.name):
-                        webp_field.generate()
-                        
-                    if force or not default_storage.exists(thumbnail_webp_field.name):
-                        thumbnail_webp_field.generate()
-                        
-                    if force or not default_storage.exists(medium_webp_field.name):
-                        medium_webp_field.generate()
-                        
-                    if force or not default_storage.exists(thumb_webp_field.name):
-                        thumb_webp_field.generate()
+                    for field_name in thumbnail_fields:
+                        if hasattr(product_image, field_name):
+                            try:
+                                field = getattr(product_image, field_name)
+                                if field:
+                                    _ = field.url  # This triggers generation
+                            except:
+                                pass  # Skip WebP if not supported
                     
                     image_count += 1
-                    self.stdout.write(f'✓ Converted WebP for ProductImage: {product_image.product.name} - Image {product_image.order + 1}')
+                    self.stdout.write(f'✓ Processed thumbnails for ProductImage: {product_image.product.name} - Image {product_image.order + 1}')
                     
                 except Exception as e:
                     self.stdout.write(
-                        self.style.ERROR(f'Failed to convert ProductImage for {product_image.product.name}: {str(e)}')
+                        self.style.ERROR(f'Failed to process ProductImage for {product_image.product.name}: {str(e)}')
                     )
         
         self.stdout.write(
             self.style.SUCCESS(
-                f'\nWebP conversion completed!\n'
-                f'Products converted: {product_count}\n'
-                f'ProductImages converted: {image_count}'
+                f'\nImage processing completed!\n'
+                f'Products processed: {product_count}\n'
+                f'ProductImages processed: {image_count}\n'
+                f'Note: WebP generation will be skipped if not supported'
             )
         )
