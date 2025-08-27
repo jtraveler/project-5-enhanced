@@ -5,7 +5,6 @@
 {% block extra_css %}
 {{ block.super }}
 <!-- Swiper CSS -->
-<!-- Swiper CSS -->
 <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}" />
 <link rel="stylesheet" href="{% static 'css/product-gallery.css' %}" />
 {% endblock %}
@@ -48,7 +47,7 @@
     <symbol id="star-pointy" viewBox="0 0 24 24">
       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
     </symbol>
-  </svg>
+</svg>
 
 <div class="overlay"></div>
 <div class="container guts">
@@ -75,10 +74,10 @@
                             {% endfor %}
                         </div>
                         <!-- Navigation -->
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next" role="button" aria-label="Next image"></div>
+                        <div class="swiper-button-prev" role="button" aria-label="Previous image"></div>
                         <!-- Pagination -->
-                        <div class="swiper-pagination"></div>
+                        <div class="swiper-pagination" role="tablist" aria-label="Image pagination"></div>
                     </div>
                     
                     <!-- Thumbnails Swiper -->
@@ -99,7 +98,7 @@
                 {% elif images|length == 1 %}
                 <!-- Single Image -->
                 {% with image=images.0 %}
-                <a href="{{ image.image.url }}" target="_blank">
+                <a href="{{ image.image.url }}" target="_blank" aria-label="View full size image of {{ product.name }}">
                     <picture>
                         <source srcset="{% if image.image_webp %}{{ image.image_webp.url }}{% elif product.image_webp %}{{ product.image_webp.url }}{% endif %}" type="image/webp">
                         <img class="single-product-image" src="{{ image.image.url }}" alt="{{ product.name }}">
@@ -119,25 +118,26 @@
                 <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
                 {% if product.category %}
                 <p class="small mt-1 mb-0">
-                    <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name|urlencode }}">
-                        <i class="fas fa-tag mr-1"></i>{{ product.category.friendly_name }}
+                    <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name|urlencode }}" aria-label="View all {{ product.category.friendly_name }} products">
+                        <i class="fas fa-tag mr-1" aria-hidden="true"></i>{{ product.category.friendly_name }}
                     </a>
                 </p>
                 {% endif %}
                 {% if avg_rating > 0 %}
                 <small class="text-muted">
-                    <span class="star-icon-pointy">
+                    <span class="star-icon-pointy" aria-hidden="true">
                         <svg><use href="#star-pointy"></use></svg>
                     </span>{{ avg_rating|floatformat:1 }} / 5 
                     ({{ review_count }} review{{ review_count|pluralize }})
+                    <span class="sr-only">Average rating: {{ avg_rating|floatformat:1 }} out of 5 stars from {{ review_count }} review{{ review_count|pluralize }}</span>
                 </small>
                 {% else %}
                 <small class="text-muted">No Rating</small>
                 {% endif %}
                 {% if request.user.is_superuser %}
                     <small class="ml-3">
-                        <a href="{% url 'edit_product' product.id %}">Edit</a> | 
-                        <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+                        <a href="{% url 'edit_product' product.id %}" aria-label="Edit {{ product.name }}">Edit</a> | 
+                        <a class="text-danger" href="{% url 'delete_product' product.id %}" aria-label="Delete {{ product.name }}">Delete</a>
                     </small>
                 {% endif %}
                 <p class="mt-3">{{ product.description|linebreaks }}</p>
@@ -148,47 +148,59 @@
                         {% with product.has_sizes as s %}
                         {% if s %}
                         <div class="col-12">
-                            <p><strong>Size:</strong></p>
-                            <select class="form-control rounded-0 w-50" name="product_size" id='id_product_size'>
+                            <label for="id_product_size"><strong>Size:</strong></label>
+                            <select class="form-control rounded-0 w-50" name="product_size" id='id_product_size' aria-describedby="size-help">
                                 <option value="xs">XS</option>
                                 <option value="s">S</option>
                                 <option value="m" selected>M</option>
                                 <option value="l">L</option>
                                 <option value="xl">XL</option>
                             </select>
+                            <small id="size-help" class="form-text text-muted sr-only">Select your preferred size</small>
                         </div>
                         {% endif %}
                         <div class="col-12">
-                            <p class="mt-3"><strong>Quantity:</strong></p>
+                            <label for="id_qty_{{ product.id }}" class="mt-3"><strong>Quantity:</strong></label>
                             <div class="form-group w-50">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <button class="decrement-qty btn btn-black rounded-0"
-                                            data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}">
+                                            data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}"
+                                            type="button" aria-label="Decrease quantity"
+                                            style="min-width: 44px; min-height: 44px;">
                                             <span class="icon">
-                                                <i class="fas fa-minus"></i>
+                                                <i class="fas fa-minus" aria-hidden="true"></i>
                                             </span>
                                         </button>
                                     </div>
                                     <input class="form-control qty_input" type="number" name="quantity" value="1"
-                                        min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                                        min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}"
+                                        aria-label="Quantity" aria-describedby="quantity-help">
                                     <div class="input-group-append">
                                         <button class="increment-qty btn btn-black rounded-0"
-                                            data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}">
+                                            data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}"
+                                            type="button" aria-label="Increase quantity"
+                                            style="min-width: 44px; min-height: 44px;">
                                             <span class="icon">
-                                                <i class="fas fa-plus"></i>
+                                                <i class="fas fa-plus" aria-hidden="true"></i>
                                             </span>
                                         </button>
                                     </div>
                                 </div>
+                                <small id="quantity-help" class="form-text text-muted sr-only">Enter quantity between 1 and 99</small>
                             </div>
                         </div>
                         
                         <div class="col{% if s %}-12 mt-2{% endif %}">
                             <div class="d-flex gap-2 mt-5">
-                                <input type="submit" class="btn btn-black rounded-0 text-uppercase flex-grow-1" value="Add to Bag">
-                                <button type="button" class="btn btn-favorite-outline {% if is_favorited %}favorited{% endif %}" onclick="handleFavoriteClick();">
-                                    <i class="{% if user.is_authenticated and is_favorited %}fas{% else %}far{% endif %} fa-heart"></i>
+                                <input type="submit" class="btn btn-black rounded-0 text-uppercase flex-grow-1" 
+                                       value="Add to Bag" aria-label="Add {{ product.name }} to shopping bag"
+                                       style="min-height: 48px;">
+                                <button type="button" class="btn btn-favorite-outline {% if is_favorited %}favorited{% endif %}" 
+                                        onclick="handleFavoriteClick();" 
+                                        aria-label="{% if user.is_authenticated and is_favorited %}Remove {{ product.name }} from favorites{% else %}Add {{ product.name }} to favorites{% endif %}"
+                                        style="min-width: 48px; min-height: 48px;">
+                                    <i class="{% if user.is_authenticated and is_favorited %}fas{% else %}far{% endif %} fa-heart" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </div>
@@ -212,10 +224,11 @@
          <!-- Reviews Section -->
         <div class="col-12 col-md-6 col-lg-6">
             <hr>
-            <h3 class="mb-3">Customer Reviews</h3>
+            <h2 class="mb-3">Customer Reviews</h2>
             
             <!-- Review Summary -->
             <div class="mb-4">
+                <h3 class="h5">Review Summary</h3>
                 <p class="mb-1">
                     <strong>Average Rating:</strong>
                     {% if avg_rating > 0 %}
@@ -234,38 +247,45 @@
                 {% for review in reviews %}
                     <div class="card mb-3">
                         <div class="card-body">
-                            <h5 class="card-title">
+                            <h4 class="h6 card-title">
                                 {% for i in "12345" %}
                                     {% if i|add:0 <= review.rating %}
-                                        <span class="star-icon-pointy">
+                                        <span class="star-icon-pointy" aria-hidden="true">
                                             <svg><use href="#star-pointy"></use></svg>
                                         </span>
                                     {% else %}
-                                        <span class="star-icon-pointy empty">
+                                        <span class="star-icon-pointy empty" aria-hidden="true">
                                             <svg><use href="#star-pointy"></use></svg>
                                         </span>
                                     {% endif %}
                                 {% endfor %}
-                            </h5>
-                            <h6 class="card-subtitle mb-2 text-muted">
+                                <span class="sr-only">{{ review.rating }} out of 5 stars</span>
+                            </h4>
+                            <h5 class="h6 card-subtitle mb-2 text-muted">
                                 By {{ review.user.username }} on {{ review.created_at|date:"M d, Y" }}
-                            </h6>
+                            </h5>
                             <p class="card-text">{{ review.comment }}</p>
                             
                             {% if request.user == review.user %}
                                 <div class="mt-3">
-                                    <a href="{% url 'edit_review' product.id review.id %}" class="btn btn-sm btn-outline-black rounded-0">Edit</a>
-                                    <button type="button" class="btn btn-sm btn-black rounded-0" data-toggle="modal" data-target="#deleteModal{{ review.id }}">
+                                    <a href="{% url 'edit_review' product.id review.id %}" 
+                                       class="btn btn-sm btn-outline-black rounded-0"
+                                       aria-label="Edit your review for {{ product.name }}"
+                                       style="min-height: 36px;">Edit</a>
+                                    <button type="button" class="btn btn-sm btn-black rounded-0" 
+                                            data-toggle="modal" data-target="#deleteModal{{ review.id }}"
+                                            aria-label="Delete your review for {{ product.name }}"
+                                            style="min-height: 36px;">
                                         Delete
                                     </button>
                                 </div>
                                 
                                 <!-- Delete Modal -->
-                                <div class="modal fade" id="deleteModal{{ review.id }}" tabindex="-1" role="dialog">
+                                <div class="modal fade" id="deleteModal{{ review.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ review.id }}">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title">Delete Review</h5>
+                                                <h5 class="modal-title" id="deleteModalLabel{{ review.id }}">Delete Review</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -295,30 +315,35 @@
             {% if user.is_authenticated %}
                 {% if not user_has_reviewed %}
                     <hr>
-                    <h4>Write a Review</h4>
+                    <h3>Write a Review</h3>
                     <form method="POST" action="{% url 'add_review' product.id %}" class="mt-3">
                         {% csrf_token %}
                         
                         <!-- Star Rating Widget -->
                         <div class="form-group">
                             <label>Rating:</label>
-                            <div class="star-rating mb-3 d-flex">
-                                <span class="star-icon-pointy star-select" data-rating="1">
+                            <div class="star-rating mb-3 d-flex" role="radiogroup" aria-label="Rating selection">
+                                <span class="star-icon-pointy star-select" data-rating="1" role="radio" aria-checked="false" tabindex="0">
                                     <svg><use href="#star-pointy"></use></svg>
+                                    <span class="sr-only">1 star</span>
                                 </span>
-                                <span class="star-icon-pointy star-select" data-rating="2">
+                                <span class="star-icon-pointy star-select" data-rating="2" role="radio" aria-checked="false" tabindex="0">
                                     <svg><use href="#star-pointy"></use></svg>
+                                    <span class="sr-only">2 stars</span>
                                 </span>
-                                <span class="star-icon-pointy star-select" data-rating="3">
+                                <span class="star-icon-pointy star-select" data-rating="3" role="radio" aria-checked="false" tabindex="0">
                                     <svg><use href="#star-pointy"></use></svg>
+                                    <span class="sr-only">3 stars</span>
                                 </span>
-                                <span class="star-icon-pointy star-select" data-rating="4">
+                                <span class="star-icon-pointy star-select" data-rating="4" role="radio" aria-checked="false" tabindex="0">
                                     <svg><use href="#star-pointy"></use></svg>
+                                    <span class="sr-only">4 stars</span>
                                 </span>
-                                <span class="star-icon-pointy star-select" data-rating="5">
+                                <span class="star-icon-pointy star-select" data-rating="5" role="radio" aria-checked="true" tabindex="0">
                                     <svg><use href="#star-pointy"></use></svg>
+                                    <span class="sr-only">5 stars</span>
                                 </span>
-                                <span class="ms-2" id="rating-text">Excellent</span>
+                                <span class="ms-2" id="rating-text" aria-live="polite">Excellent</span>
                             </div>
                             {{ review_form.rating }}
                         </div>
@@ -329,19 +354,21 @@
                             {{ review_form.comment }}
                         </div>
                         
-                        <button type="submit" class="btn btn-black rounded-0 text-uppercase mt-3">
+                        <button type="submit" class="btn btn-black rounded-0 text-uppercase mt-3" style="min-height: 44px;">
                             <span class="text-uppercase">Submit Review</span>
                         </button>
-                        <a href="{% url 'product_detail' product.id %}" class="btn btn-outline-black rounded-0 mt-3">
+                        <a href="{% url 'product_detail' product.id %}" class="btn btn-outline-black rounded-0 mt-3" style="min-height: 44px;">
                             <span class="text-uppercase">Cancel</span>
                         </a>
                     </form>
                 {% else %}
                     <hr>
+                    <h3>Your Review</h3>
                     <p class="text-muted">You have already reviewed this product.</p>
                 {% endif %}
             {% else %}
                 <hr>
+                <h3>Write a Review</h3>
                 <p>Please <a href="{% url 'account_login' %}?next={{ request.path }}">login</a> to write a review.</p>
             {% endif %}
         </div>
@@ -424,6 +451,7 @@
             currentRating = $(this).data('rating');
             ratingInput.val(currentRating);
             updateStars(currentRating);
+            updateAriaChecked(currentRating);
         });
         
         // Hover handler
@@ -439,6 +467,14 @@
             ratingText.text(ratingTexts[currentRating]);
         });
         
+        // Keyboard navigation for stars
+        stars.on('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                $(this).click();
+            }
+        });
+        
         function updateStars(rating) {
             stars.each(function(index) {
                 if (index < rating) {
@@ -446,6 +482,12 @@
                 } else {
                     $(this).addClass('empty');
                 }
+            });
+        }
+        
+        function updateAriaChecked(rating) {
+            stars.each(function(index) {
+                $(this).attr('aria-checked', (index + 1) === rating);
             });
         }
         
@@ -462,10 +504,9 @@
                 $icon.removeClass('fas').addClass('far');
                 $button.removeClass('favorited');
             }
-            
-            
         });
     });
+    
     function handleFavoriteClick() {
     {% if user.is_authenticated %}
         document.getElementById('favorite-form-{{ product.id }}').submit();
