@@ -65,21 +65,31 @@
                                 {% with primary_image=product.get_primary_image %}
                                     {% if primary_image and primary_image.image %}
                                         <a href="{% url 'product_detail' product.id %}">
-                                            <img class="card-img-top img-fluid" 
-                                                src="{{ primary_image.image.url }}"
-                                                alt="{{ product.name }}"
-                                                {% if forloop.counter > 6 %}loading="lazy"{% endif %}
-                                                decoding="async"
-                                                onerror="this.src='{{ MEDIA_URL }}noimage.png'">
+                                            <picture>
+                                                <source 
+                                                    srcset="{% if primary_image.image_thumbnail_webp %}{{ primary_image.image_thumbnail_webp.url }}{% elif product.image_thumbnail_webp %}{{ product.image_thumbnail_webp.url }}{% endif %}" 
+                                                    type="image/webp">
+                                                <img class="card-img-top img-fluid" 
+                                                    src="{% if primary_image.image_thumbnail %}{{ primary_image.image_thumbnail.url }}{% elif product.image_thumbnail %}{{ product.image_thumbnail.url }}{% else %}{{ primary_image.image.url }}{% endif %}"
+                                                    alt="{{ product.name }}"
+                                                    {% if forloop.counter > 6 %}loading="lazy"{% endif %}
+                                                    decoding="async"
+                                                    onerror="this.src='{{ MEDIA_URL }}noimage.png'">
+                                            </picture>
                                         </a>
                                     {% elif product.image %}
                                         <a href="{% url 'product_detail' product.id %}">
-                                            <img class="card-img-top img-fluid" 
-                                                src="{{ product.image.url }}"
-                                                alt="{{ product.name }}" 
-                                                {% if forloop.counter > 6 %}loading="lazy"{% endif %}
-                                                decoding="async"
-                                                onerror="this.src='{{ MEDIA_URL }}noimage.png'">
+                                            <picture>
+                                                <source 
+                                                    srcset="{% if product.image_thumbnail_webp %}{{ product.image_thumbnail_webp.url }}{% endif %}" 
+                                                    type="image/webp">
+                                                <img class="card-img-top img-fluid" 
+                                                    src="{% if product.image_thumbnail %}{{ product.image_thumbnail.url }}{% else %}{{ product.image.url }}{% endif %}"
+                                                    alt="{{ product.name }}" 
+                                                    {% if forloop.counter > 6 %}loading="lazy"{% endif %}
+                                                    decoding="async"
+                                                    onerror="this.src='{{ MEDIA_URL }}noimage.png'">
+                                            </picture>
                                         </a>
                                     {% else %}
                                         <a href="{% url 'product_detail' product.id %}">
