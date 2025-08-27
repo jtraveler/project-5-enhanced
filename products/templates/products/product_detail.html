@@ -66,8 +66,11 @@
                         <div class="swiper-wrapper">
                             {% for image in images %}
                             <div class="swiper-slide">
-                                <img src="{% if image.image_medium %}{{ image.image_medium.url }}{% else %}{{ image.image.url }}{% endif %}" 
-                                     alt="{{ image.alt_text|default:product.name }}">
+                                <picture>
+                                    <source srcset="{% if image.image_medium_webp %}{{ image.image_medium_webp.url }}{% elif image.image_webp %}{{ image.image_webp.url }}{% endif %}" type="image/webp">
+                                    <img src="{% if image.image_medium %}{{ image.image_medium.url }}{% else %}{{ image.image.url }}{% endif %}" 
+                                         alt="{{ image.alt_text|default:product.name }}">
+                                </picture>
                             </div>
                             {% endfor %}
                         </div>
@@ -83,8 +86,11 @@
                         <div class="swiper-wrapper">
                             {% for image in images %}
                             <div class="swiper-slide">
-                                <img src="{% if image.thumbnail %}{{ image.thumbnail.url }}{% else %}{{ image.image.url }}{% endif %}" 
-                                     alt="{{ image.alt_text|default:product.name }}">
+                                <picture>
+                                    <source srcset="{% if image.thumbnail_webp %}{{ image.thumbnail_webp.url }}{% endif %}" type="image/webp">
+                                    <img src="{% if image.thumbnail %}{{ image.thumbnail.url }}{% else %}{{ image.image.url }}{% endif %}" 
+                                         alt="{{ image.alt_text|default:product.name }}">
+                                </picture>
                             </div>
                             {% endfor %}
                         </div>
@@ -94,7 +100,10 @@
                 <!-- Single Image -->
                 {% with image=images.0 %}
                 <a href="{{ image.image.url }}" target="_blank">
-                    <img class="single-product-image" src="{{ image.image.url }}" alt="{{ product.name }}">
+                    <picture>
+                        <source srcset="{% if image.image_webp %}{{ image.image_webp.url }}{% elif product.image_webp %}{{ product.image_webp.url }}{% endif %}" type="image/webp">
+                        <img class="single-product-image" src="{{ image.image.url }}" alt="{{ product.name }}">
+                    </picture>
                 </a>
                 {% endwith %}
                 {% else %}
