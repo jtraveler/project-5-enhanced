@@ -183,7 +183,7 @@ LOGIN_REDIRECT_URL = '/'
 # Email
 if DEVELOPMENT:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    DEFAULT_FROM_EMAIL = 'nycdogpro@gmail.com'
+    DEFAULT_FROM_EMAIL = 'support@birchlin.com'
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_USE_TLS = True
