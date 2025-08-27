@@ -32,11 +32,26 @@ class Product(models.Model):
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     
-    # ADDING COMPRESSED IMAGE FIELD
+    # JPEG versions (existing)
     image_thumbnail = ImageSpecField(
         source='image',
         processors=[ResizeToFill(300, 300)],
         format='JPEG',
+        options={'quality': 80}
+    )
+    
+    # WebP versions (new)
+    image_webp = ImageSpecField(
+        source='image',
+        processors=[ResizeToFill(800, 600)],
+        format='WEBP',
+        options={'quality': 85}
+    )
+    
+    image_thumbnail_webp = ImageSpecField(
+        source='image',
+        processors=[ResizeToFill(300, 300)],
+        format='WEBP',
         options={'quality': 80}
     )
     
@@ -63,6 +78,24 @@ class Product(models.Model):
         """
         Safely get the image URL, with fallback for missing files
         """
+        return self.get_safe_image_url()
+    
+    def get_webp_url(self):
+        """Get WebP image URL with fallback"""
+        try:
+            if self.image_webp:
+                return self.image_webp.url
+        except:
+            pass
+        return self.get_safe_image_url()
+    
+    def get_thumbnail_webp_url(self):
+        """Get WebP thumbnail URL with fallback"""
+        try:
+            if self.image_thumbnail_webp:
+                return self.image_thumbnail_webp.url
+        except:
+            pass
         return self.get_safe_image_url()
     
     def average_rating(self):
@@ -139,6 +172,8 @@ class ProductImage(models.Model):
         upload_to='product_images/',
         help_text='Upload product image'
     )
+    
+    # JPEG versions (existing)
     image_thumbnail = ImageSpecField(
         source='image',
         processors=[ResizeToFill(300, 300)],
@@ -159,6 +194,33 @@ class ProductImage(models.Model):
         format='JPEG',
         options={'quality': 90}
     )
+    
+    # WebP versions (new)
+    image_webp = ImageSpecField(
+        source='image',
+        processors=[ResizeToFit(800, 800)],
+        format='WEBP',
+        options={'quality': 85}
+    )
+    image_thumbnail_webp = ImageSpecField(
+        source='image',
+        processors=[ResizeToFill(300, 300)],
+        format='WEBP',
+        options={'quality': 80}
+    )
+    thumbnail_webp = ImageSpecField(
+        source='image',
+        processors=[ResizeToFill(100, 100)],
+        format='WEBP',
+        options={'quality': 80}
+    )
+    image_medium_webp = ImageSpecField(
+        source='image',
+        processors=[ResizeToFit(800, 800)],
+        format='WEBP',
+        options={'quality': 85}
+    )
+    
     alt_text = models.CharField(
         max_length=255, 
         blank=True,
@@ -222,6 +284,33 @@ class ProductImage(models.Model):
         except:
             pass
         return self.get_safe_image_url()  # Fallback to original image
+    
+    def get_webp_url(self):
+        """Get WebP image URL with fallback"""
+        try:
+            if self.image_webp:
+                return self.image_webp.url
+        except:
+            pass
+        return self.get_safe_image_url()
+    
+    def get_thumbnail_webp_url(self):
+        """Get WebP thumbnail URL with fallback"""
+        try:
+            if self.image_thumbnail_webp:
+                return self.image_thumbnail_webp.url
+        except:
+            pass
+        return self.get_safe_image_url()
+    
+    def get_medium_webp_url(self):
+        """Get WebP medium image URL with fallback"""
+        try:
+            if self.image_medium_webp:
+                return self.image_medium_webp.url
+        except:
+            pass
+        return self.get_safe_image_url()
 
 
 class Review(models.Model):
