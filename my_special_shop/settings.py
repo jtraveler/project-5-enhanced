@@ -174,7 +174,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # Uses HTML5 form rendering (removes trailing slashes)
-FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+FORM_RENDERER = 'django.forms.renderers.DjangoTemplates'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
