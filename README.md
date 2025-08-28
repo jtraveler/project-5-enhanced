@@ -769,6 +769,9 @@ All HTML templates validated using the [W3C HTML Validator](https://validator.w3
 
 </details>
 
+Same results for all pages mentioned above
+![HTML Validation](static/images/readme/html-validation-all)
+
 ### CSS Validation
 
 CSS validated using the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/):
