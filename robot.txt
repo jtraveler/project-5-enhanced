@@ -1,0 +1,33 @@
+User-agent: *
+Allow: /
+
+# Allow access to CSS and JS files for proper rendering
+Allow: /static/
+Allow: /media/
+
+# Disallow private/admin areas
+Disallow: /admin/
+Disallow: /accounts/
+Disallow: /bag/
+Disallow: /checkout/
+Disallow: /profile/
+Disallow: /wishlist/
+
+# Disallow search result pages to avoid duplicate content
+Disallow: /search/
+Disallow: /*?q=*
+Disallow: /*?sort=*
+Disallow: /*?filter=*
+
+# Disallow pagination parameters
+Disallow: /*?page=*
+
+# Allow product pages and categories
+Allow: /products/
+Allow: /category/
+
+# Sitemap location
+Sitemap: https://mj-project5-aec364964bcd.herokuapp.com/sitemap.xml
+
+# Crawl-delay for being respectful to server resources
+Crawl-delay: 1
