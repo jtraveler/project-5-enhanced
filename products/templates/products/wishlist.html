@@ -34,7 +34,7 @@
                         <div class="card h-100 border-0">
                             {% with primary_image=favorite.product.get_primary_image %}
                                 {% if primary_image %}
-                                    <a href="{% url 'product_detail' favorite.product.id %}">
+                                    <a href="{% url 'product_detail' favorite.product.id %}" aria-label="View details for {{ favorite.product.name }}">
                                         {% if primary_image.image_thumbnail %}
                                             <img class="card-img-top img-fluid" 
                                                  src="{{ primary_image.image_thumbnail.url }}" 
@@ -50,7 +50,7 @@
                                         {% endif %}
                                     </a>
                                 {% else %}
-                                    <a href="{% url 'product_detail' favorite.product.id %}">
+                                    <a href="{% url 'product_detail' favorite.product.id %}" aria-label="View details for {{ favorite.product.name }}">
                                         <img class="card-img-top img-fluid" 
                                              src="{{ MEDIA_URL }}noimage.png" 
                                              alt="{{ favorite.product.name }}">
@@ -66,17 +66,18 @@
                                         <p class="lead mb-0 text-left font-weight-bold">${{ favorite.product.price }}</p>
                                         {% if favorite.product.average_rating > 0 %}
                                             <small class="text-muted">
-                                                <span class="star-icon-pointy">
+                                                <span class="star-icon-pointy" aria-hidden="true">
                                                     <svg><use href="#star-pointy"></use></svg>
                                                 </span>{{ favorite.product.average_rating|floatformat:1 }} / 5
+                                                <span class="sr-only">Rating: {{ favorite.product.average_rating|floatformat:1 }} out of 5 stars</span>
                                             </small>
                                         {% else %}
                                             <small class="text-muted">No Rating</small>
                                         {% endif %}
                                         <form method="POST" action="{% url 'toggle_favorite' favorite.product.id %}" class="mt-2">
                                             {% csrf_token %}
-                                            <button type="submit" class="btn btn-outline-danger btn-sm btn-wishlist-remove">
-                                              <i class="fas fa-heart-broken"></i> Remove from Wishlist
+                                            <button type="submit" class="btn btn-outline-danger btn-sm btn-wishlist-remove" aria-label="Remove {{ favorite.product.name }} from wishlist">
+                                              <i class="fas fa-heart-broken" aria-hidden="true"></i> Remove from Wishlist
                                             </button>
                                         </form>
                                     </div>
