@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from adminsortable2.admin import SortableInlineAdminMixin
+from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminBase
 from .models import Product, Category, ProductImage, Review, Favorite
 
 
@@ -19,20 +19,21 @@ class ProductImageInline(SortableInlineAdminMixin, admin.TabularInline):
     extra = 1
     fields = ('image', 'thumbnail_preview', 'alt_text', 'is_primary', 'order')
     readonly_fields = ('thumbnail_preview',)
-    
+
     def thumbnail_preview(self, obj):
         if obj.image:
             try:
-                return format_html('<img src="{}" width="100" height="100" />', obj.get_thumbnail_url())
-            except:
+                return format_html(
+                    '<img src="{}" width="100" height="100" />',
+                    obj.get_thumbnail_url()
+                )
+            except Exception:
                 return "No image"
         return "No image"
     thumbnail_preview.short_description = 'Preview'
 
 
 # Product admin with enhanced search and filtering
-from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminBase
-
 class ProductAdmin(SortableAdminBase, admin.ModelAdmin):
     list_display = (
         'sku',
@@ -44,14 +45,14 @@ class ProductAdmin(SortableAdminBase, admin.ModelAdmin):
         'created_at',
         'primary_image_preview',
     )
-    
+
     list_filter = (
         'category',
         'created_at',
         'price',
         'has_sizes',
     )
-    
+
     search_fields = (
         'name',
         'sku',
@@ -59,18 +60,18 @@ class ProductAdmin(SortableAdminBase, admin.ModelAdmin):
         'category__name',
         'category__friendly_name',
     )
-    
+
     date_hierarchy = 'created_at'
     ordering = ('-created_at',)
     inlines = [ProductImageInline]
-    
+
     # Optionally, add list_per_page to control pagination
     list_per_page = 60
-    
+
     def image_count(self, obj):
         return obj.images.count()
     image_count.short_description = 'Images'
-    
+
     def primary_image_preview(self, obj):
         primary_image = obj.get_primary_image()
         if primary_image:
@@ -85,14 +86,15 @@ class ProductAdmin(SortableAdminBase, admin.ModelAdmin):
                     image_url = primary_image.get_image_url()
                 else:
                     return "No image"
-                
+
                 # Make the image clickable with a link to the edit page
                 return format_html(
-                    '<a href="{}"><img src="{}" width="80" height="80" style="object-fit: cover; border-radius: 4px;" /></a>',
+                    '<a href="{}"><img src="{}" width="80" height="80" '
+                    'style="object-fit: cover; border-radius: 4px;" /></a>',
                     f'/admin/products/product/{obj.id}/change/',
                     image_url
                 )
-            except Exception as e:
+            except Exception:
                 # Handle any unexpected errors
                 return "Image error"
         return "No image"
