@@ -766,17 +766,19 @@ All HTML templates validated using the [W3C HTML Validator](https://validator.w3
 | Checkout | ✅ Pass | 0 errors |
 | User Profile | ✅ Pass | 0 errors |
 | Contact | ✅ Pass | 0 errors |
+| Genral text pages such as About | ✅ Pass | 0 errors |
+
 
 </details>
 
 Same results for all pages mentioned above
-![HTML Validation](static/images/readme/html-validation-all)
+![HTML Validation](static/images/readme/html-validation-all.jpg)
 
 ### CSS Validation
 
 CSS validated using the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/):
 
-![CSS Validation](static/images/readme/css-validation.png)
+![CSS Validation](static/images/readme/css-validation-all.jpg)
 
 ### Accessibility Testing
 
