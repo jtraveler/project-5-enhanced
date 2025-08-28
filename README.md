@@ -780,26 +780,6 @@ CSS validated using the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/
 
 ![CSS Validation](static/images/readme/css-validation-all.jpg)
 
-### Accessibility Testing
-
-Accessibility compliance verified through multiple testing methods:
-
-**WAVE Testing Results:**
-- Zero accessibility errors across main pages
-- Proper heading hierarchy implementation
-- Sufficient color contrast ratios maintained
-- Alt text provided for all meaningful images
-
-### Wave Validation
-
-<details>
-<summary>WAVE Validation Results</summary>
-
-![Homepage WAVE](static/images/readme/wave-homepage.png)
-![Catalog WAVE](static/images/readme/wave-catalog.png)
-![Product WAVE](static/images/readme/wave-product.png)
-
-</details>
 
 ### Lighthouse Performance
 
@@ -905,21 +885,40 @@ JavaScript code validated using [JSHint](https://jshint.com/):
 </details>
 
 ### Python Code Validation
+## [PEP8CI Python Validator](https://pep8ci.herokuapp.com/)
+All Python files were tested using PEP8CI for PEP8 compliance validation. The validation covered all core application files across the `products`, `bag`, `checkout`, `profiles`, `contact`, and `home` apps.
 
-Python code validated using [PEP8 CI Linter](https://pep8ci.herokuapp.com/):
+| File | PEP8CI Validation | 
+|------|-------------------|
+| products/models.py | Clear |
+| products/views.py | Clear |
+| products/forms.py | Clear |
+| products/admin.py | Clear |
+| products/urls.py | Clear |
+| bag/views.py | Clear |
+| bag/urls.py | Clear |
+| checkout/models.py | Clear |
+| checkout/views.py | Clear |
+| checkout/forms.py | Clear |
+| checkout/admin.py | Clear |
+| checkout/urls.py | Clear |
+| checkout/webhooks.py | Clear |
+| profiles/models.py | Clear |
+| profiles/views.py | Clear |
+| profiles/forms.py | Clear |
+| profiles/urls.py | Clear |
+| contact/models.py | Clear |
+| contact/views.py | Clear |
+| contact/forms.py | Clear |
+| contact/urls.py | Clear |
+| home/views.py | Clear |
+| home/urls.py | Clear |
+| my_special_shop/settings.py | Clear |
+| my_special_shop/urls.py | Clear |
+| custom_storages.py | Clear |
 
-<details>
-<summary>Python Validation Results</summary>
-
-| File | Status | Issues |
-|------|--------|--------|
-| views.py | ✅ Pass | 0 errors |
-| models.py | ✅ Pass | 0 errors |
-| forms.py | ✅ Pass | 0 errors |
-| urls.py | ✅ Pass | 0 errors |
-| settings.py | ✅ Pass | 0 errors |
-
-</details>
+### Python Validation Screenshots
+![PEP8 Validation Results](static/images/readme/python-validation.png)
 
 ### Device Testing
 
