@@ -100,17 +100,3 @@
         </div>
     </div>
 {% endblock %}
-
-{% block postloadjs %}
-{{ block.super }}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Remove trailing slashes from input elements for HTML5 compliance
-    document.querySelectorAll('input').forEach(function(input) {
-        if (input.outerHTML.includes('/>')) {
-            input.outerHTML = input.outerHTML.replace(/\s*\/>/g, '>');
-        }
-    });
-});
-</script>
-{% endblock %}
