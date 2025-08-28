@@ -128,7 +128,7 @@
                             <svg><use href="#star-pointy"></use></svg>
                         </span>{{ avg_rating|floatformat:1 }} / 5 
                         ({{ review_count }} review{{ review_count|pluralize }})
-                        <span class="sr-only">Average rating: {{ avg_rating|floatformat:1 }} out of 5 stars from {{ review_count }} review{{ review_count|pluralize }}</span>
+                        
                     </small>
                     {% else %}
                     <small class="text-muted">No Rating</small>
@@ -155,7 +155,7 @@
                                     <option value="l">L</option>
                                     <option value="xl">XL</option>
                                 </select>
-                                <small id="size-help" class="form-text text-muted sr-only">Select your preferred size</small>
+                                
                             </div>
                             {% endif %}
                             <div class="col-12">
@@ -186,7 +186,6 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <small id="quantity-help" class="form-text text-muted sr-only">Enter quantity between 1 and 99</small>
                                 </div>
                             </div>
                             
@@ -258,7 +257,6 @@
                                             </span>
                                         {% endif %}
                                     {% endfor %}
-                                    <span class="sr-only">{{ review.rating }} out of 5 stars</span>
                                 </h4>
                                 <h5 class="h6 card-subtitle mb-2 text-muted">
                                     By {{ review.user.username }} on {{ review.created_at|date:"M d, Y" }}
@@ -324,23 +322,18 @@
                                 <div class="star-rating mb-3 d-flex" role="radiogroup" aria-label="Rating selection">
                                     <span class="star-icon-pointy star-select" data-rating="1" role="radio" aria-checked="false" tabindex="0">
                                         <svg><use href="#star-pointy"></use></svg>
-                                        <span class="sr-only">1 star</span>
                                     </span>
                                     <span class="star-icon-pointy star-select" data-rating="2" role="radio" aria-checked="false" tabindex="0">
                                         <svg><use href="#star-pointy"></use></svg>
-                                        <span class="sr-only">2 stars</span>
                                     </span>
                                     <span class="star-icon-pointy star-select" data-rating="3" role="radio" aria-checked="false" tabindex="0">
                                         <svg><use href="#star-pointy"></use></svg>
-                                        <span class="sr-only">3 stars</span>
                                     </span>
                                     <span class="star-icon-pointy star-select" data-rating="4" role="radio" aria-checked="false" tabindex="0">
                                         <svg><use href="#star-pointy"></use></svg>
-                                        <span class="sr-only">4 stars</span>
                                     </span>
                                     <span class="star-icon-pointy star-select" data-rating="5" role="radio" aria-checked="true" tabindex="0">
                                         <svg><use href="#star-pointy"></use></svg>
-                                        <span class="sr-only">5 stars</span>
                                     </span>
                                     <span class="ms-2" id="rating-text" aria-live="polite">Excellent</span>
                                 </div>

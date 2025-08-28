@@ -36,7 +36,6 @@
             <div class="row mt-1 mb-2">
                 <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
                     <div class="sort-select-wrapper">
-                        <label for="sort-selector" class="sr-only">Sort products by</label>
                         <select id="sort-selector" class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}" aria-label="Sort products by price, rating, name, or category">
                             <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
                             <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
@@ -129,7 +128,6 @@
                                                 <span class="star-icon-pointy" aria-hidden="true">
                                                     <svg><use href="#star-pointy"></use></svg>
                                                 </span>{{ product.average_rating|floatformat:1 }} / 5
-                                                <span class="sr-only">Rating: {{ product.average_rating|floatformat:1 }} out of 5 stars</span>
                                             </small>
                                         {% else %}
                                             <small class="text-muted">No Rating</small>
