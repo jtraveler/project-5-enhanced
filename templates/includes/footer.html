@@ -11,6 +11,7 @@
 
     <!-- Section: Links  -->
     <section class="px-3">
+      <h2 class="sr-only">Footer Navigation</h2>
       <div class="container text-md-start mt-5">
         <!-- Grid row -->
         <div class="row mt-3">
@@ -20,17 +21,19 @@
             <a href="{% url 'home' %}" class="brand-text">BIRCHLIN</a>
             
             <p>
-              Gear up at our wilderness outpost where quality meets adventure. From tents to trails, we equip your escape. Find your wild side and we'll pack the rest!          </div>
+              Gear up at our wilderness outpost where quality meets adventure. From tents to trails, we equip your escape. Find your wild side and we'll pack the rest!
+            </p>
+          </div>
           <!-- Grid column -->
 
          
           <div class="col-md-12 col-lg-6 col-xl-5 mx-auto mb-4 pr-4 pr-lg-0 pr-xl-4">
             <!-- Links -->
-            <div class="footer-header mb-4">Browse by Category</div>
+            <h3 class="footer-header mb-4">Browse by Category</h3>
             
             <div class="grid-container-category">
             <p>
-              <a href="{% url 'products' %}?category=tents_and_shelter" aria-haspopup="true" aria-expanded="false" aria-label="Category - Shelter">Shelter</a>
+              <a href="{% url 'products' %}?category=tents_and_shelter" aria-label="Category - Shelter">Shelter</a>
             </p>
             <p>
               <a href="{% url 'products' %}?category=sleeping_bags" aria-label="Category - Sleeping Bags">Sleeping Bags</a>
@@ -39,34 +42,31 @@
               <a href="{% url 'products' %}?category=sleeping_pads" aria-label="Category - Sleeping Pads">Sleeping Pads</a>
             </p>
             <p>
-              <a href="{% url 'products' %}?category=cooking_and_food" aria-haspopup="true" aria-expanded="false" aria-label="Category - Cook">Cook</a>
+              <a href="{% url 'products' %}?category=cooking_and_food" aria-label="Category - Cook">Cook</a>
             </p>
             <p>
-              <a href="{% url 'products' %}?category=power_banks" aria-haspopup="true" aria-expanded="false" aria-label="Category - Power">Power</a>
+              <a href="{% url 'products' %}?category=power_banks" aria-label="Category - Power">Power</a>
             </p>
             <p>
-              <a href="{% url 'products' %}?category=lighting" aria-haspopup="true" aria-expanded="false" aria-label="Category - Lighting">Lighting</a>
+              <a href="{% url 'products' %}?category=lighting" aria-label="Category - Lighting">Lighting</a>
             </p>
             <p>
-              <a href="{% url 'products' %}?category=backpacks_and_bags" aria-haspopup="true" aria-expanded="false" aria-label="Category - Bags and Backpacks">Bags & Backpacks</a>
+              <a href="{% url 'products' %}?category=backpacks_and_bags" aria-label="Category - Bags and Backpacks">Bags & Backpacks</a>
             </p>
             <p>
-              <a href="{% url 'products' %}?category=navigation" aria-haspopup="true" aria-expanded="false" aria-label="Category - Navigation">Navigation</a>
+              <a href="{% url 'products' %}?category=navigation" aria-label="Category - Navigation">Navigation</a>
             </p>
             <p>
-              <a href="{% url 'products' %}?category=safety" aria-haspopup="true" aria-expanded="false" aria-label="Category - Safety">Safety</a>
+              <a href="{% url 'products' %}?category=safety" aria-label="Category - Safety">Safety</a>
             </p>
 
             <p>
-              <a href="{% url 'products' %}?category=hammocks" aria-haspopup="true" aria-expanded="false" aria-label="Category - Hammocks">Hammocks</a>
+              <a href="{% url 'products' %}?category=hammocks" aria-label="Category - Hammocks">Hammocks</a>
             </p>
 
             <p>
-              <a href="{% url 'products' %}?category=chairs" aria-haspopup="true" aria-expanded="false" aria-label="Category - Chairs">Chairs</a>
+              <a href="{% url 'products' %}?category=chairs" aria-label="Category - Chairs">Chairs</a>
             </p>
-            
-           
-           
 
           </div>
             
@@ -74,13 +74,13 @@
 
           <div class="col-md-12 col-lg-5 col-xl-3 mx-auto ml-lg-0 pr-xl-0 mr-xl-0">
             <!-- Links -->
-            <div class="footer-header mb-4">Info</div>
+            <h3 class="footer-header mb-4">Info</h3>
               <div class="grid-container-info">
                 <p>
                   <a href="{% url 'about' %}" aria-label="About Us">About Us</a>
                 </p>
                 <p>
-                  <a href="{% url 'contact' %}" aria-label="Category - Connect">Contact</a>
+                  <a href="{% url 'contact' %}" aria-label="Contact">Contact</a>
                 </p>
                 <p>
                   <a href="{% url 'privacy_policy' %}" aria-label="Privacy Policy">Privacy Policy</a>
@@ -94,8 +94,6 @@
             </p></div>
             
           </div>
-
-          
           
         </div>
        
