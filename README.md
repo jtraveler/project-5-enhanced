@@ -21,7 +21,6 @@ The platform serves adventure-seekers across all experience levels, providing de
       - [WHO: Who is the customer?](#who-who-is-the-customer)
       - [WHAT: What are they buying?](#what-what-are-they-buying)
       - [HOW: How will they pay?](#how-how-will-they-pay)
-  - [UX & Agile Development](#ux--agile-development)
   - [User Experience Design](#user-experience-design)
   - [Agile Methodology](#agile-methodology)
   - [Development Tools & Architecture](#development-tools--architecture)
@@ -33,7 +32,6 @@ The platform serves adventure-seekers across all experience levels, providing de
   - [Icons & Visual Elements](#icons--visual-elements)
   - [Technologies Used](#technologies-used)
     - [Wireframes](#wireframes)
-    - [Favicon](#favicon)
     - [Languages](#languages)
     - [Frameworks & Software](#frameworks--software)
     - [Libraries and Modules](#libraries-and-modules)
@@ -43,6 +41,7 @@ The platform serves adventure-seekers across all experience levels, providing de
       - [Database Design](#database-design)
       - [Entity Relationships](#entity-relationships)
     - [Version Control](#version-control)
+  - [Pages Overview](#e-commerce-business-model)
   - [E-commerce Business Model](#e-commerce-business-model)
     - [Search Engine Optimization (SEO)](#search-engine-optimization-seo)
     - [Social Media Marketing](#social-media-marketing)
@@ -69,7 +68,6 @@ The platform serves adventure-seekers across all experience levels, providing de
     - [Accessibility Testing](#accessibility-testing)
     - [Wave Validation](#wave-validation)
     - [Lighthouse Performance](#lighthouse-performance)
-    - [JavaScript Validation](#javascript-validation)
     - [Python Code Validation](#python-code-validation)
     - [Device Testing](#device-testing)
     - [Browser Compatibility](#browser-compatibility)
@@ -82,6 +80,7 @@ The platform serves adventure-seekers across all experience levels, providing de
     - [Forking the Repository](#forking-the-repository)
     - [Cloning the Repository](#cloning-the-repository)
     - [Environment Setup](#environment-setup)
+  - [Facebook](#facebook)
   - [Credits](#credits)
     - [Code References](#code-references)
     - [Media Sources](#media-sources)
@@ -132,13 +131,8 @@ Birchlin specializes in outdoor gear across multiple categories:
 #### HOW: How will they pay?
 
 **Payment Model:**
-- **Single Payment:** Standard 
+- **Single Payment:** Standard with credit car
 - **Secure Processing:** Stripe integration for reliable payment handling
-- **Multiple Payment Method:** Credit card
-
-## UX & Agile Development
-
-The complete User Experience design process and Agile methodology implementation are documented in our [Agile Documentation](AGILE.md).
 
 ## User Experience Design
 
@@ -188,11 +182,6 @@ The homepage creates an immediate connection with outdoor adventure through:
 - Clear value proposition emphasizing gear reliability
 - Direct call-to-action leading to product catalog
 
-**Featured Content:**
-- Category highlights with representative product imagery
-- Latest gear arrivals and seasonal recommendations
-- Customer testimonials and gear success stories
-
 **Navigation:**
 - Intuitive category-based menu structure
 - Quick access to account features and shopping cart
@@ -204,7 +193,6 @@ The product catalog prioritizes information clarity and discovery:
 
 **Category Structure:**
 - Category indicators for quick identification
-- Advanced filtering options for specific requirements
 
 **Product Display:**
 - Grid layout optimizing product imagery and key details
@@ -368,11 +356,8 @@ Wireframes established the foundational layout and user flow:
 
 
 
-### Favicon
+### Pages
 
-The favicon incorporates outdoor themes while maintaining brand recognition:
-
-![Favicon](static/images/readme/favicon.png)
 
 ### Languages
 
@@ -481,8 +466,6 @@ Email functionality supports customer communication and marketing:
 
 The database schema supports comprehensive e-commerce functionality:
 
-![ERD Diagram](static/images/readme/erd-diagram.png)
-
 **Core Models:**
 - **User:** Extended Django user model with profile information
 - **Product:** Comprehensive product information with categories
@@ -519,6 +502,40 @@ The database schema supports comprehensive e-commerce functionality:
 - Issues tracking for bug reports and feature requests
 - Project boards for sprint planning and progress tracking
 - Automated deployments through GitHub Actions
+
+## Pages Overview
+ 
+ Home
+ ![Page - Home](static/images/readme/features/page-home.png)
+
+  Home - Responsive
+ ![Page - Home - Mobile](static/images/readme/features/page-home-mobile.png)
+
+Products
+ ![Page - Home](static/images/readme/features/page-products.jpg)
+
+Product Detail
+ ![Page - Home](static/images/readme/features/page-product-detail.jpg)
+
+Search
+ ![Page - Home](static/images/readme/features/page-search.png)
+
+Shopping Bag
+ ![Page - Home](static/images/readme/features/page-shopping-bag.png)
+
+Wish List
+ ![Page - Home](static/images/readme/features/page-wichlist.png)
+
+Order Confirmation
+ ![Page - Home](static/images/readme/features/page-order-confirmation.png)
+
+My Profile
+ ![Page - Home](static/images/readme/features/page-myprofile.png)
+
+About
+![Page - Home](static/images/readme/features/page-about.png)
+
+ 
 
 ## E-commerce Business Model
 
@@ -570,6 +587,10 @@ Birchlin implements a comprehensive digital marketing strategy supporting sustai
 - Persistent shopping cart icon with live item count
 - User account dropdown with quick access to profile features
 
+![Navigation](static/images/readme/features/navigation.jpg)
+
+![Navigation - mobile](static/images/readme/features/navigationjpg-mobile.jpg)
+
 #### Hero Video Section
 
 **Dynamic Hero Content:**
@@ -578,20 +599,28 @@ Birchlin implements a comprehensive digital marketing strategy supporting sustai
 - Call-to-action buttons directing to featured categories
 - Automatic video optimization for different connection speeds
 
+![Hero video](static/images/readme/features/hero-section.jpg)
+
 #### Product Catalog
 
 **Advanced Product Display:**
 - Grid layout optimizing product imagery
 - Pagination with 20 products per page for improved performance
 
+![Page - Products](static/images/readme/features/page-products.jpg)
+
 **Advanced Sorting & Filtering:**
 - Sort by customer rating (high to low, low to high)
 - Sort by price, name, category, and rating
+
+![Products - sorting](static/images/readme/features/prodycts-sort.jpg)
 
 **Product Information Display:**
 - Star rating display with visual rating indicators
 - Customer average rating
 - Category and price information
+
+![Products - information display](static/images/readme/features/products-preview.jpg)
 
 #### Product Detail Pages
 
@@ -602,13 +631,14 @@ Birchlin implements a comprehensive digital marketing strategy supporting sustai
 - Touch gestures and keyboard navigation support
 - Mobile-optimized gallery experience with responsive design
 
-**Comprehensive Product Information:**
-- High-resolution image galleries with multiple product angles
+![Products - review](static/images/readme/features/product-detail-swift-gallery.jpg)
 
 **Rating & Review System:**
 - 5-star rating display with aggregate customer scores
 - Customer review submission and management system
 - Review filtering and sorting options
+
+![Products - review](static/images/readme/features/product-detail-review.jpg)
 
 #### Shopping Cart & Checkout
 
@@ -616,10 +646,14 @@ Birchlin implements a comprehensive digital marketing strategy supporting sustai
 - Persistent cart across sessions for registered users
 - Quantity adjustment
 
+![Products - review](static/images/readme/features/products-persitent-cart.jpg)
+
 **Streamlined Checkout:**
 - Guest checkout option for quick purchases
 - Address autocomplete for shipping information
 - Order confirmation
+
+![Checkout](static/images/readme/features/page-checkout.jpg)
 
 #### User Authentication & Profiles
 
@@ -628,10 +662,20 @@ Birchlin implements a comprehensive digital marketing strategy supporting sustai
 - Email verification for account security
 - Password reset functionality with secure token generation
 
+Signup confirmation
+
+![Checkout](static/images/readme/features/email.jpg)
+
+Order confirmation
+
+![Checkout](static/images/readme/features/email-order.jpg)
+
 **User Profiles:**
 - Order history
 - Shipping address management
 - Wishlist access and management
+
+![Checkout](static/images/readme/features/my-profile.jpg)
 
 #### Wishlist Functionality
 
@@ -639,6 +683,7 @@ Birchlin implements a comprehensive digital marketing strategy supporting sustai
 - Add products from catalog or detail pages
 - Move to cart functionality for easy purchasing
 
+![Wishkist](static/images/readme/features/wishlist.jpg)
 
 #### Search Capabilities
 
@@ -646,12 +691,17 @@ Birchlin implements a comprehensive digital marketing strategy supporting sustai
 - Full-text search across product names and descriptions
 - Search result highlighting for query terms
 
+![Wishkist](static/images/readme/features/search.jpg)
+
+
 #### Contact
 
 **Form Validation:**
 - Real-time validation for all form inputs
 - Clear error messaging for failed validations
 - Success confirmations for form submissions
+
+![Contact](static/images/readme/features/contact.jpg)
 
 
 #### Admin Management
@@ -668,6 +718,27 @@ Birchlin implements a comprehensive digital marketing strategy supporting sustai
 - Basic search with advanced filtering (by SKU, name, description, category)
 - Improved pagination controls (50 items per page with "show all" option)
 - Order management dashboard
+
+Admin Category Management
+![Admin - categories](static/images/readme/features/page-admin-categories.jpg)
+
+Admin Faves Management
+![Admin - categories](static/images/readme/features/page-admin-favorties.jpg)
+
+Admin Orders Management
+![Admin - categories](static/images/readme/features/page-admin-orders.jpg)
+
+Admin Review Management
+![Admin - categories](static/images/readme/features/page-admin-review.jpg)
+
+Admin Product Management
+![Admin - categories](static/images/readme/features/page-admin-products.jpg)
+
+Admin Add Product
+![Admin - categories](static/images/readme/features/page-admin-products-add.jpg)
+
+Admin Product Multi Image Upload
+![Admin - categories](static/images/readme/features/admin-products-multi-upload.jpg)
 
 **Image Processing & Optimization:**
 - Automatic thumbnail generation using django-imagekit
@@ -819,7 +890,9 @@ CSS validated using the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/
 The following Lighthouse testing is only for the mobile versions of the pages as the tests were done with a mobile-first approach.
 
 
+<details>
 
+<summary>Lighthouse Results</summary>
 Home
 
 ![Home](static/images/readme/lighthouse/home.jpg)
@@ -868,57 +941,48 @@ Genral Text Pages
 
 ![Home](static/images/readme/lighthouse/general_text.jpg)
 
-### JavaScript Validation
-
-JavaScript code validated using [JSHint](https://jshint.com/):
-
-<details>
-<summary>JavaScript Validation Results</summary>
-
-| File | Status | Warnings |
-|------|--------|----------|
-| main.js | ✅ Pass | 0 warnings |
-| cart.js | ✅ Pass | 0 warnings |
-| product.js | ✅ Pass | 0 warnings |
-| checkout.js | ✅ Pass | 0 warnings |
-
 </details>
+
 
 ### Python Code Validation
 ## [PEP8CI Python Validator](https://pep8ci.herokuapp.com/)
 All Python files were tested using PEP8CI for PEP8 compliance validation. The validation covered all core application files across the `products`, `bag`, `checkout`, `profiles`, `contact`, and `home` apps.
 
-| File | PEP8CI Validation | 
-|------|-------------------|
-| products/models.py | Clear |
-| products/views.py | Clear |
-| products/forms.py | Clear |
-| products/admin.py | Clear |
-| products/urls.py | Clear |
-| bag/views.py | Clear |
-| bag/urls.py | Clear |
-| checkout/models.py | Clear |
-| checkout/views.py | Clear |
-| checkout/forms.py | Clear |
-| checkout/admin.py | Clear |
-| checkout/urls.py | Clear |
-| checkout/webhooks.py | Clear |
-| profiles/models.py | Clear |
-| profiles/views.py | Clear |
-| profiles/forms.py | Clear |
-| profiles/urls.py | Clear |
-| contact/models.py | Clear |
-| contact/views.py | Clear |
-| contact/forms.py | Clear |
-| contact/urls.py | Clear |
-| home/views.py | Clear |
-| home/urls.py | Clear |
-| my_special_shop/settings.py | Clear |
-| my_special_shop/urls.py | Clear |
-| custom_storages.py | Clear |
+<summary>Python Validation Results</summary>
+
+<details>
+| Feature | Test Case | Expected Result | Status |
+|---------|-----------|-----------------|--------|
+| products/models.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| products/views.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| products/forms.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| products/admin.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| products/urls.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| bag/views.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| bag/urls.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| checkout/models.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| checkout/views.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| checkout/forms.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| checkout/admin.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| checkout/urls.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| checkout/webhooks.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| profiles/models.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| profiles/views.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| profiles/forms.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| profiles/urls.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| contact/models.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| contact/views.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| contact/forms.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| contact/urls.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| home/views.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| home/urls.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| my_special_shop/settings.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| my_special_shop/urls.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+| custom_storages.py | PEP8CI validation | No syntax errors, proper formatting | ✅ Pass |
+</details>
 
 ### Python Validation Screenshots
-![PEP8 Validation Results](static/images/readme/python-validation.png)
+![PEP8 Validation Results](static/images/readme/python-validation.jpg)
 
 ### Device Testing
 
@@ -1008,7 +1072,7 @@ The application is deployed on Heroku with the following configuration:
 
 1. **Create Heroku Application:**
    ```bash
-   heroku create birchlin-outdoor-gear
+   heroku create
    ```
 
 2. **Configure Environment Variables:**
@@ -1057,7 +1121,7 @@ Static and media files hosted on Amazon S3:
 
 1. **Clone Repository:**
    ```bash
-   git clone https://github.com/username/birchlin-project.git
+   git clone 
    cd birchlin-project
    ```
 
@@ -1099,19 +1163,11 @@ Static and media files hosted on Amazon S3:
 
 To fork this repository for your own development:
 
-1. Navigate to the [GitHub repository](https://github.com/username/birchlin-project)
+1. Navigate to the [GitHub repository](https://github.com/jtraveler/project-5)
 2. Click the "Fork" button in the top-right corner
 3. Select your GitHub account as the destination
 4. Clone your forked repository locally
 
-### Cloning the Repository
-
-To clone this repository:
-
-```bash
-git clone https://github.com/username/birchlin-project.git
-cd birchlin-project
-```
 
 ### Environment Setup
 
@@ -1146,6 +1202,10 @@ EMAIL_HOST_PASSWORD=your-app-password
 ```
 
 </details>
+
+## Facebook
+
+![Facebook](static/images/readme/features/facebook.jpg)
 
 ## Credits
 
@@ -1196,7 +1256,47 @@ EMAIL_HOST_PASSWORD=your-app-password
 **Photography:**
 - [Unsplash](https://unsplash.com/) - Product and outdoor lifestyle photography
 - [Pexels](https://www.pexels.com/) - Additional stock photography
-- [Pixabay](https://pixabay.com/) - Icons and graphic elements
+- [Font Awesome](https://fontawesome.com/) - Icons
+
+**Product Images Used (for demonstration purposes only)**
+
+- www.thule.com
+- www.globetrotter.de
+- lordco.com
+- www.coleman.com
+- www.extremeterrain.com
+- www.klymit.eu
+- www.waragod.at
+- www.walmart.com
+- www.rei.com
+- www.amazon.ca
+- business.walmart.com
+- www.amazon.com
+- www.outnorth.com
+- pittmanoutdoors.com
+- www.rothco.com
+- wateryachtsolutions.com
+- www.ustgear.com
+- sutherlands.com
+- www.streetstylez.eu
+- www.otto.de
+- hazard4.com
+- www.outdoority.com
+- thefeed.com
+- www.maciag-offroad.de
+- www.ebay.com
+- houndandhammer.com
+- akrapovic.com
+- www.txfowlers.com
+- www.voelkner.de
+- www.amazon.de
+- www.overtons.com
+- panbo.com
+- www.tackledirect.com
+- www.factoryeffex.com
+- www.vidaxl.com
+- www.truckinmotion.com
+- browningcamping.com
 
 **Video Content:**
 - [From USer Taryn Elliott on Pexels.com](https://www.pexels.com/video/a-woman-sitting-on-a-rock-with-a-coffee-pot-4909395/) - Background video content
@@ -1209,15 +1309,6 @@ EMAIL_HOST_PASSWORD=your-app-password
 - **Code Institute** - Educational resources and project guidance
 - **Django Community** - Documentation and community support
 
-**Testing Contributors:**
-- Beta testers who provided valuable feedback on user experience
-- Accessibility consultants who verified compliance standards
-- Performance optimization specialists
-
-**Special Recognition:**
-- Outdoor gear enthusiasts who provided domain expertise
-- UX/UI designers who contributed to the design system
-- Content creators who developed product descriptions and guides
 
 ---
 
