@@ -66,7 +66,7 @@
                                 <div class="swiper-slide">
                                     <picture>
                                         <source srcset="{% if image.image_medium_webp %}{{ image.image_medium_webp.url }}{% elif image.image_webp %}{{ image.image_webp.url }}{% endif %}" type="image/webp">
-                                        <img src="{% if image.image_medium %}{{ image.image_medium.url %}{% else %}{{ image.image.url }}{% endif %}" 
+                                        <img src="{% if image.image_medium %}{{ image.image_medium.url }}{% else %}{{ image.image.url }}{% endif %}" 
                                              alt="{{ image.alt_text|default:product.name }}">
                                     </picture>
                                 </div>
@@ -147,14 +147,15 @@
                             {% with product.has_sizes as s %}
                             {% if s %}
                             <div class="col-12">
-                                <label for="id_product_size_{{ product.id }}"><strong>Size:</strong></label>
-                                <select class="form-control rounded-0 w-50" name="product_size" id="id_product_size_{{ product.id }}">
+                                <label for="id_product_size"><strong>Size:</strong></label>
+                                <select class="form-control rounded-0 w-50" name="product_size" id='id_product_size' aria-describedby="size-help">
                                     <option value="xs">XS</option>
                                     <option value="s">S</option>
                                     <option value="m" selected>M</option>
                                     <option value="l">L</option>
                                     <option value="xl">XL</option>
                                 </select>
+                                
                             </div>
                             {% endif %}
                             <div class="col-12">
@@ -173,7 +174,7 @@
                                         </div>
                                         <input class="form-control qty_input" type="number" name="quantity" value="1"
                                             min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_detail_{{ product.id }}"
-                                            aria-label="Product quantity">
+                                            aria-label="Quantity" aria-describedby="quantity-help">
                                         <div class="input-group-append">
                                             <button class="increment-qty btn btn-black rounded-0"
                                                 data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}"
@@ -319,19 +320,19 @@
                             <div class="form-group">
                                 <label>Rating:</label>
                                 <div class="star-rating mb-3 d-flex" role="radiogroup" aria-label="Rating selection">
-                                    <span class="star-icon-pointy star-select" data-rating="1" role="radio" aria-checked="false" tabindex="0" aria-label="1 star">
+                                    <span class="star-icon-pointy star-select" data-rating="1" role="radio" aria-checked="false" tabindex="0">
                                         <svg><use href="#star-pointy"></use></svg>
                                     </span>
-                                    <span class="star-icon-pointy star-select" data-rating="2" role="radio" aria-checked="false" tabindex="0" aria-label="2 stars">
+                                    <span class="star-icon-pointy star-select" data-rating="2" role="radio" aria-checked="false" tabindex="0">
                                         <svg><use href="#star-pointy"></use></svg>
                                     </span>
-                                    <span class="star-icon-pointy star-select" data-rating="3" role="radio" aria-checked="false" tabindex="0" aria-label="3 stars">
+                                    <span class="star-icon-pointy star-select" data-rating="3" role="radio" aria-checked="false" tabindex="0">
                                         <svg><use href="#star-pointy"></use></svg>
                                     </span>
-                                    <span class="star-icon-pointy star-select" data-rating="4" role="radio" aria-checked="false" tabindex="0" aria-label="4 stars">
+                                    <span class="star-icon-pointy star-select" data-rating="4" role="radio" aria-checked="false" tabindex="0">
                                         <svg><use href="#star-pointy"></use></svg>
                                     </span>
-                                    <span class="star-icon-pointy star-select" data-rating="5" role="radio" aria-checked="true" tabindex="0" aria-label="5 stars">
+                                    <span class="star-icon-pointy star-select" data-rating="5" role="radio" aria-checked="true" tabindex="0">
                                         <svg><use href="#star-pointy"></use></svg>
                                     </span>
                                     <span class="ms-2" id="rating-text" aria-live="polite">Excellent</span>
@@ -341,7 +342,7 @@
                             
                             <!-- Comment Field -->
                             <div class="form-group">
-                                <label for="{{ review_form.comment.id_for_label }}">Your Review:</label>
+                                <label for="{{ form.comment.id_for_label }}">Your Review:</label>
                                 {{ review_form.comment }}
                             </div>
                             
