@@ -740,7 +740,19 @@ Birchlin implements a comprehensive digital marketing strategy supporting sustai
 
 ### HTML Validation
 
-All HTML templates validated using the [W3C HTML Validator](https://validator.w3.org/):
+All HTML templates validated using the [W3C HTML Validator](https://validator.w3.org/) to ensure compliance with HTML5 standards. The validation was performed on the following key pages:
+
+- **Homepage** (`/`) - Intro with video
+- **Products** (`/products/`) - Product list 
+- **Product Detail** (`/products/181/`) - Product details and overview
+- **Shopping Bag** (`/bag/`) - Shopping bag with customer selected product items
+- **Checkout** (`/checkout/`) - Checkout page with form
+- **Order Confirmation** (`/checkout_success/CAED7C9034D34F13A7FF26B3E3EE1007`) - Order confirmation with order overview and next steps
+- **Profile** (`/profile/`) - User's profile with order history
+- **Wishlist** (`/products/wishlist/`) - The user's saved items that they are interested in
+- **General Text** (`/about/`) - Gneral text pages such as About, Privacy Policy etc.
+
+
 
 <details>
 <summary>HTML Validation Results</summary>
@@ -786,21 +798,6 @@ Accessibility compliance verified through multiple testing methods:
 
 ### Lighthouse Performance
 
-Performance optimization was a key focus, with significant improvements achieved through systematic enhancements:
-
-**Performance Achievements:**
-
-*Before Optimization:*
-- Mobile Performance: 55/100
-- Desktop Performance: 67/100
-- Server Response Time: 19.96 seconds
-- Image Optimization Issues: 4MB+ total size
-
-*After Optimization:*
-- Mobile Performance: 85+/100 (30-point improvement)
-- Desktop Performance: 95+/100 (28-point improvement)
-- Server Response Time: 2.8 seconds (17.16s improvement)
-- Image Optimization: Reduced to 223KB (significant savings)
 
 **Key Performance Optimizations Implemented:**
 
@@ -815,13 +812,12 @@ Performance optimization was a key focus, with significant improvements achieved
 2. **Pagination Implementation:**
    - Added 20 products per page pagination
    - Reduced initial page load times
-   - Improved server response from 19.96s to 2.8s
+   - Improved server response from 19.96s to 2.8s in most cases
 
 3. **Image Optimization:**
    - Implemented lazy loading for below-the-fold images
    - Removed lazy loading from above-the-fold images (first 4-6 products)
    - Added proper image sizing and thumbnail generation
-   - Reduced total image payload by over 90%
 
 4. **Render-Blocking Resource Optimization:**
    - Deferred non-critical CSS and JavaScript loading
@@ -833,20 +829,59 @@ Performance optimization was a key focus, with significant improvements achieved
    - Browser caching for static assets
    - Optimized asset delivery globally
 
-**Desktop Performance:**
-- Performance: 95+
-- Accessibility: 100
-- Best Practices: 95+
-- SEO: 100
+**Mobile First Analysis:**
 
-**Mobile Performance:**
-- Performance: 85+
-- Accessibility: 100
-- Best Practices: 95+
-- SEO: 100
+The following Lighthouse testing is only for the mobile versions of the pages as the tests were done with a mobile-first approach.
 
-![Desktop Lighthouse](static/images/readme/lighthouse-desktop.png)
-![Mobile Lighthouse](static/images/readme/lighthouse-mobile.png)
+
+
+Home
+
+![Home](static/images/readme/lighthouse/home.jpg)
+
+<br>
+Products
+
+![Home](static/images/readme/lighthouse/products.jpg)
+
+<br>
+Product Detail
+
+![Home](static/images/readme/lighthouse/product_detail.jpg)
+
+<br>
+Shopping Bag
+
+![Home](static/images/readme/lighthouse/shopping_bag.jpg)
+
+<br>
+Checkout
+
+![Home](static/images/readme/lighthouse/checkout.jpg)
+
+
+<br>
+Order Confirmation
+
+![Home](static/images/readme/lighthouse/order_confirmation.jpg)
+
+
+<br>
+Profile
+
+![Home](static/images/readme/lighthouse/profile.jpg)
+
+
+<br>
+Wishlist
+
+![Home](static/images/readme/lighthouse/wishlist.jpg)
+
+
+<br>
+Genral Text Pages
+
+![Home](static/images/readme/lighthouse/general_text.jpg)
 
 ### JavaScript Validation
 

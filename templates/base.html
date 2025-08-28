@@ -100,7 +100,7 @@
     <div class="header-divider d-sm-none d-lg-block"></div>
 
     <div class="container nav-row d-lg-flex">
-      <nav class="navbar navbar-expand-lg navbar-light p-0 w-100" id="main-nav">
+      <nav class="navbar navbar-expand-lg navbar-light p-0 w-100" id="main-nav" aria-label="Main navigation">
         <div class="collapse navbar-collapse d-lg-flex" id="mainnav-items">
           <ul class="navbar-nav d-lg-none gap-3">
             {% include 'includes/mobile-top-header.html' %}
@@ -133,8 +133,10 @@
   {% block page_header %}
   {% endblock %}
 
-  {% block content %}
-  {% endblock %}
+  <main id="main-content">
+    {% block content %}
+    {% endblock %}
+  </main>
 
   {% include 'includes/footer.html' %}
 
@@ -143,27 +145,26 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   
-  <!-- Load fonts and icons after page load -->
-<!-- Load Stripe immediately for checkout pages -->
-{% if 'checkout' in request.resolver_match.url_name %}
-    <script src="https://js.stripe.com/basil/stripe.js"></script>
-{% endif %}
+  <!-- Load Stripe immediately for checkout pages -->
+  {% if 'checkout' in request.resolver_match.url_name %}
+      <script src="https://js.stripe.com/basil/stripe.js"></script>
+  {% endif %}
 
-<script>
-window.addEventListener('load', function() {
-    // Load fonts after everything else
-    const fontLink = document.createElement('link');
-    fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap';
-    fontLink.rel = 'stylesheet';
-    document.head.appendChild(fontLink);
-    
-    // Load FontAwesome
-    const faLink = document.createElement('link');
-    faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
-    faLink.rel = 'stylesheet';
-    document.head.appendChild(faLink);
-});
-</script>
+  <script>
+  window.addEventListener('load', function() {
+      // Load fonts after everything else
+      const fontLink = document.createElement('link');
+      fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap';
+      fontLink.rel = 'stylesheet';
+      document.head.appendChild(fontLink);
+      
+      // Load FontAwesome
+      const faLink = document.createElement('link');
+      faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
+      faLink.rel = 'stylesheet';
+      document.head.appendChild(faLink);
+  });
+  </script>
 
   {% block corejs %}
   {% endblock %}
