@@ -9,7 +9,9 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = '__all__'
 
-    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)
+    image = forms.ImageField(
+        label='Image', required=False, widget=CustomClearableFileInput
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -20,24 +22,27 @@ class ProductForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black rounded-0'
 
+
 class ReviewForm(forms.ModelForm):
     """Form for creating/editing reviews"""
-    
+
     class Meta:
         model = Review
         fields = ['rating', 'comment']
         widgets = {
             'rating': forms.HiddenInput(),
         }
-        
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
+
         # Add placeholders and classes
-        self.fields['comment'].widget.attrs['placeholder'] = 'Write your review here...'
+        self.fields['comment'].widget.attrs['placeholder'] = (
+            'Write your review here...'
+        )
         self.fields['comment'].widget.attrs['rows'] = 4
         self.fields['comment'].widget.attrs['class'] = 'border-black rounded-0'
-        
+
         # Set default rating value
         if not self.instance.pk:  # Only for new reviews
             self.fields['rating'].initial = 5
