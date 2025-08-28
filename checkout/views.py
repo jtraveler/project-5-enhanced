@@ -1,4 +1,6 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.shortcuts import (
+    render, redirect, reverse, get_object_or_404, HttpResponse
+)
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
@@ -27,8 +29,8 @@ def cache_checkout_data(request):
         })
         return HttpResponse(status=200)
     except Exception as e:
-        messages.error(request, 'Sorry, your payment cannot be \
-            processed right now. Please try again later.')
+        messages.error(request, 'Sorry, your payment cannot be '
+                       'processed right now. Please try again later.')
         return HttpResponse(content=e, status=400)
 
 
@@ -50,17 +52,18 @@ def checkout(request):
             'street_address2': request.POST['street_address2'],
             'county': request.POST['county'],
         }
-        
+
         # Skip form validation and create order directly
         try:
             pid = request.POST.get('client_secret').split('_secret')[0]
-            
+
             # Check if order already exists
             existing_order = Order.objects.filter(stripe_pid=pid).first()
             if existing_order:
                 request.session['save_info'] = 'save-info' in request.POST
-                return redirect(reverse('checkout_success', args=[existing_order.order_number]))
-            
+                return redirect(reverse('checkout_success',
+                                        args=[existing_order.order_number]))
+
             # Create order directly without form validation
             order = Order(
                 full_name=form_data['full_name'],
@@ -76,7 +79,7 @@ def checkout(request):
                 original_bag=json.dumps(bag),
             )
             order.save()
-            
+
             # Create order line items
             for item_id, item_data in bag.items():
                 try:
@@ -89,7 +92,8 @@ def checkout(request):
                         )
                         order_line_item.save()
                     else:
-                        for size, quantity in item_data['items_by_size'].items():
+                        for size, quantity in item_data[
+                                'items_by_size'].items():
                             order_line_item = OrderLineItem(
                                 order=order,
                                 product=product,
@@ -99,19 +103,21 @@ def checkout(request):
                             order_line_item.save()
                 except Product.DoesNotExist:
                     messages.error(request, (
-                        "One of the products in your bag wasn't found in our database. "
-                        "Please call us for assistance!")
+                        "One of the products in your bag wasn't found in our "
+                        "database. Please call us for assistance!")
                     )
                     order.delete()
                     return redirect(reverse('view_bag'))
 
             request.session['save_info'] = 'save-info' in request.POST
-            return redirect(reverse('checkout_success', args=[order.order_number]))
-            
-        except Exception as e:
-            messages.error(request, 'There was an error processing your order. Please try again.')
+            return redirect(reverse('checkout_success',
+                                    args=[order.order_number]))
+
+        except Exception:
+            messages.error(request, 'There was an error processing your '
+                           'order. Please try again.')
             # Fall through to re-render the form
-    
+
     # This code runs for GET requests AND when POST has errors
     bag = request.session.get('bag', {})
     if not bag:
@@ -148,8 +154,8 @@ def checkout(request):
         order_form = OrderForm()
 
     if not stripe_public_key:
-        messages.warning(request, 'Stripe public key is missing. \
-            Did you forget to set it in your environment?')
+        messages.warning(request, 'Stripe public key is missing. '
+                         'Did you forget to set it in your environment?')
 
     template = 'checkout/checkout.html'
     context = {
@@ -187,20 +193,22 @@ def checkout_success(request, order_number):
                     'default_street_address2': order.street_address2,
                     'default_county': order.county,
                 }
-                # Wrap the profile form update in try-except to handle country field issues
+                # Wrap the profile form update in try-except to handle
+                # country field issues
                 try:
-                    user_profile_form = UserProfileForm(profile_data, instance=profile)
+                    user_profile_form = UserProfileForm(profile_data,
+                                                        instance=profile)
                     if user_profile_form.is_valid():
                         user_profile_form.save()
-                except Exception as e:
+                except Exception:
                     # Log the error but don't let it break the success page
                     pass
         except UserProfile.DoesNotExist:
             pass
 
-    messages.success(request, f'Order successfully processed! \
-        Your order number is {order_number}. A confirmation \
-        email will be sent to {order.email}.')
+    messages.success(request, f'Order successfully processed! '
+                     f'Your order number is {order_number}. A confirmation '
+                     f'email will be sent to {order.email}.')
 
     if 'bag' in request.session:
         del request.session['bag']
@@ -211,3 +219,4 @@ def checkout_success(request, order_number):
     }
 
     return render(request, template, context)
+    
