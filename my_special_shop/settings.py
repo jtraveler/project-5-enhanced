@@ -17,11 +17,8 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 # Secret Key
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your_default_secret_key')
 
-# Allowed hosts
-if DEVELOPMENT:
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-else:
-    ALLOWED_HOSTS = ['mj-project5-aec364964bcd.herokuapp.com']
+# Fixed version - reads from environment variable
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 # Application definition
 INSTALLED_APPS = [
