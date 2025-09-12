@@ -41,6 +41,8 @@ class ProductAdmin(SortableAdminBase, admin.ModelAdmin):
         'category',
         'price',
         'rating',
+        'featured',         # FIXED - Using the actual field name
+        'featured_order',   
         'image_count',
         'created_at',
         'primary_image_preview',
@@ -48,6 +50,7 @@ class ProductAdmin(SortableAdminBase, admin.ModelAdmin):
 
     list_filter = (
         'category',
+        'featured',        # Add featured filter
         'created_at',
         'price',
         'has_sizes',
@@ -61,9 +64,26 @@ class ProductAdmin(SortableAdminBase, admin.ModelAdmin):
         'category__friendly_name',
     )
 
+    # Add featured fields to edit form
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'sku', 'category', 'description', 'has_sizes', 'price')
+        }),
+        ('Featured Settings', {
+            'fields': ('featured', 'featured_order'),
+            'description': 'Control whether this product appears in the homepage featured section'
+        }),
+        ('Images', {
+            'fields': ('image_url', 'image'),
+        }),
+    )
+
     date_hierarchy = 'created_at'
     ordering = ('-created_at',)
     inlines = [ProductImageInline]
+
+    # Add list editable for quick featured management
+    list_editable = ('featured', 'featured_order')
 
     # Optionally, add list_per_page to control pagination
     list_per_page = 60
@@ -99,6 +119,19 @@ class ProductAdmin(SortableAdminBase, admin.ModelAdmin):
                 return "Image error"
         return "No image"
     primary_image_preview.short_description = 'Image'
+
+    # Add actions for bulk featured management
+    actions = ['make_featured', 'remove_featured']
+
+    def make_featured(self, request, queryset):
+        updated = queryset.update(featured=True)
+        self.message_user(request, f'{updated} products marked as featured.')
+    make_featured.short_description = "Mark selected products as featured"
+
+    def remove_featured(self, request, queryset):
+        updated = queryset.update(featured=False)
+        self.message_user(request, f'{updated} products removed from featured.')
+    remove_featured.short_description = "Remove selected products from featured"
 
 
 # Review admin

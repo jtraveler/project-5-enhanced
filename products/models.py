@@ -35,6 +35,16 @@ class Product(models.Model):
     )
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
+    
+    # NEW: Featured product field
+    featured = models.BooleanField(
+        default=False,
+        help_text='Display this product in the featured section on homepage'
+    )
+    featured_order = models.PositiveIntegerField(
+        default=0,
+        help_text='Order of display in featured section (lower numbers appear first)'
+    )
 
     # JPEG versions (existing)
     image_thumbnail = ImageSpecField(
