@@ -10,9 +10,8 @@ import logging
 # Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Environment flags
-DEVELOPMENT = os.environ.get('DEVELOPMENT', 'False') == 'True'
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEVELOPMENT = 'DEVELOPMENT' in os.environ
+DEBUG = 'DEVELOPMENT' in os.environ
 
 # Secret Key
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your_default_secret_key')
